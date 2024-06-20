@@ -1,8 +1,56 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Business-Owner-Client
 
-Currently, two official plugins are available:
+# Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## linux users(Ubuntu 20.04)
+Before you can start using this app, run this lines in youre shell:
+
+```sh
+sudo apt update
+sudo apt install npm
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+```
+
+## windows users
+Before you can start using this app, make sure you have the following installed on your machine:
+
+- Node.js
+- NPM (Node Package Manager)
+
+
+# Getting Started
+To get started, follow these easy steps:
+
+- **Step 1**: Download or clone this repository to your local machine.
+
+- **Step 2**: Open Your Command Line Tool (e.g. Terminal on Mac or Command Prompt on Windows).
+
+- **Step 3**: 
+Navigate to the src project directory by using the cd command:
+
+``
+cd path/to/project/directory/src
+``
+
+- **Step 4**: 
+Install the dependencies by running the following command:
+
+``
+npm i
+``
+
+This will install all the necessary packages and dependencies listed in the package.json file.
+
+- **Step 5**:  
+(Before start step 5 make sure the server in the spring is running)
+
+ 
+``
+npm start
+``
+
+
+This will start the app and open it in your default web browser.
