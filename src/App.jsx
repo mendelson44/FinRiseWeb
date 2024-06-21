@@ -8,7 +8,7 @@ import "./styles/footer.css"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import SignUp from "./pages/UserSignUp"
-import AddCustomer from "./pages/AddCustomer"
+import AddNewCustomer from "./pages/AddNewCustomer"
 
 function App() {
 
@@ -19,7 +19,7 @@ function App() {
       <Route path="/" element= {<Home />}/>
       <Route path="/login" element= {<Login />}/>
       <Route path="/usersignup" element= {<SignUp />}/>
-      <Route path="/addcustomer" element= {<AddCustomer />}/>
+      <Route path="/addnewcustomer" element= {<AddNewCustomer />}/>
     </Routes>
     <Footer/>
 

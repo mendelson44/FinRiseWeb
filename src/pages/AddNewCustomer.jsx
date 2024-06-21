@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Zoom from '@mui/material/Zoom';
 
-function AddCustomer(){
+function AddNewCustomer(){
 
     const [isExpand, setExpand] = useState(false);
 
@@ -33,4 +33,4 @@ function AddCustomer(){
     );
 }
 
-export default AddCustomer;
+export default AddNewCustomer;

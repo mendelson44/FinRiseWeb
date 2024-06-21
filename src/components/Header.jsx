@@ -7,17 +7,20 @@ function Header() {
 	return (
 		<>
 			<nav>
-				<Link style={{textDecoration :"none"}} to="/">
-					<div className="logo-container">
-						<img src="src/assets/logo.png" alt="FinRise Logo" />
-						<h1>FinRise</h1>
-					</div>
-				</Link>
+				
 				
 				<ul>
 					<li>
 						<Link to="/">Home</Link>
 					</li>
+					<li>
+						<Link to="/">Our Services</Link>
+					</li>
+					<li>
+						<Link to="/">Contact Us</Link>
+						
+					</li>
+					
 					<li>
 						<Link to="/login">Login</Link>
 					</li>
@@ -25,8 +28,9 @@ function Header() {
 						<Link to="/usersignup">Sign Up</Link>
 					</li>
 				</ul>
-				<Clock/>
+
 			</nav>
+			<Clock/>
 		</>
 	);
 }

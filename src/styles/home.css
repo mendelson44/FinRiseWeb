@@ -1,0 +1,73 @@
+.logo {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100px;
+    width: 300px;
+}
+.custom-text {
+    position: relative;
+    top: 250px; /* Adjust this value as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    text-align: center; /* Center align text */
+    line-height: 1.5; /* Line spacing */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 800px;
+}
+
+.boxes-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 350px auto 50px auto; /* Adjusted to push the boxes lower */
+    max-width: 1200px;
+    padding: 20px;
+}
+
+.box {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    border-radius: 10px;
+    padding: 30px;
+    width: 30%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+
+}
+
+.box h3 {
+    font-size: 20px;
+    color: #0eba97;
+    margin-bottom: 10px;
+}
+
+.box p {
+    font-size: 16px;
+    color: #333;
+}
+
+.contact-info {
+    text-align: center;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+.contact-info h3 {
+    font-size: 24px;
+    color: #0eba97;
+    margin-bottom: 10px;
+}
+
+.contact-info p {
+    font-size: 18px;
+    color: #333;
+    margin: 5px 0;
+}
