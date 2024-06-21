@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import Typography from '@mui/material/Typography';
 
 function Clock() {
     
@@ -14,9 +15,11 @@ function Clock() {
         setTime(newTime);
     }
 	return (
-		<>
-			<h1>{time}</h1>
-		</>
+        <div style={{ textAlign: 'right', marginRight: '20px' ,marginTop:'20px'}}>
+        <Typography variant="h1" sx={{ color: '#000000' ,fontSize:30}}>
+            {time}
+        </Typography>
+    </div>
 	);
 }
 

@@ -21,15 +21,17 @@
     max-width: 800px;
 }
 
-.contact-info {
+/*
+.contact-info { // home.jsx-זה בהערות כי זה קשור לקוד ששמתי בהערות בקובץ של ה 
     text-align: center;
     margin: 50px auto;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    background-color: rgba(255, 255, 255, 0.9); 
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-width: 600px;
 }
+
 
 .contact-info h3 {
     font-size: 24px;
@@ -41,4 +43,5 @@
     font-size: 18px;
     color: #333;
     margin: 5px 0;
-}
+} 
+*/
