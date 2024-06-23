@@ -9,19 +9,18 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import SignUp from "./pages/UserSignUp"
 import AddNewCustomer from "./pages/AddNewCustomer"
-
 function App() {
 
   return (
     <>
-    <Header/>
-    <Routes>
-      <Route path="/" element= {<Home />}/>
-      <Route path="/login" element= {<Login />}/>
-      <Route path="/usersignup" element= {<SignUp />}/>
-      <Route path="/addnewcustomer" element= {<AddNewCustomer />}/>
-    </Routes>
-    <Footer/>
+      <Header/>
+      <Routes>
+        <Route path="/" element= {<Home />}/>
+        <Route path="/login" element= {<Login />}/>
+        <Route path="/usersignup" element= {<SignUp />}/>
+        <Route path="/addnewcustomer" element= {<AddNewCustomer />}/>
+      </Routes>
+      <Footer/>
 
     </>
   )

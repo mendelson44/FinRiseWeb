@@ -2,8 +2,9 @@ import { Zoom } from "@mui/material";
 import React, {useState} from "react";
 import Button from '@mui/material/Button';
 import ImageUploader from "../components/ImageUploader";
-import { alignProperty } from "@mui/material/styles/cssUtils";
-
+import FormControl from '@mui/joy/FormControl';
+import FormLabel from '@mui/joy/FormLabel';
+import Input from '@mui/joy/Input';
 function SignUp(){
 
     // State to store form data
@@ -30,7 +31,8 @@ function SignUp(){
         event.preventDefault();
         console.log('Form data submitted:', formData);
         // Here you would usually send the formData to a server or some other handling function
-            
+        //TODO: 1. check if this email is not used in the database (GET)
+        //      2. if not, create new user (POST)
     };
 
     return(
@@ -76,18 +78,24 @@ function SignUp(){
                     onChange={handleChange}
                     
                     />
-                <label htmlFor="password">Password:</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    placeholder='Enter your Password'
-                    onChange={handleChange}
+                    
+                <FormControl>
+                    <FormLabel>Password:</FormLabel>
+                    <Input
+                        // html input attribute
+                        name="password"
+                        type="password"
+                        placeholder="Enter your Password"
+                        value={formData.password}
+                        onChange={handleChange}
                     />
+                </FormControl>
                 
             
-                <Button style={{backgroundColor: "rgb(14, 186, 151)"}} type="submit" >
+                <Button 
+                    style={{backgroundColor: "rgb(14, 186, 151)"}} 
+                    type="submit" 
+                    >
                     Submit
                 </Button>
             </form>

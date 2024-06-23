@@ -27,6 +27,8 @@ function Header() {
                     <li>
 						<a href="#contact" onClick={scrollToContact}>Contact Us</a>
                     </li>
+                </ul>
+                <ul>
                     <li>
                         <Link to="/login">Login</Link>
                     </li>
