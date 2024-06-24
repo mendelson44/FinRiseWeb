@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import TableSearch from './TableSearch'; // Import TableSearch component
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import TableSearch from "./TableSearch"; // Import TableSearch component
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
 
 // Function to create sample data
 function createData(firstName, lastName, address, phone, email) {
@@ -26,14 +26,14 @@ function createData(firstName, lastName, address, phone, email) {
     email,
     history: [
       {
-        date: '2020-01-05',
-        customerId: '11091700',
-        file: 'file1.pdf', // Example file name
+        date: "2020-01-05",
+        customerId: "11091700",
+        file: "file1.pdf", // Example file name
       },
       {
-        date: '2020-01-02',
-        customerId: 'Anonymous',
-        file: 'file2.pdf', // Example file name
+        date: "2020-01-02",
+        customerId: "Anonymous",
+        file: "file2.pdf", // Example file name
       },
     ],
   };
@@ -46,7 +46,7 @@ function Row(props) {
 
   return (
     <>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -128,35 +128,47 @@ Row.propTypes = {
 
 // Sample data
 const rows = [
-  createData('Inbar', 'Zafar', '123 Main St', '555-1234', 'inbar@example.com'),
-  createData('Roy', 'Rubin', '456 Elm St', '555-5678', 'roy@example.com'),
-  createData('Yosi', 'Ben Shushan', '789 Oak St', '555-9876', 'yosi@example.com'),
-  createData('Ben', 'Mendelson', '101 Pine St', '555-4321', 'ben@example.com'),
-  createData('Noa', 'Sharabi', '202 Cedar St', '555-8765', 'noa@example.com'),
+  createData("Inbar", "Zafar", "123 Main St", "555-1234", "inbar@example.com"),
+  createData("Roy", "Rubin", "456 Elm St", "555-5678", "roy@example.com"),
+  createData(
+    "Yosi",
+    "Ben Shushan",
+    "789 Oak St",
+    "555-9876",
+    "yosi@example.com"
+  ),
+  createData("Ben", "Mendelson", "101 Pine St", "555-4321", "ben@example.com"),
+  createData("Noa", "Sharabi", "202 Cedar St", "555-8765", "noa@example.com"),
 ];
 
 // Main component rendering the table
 export default function CollapsibleTable() {
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>First Name</TableCell>
-            <TableCell>Last Name</TableCell>
-            <TableCell align="right">Address</TableCell>
-            <TableCell align="right">Phone</TableCell>
-            <TableCell align="right">Email</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableSearch /> {/* Include TableSearch component here */}
-        <TableBody>
-          {rows.map((row) => (
-            <Row key={`${row.firstName}-${row.lastName}`} row={row} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <div style={{ padding: "20px" }}>
+        <p style={{ backgroundColor: "white", padding: "20px" }}>
+          <TableSearch /> {/* Include TableSearch component here */}
+        </p>
+        <TableContainer component={Paper}>
+          <Table aria-label="collapsible table">
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell>First Name</TableCell>
+                <TableCell>Last Name</TableCell>
+                <TableCell align="right">Address</TableCell>
+                <TableCell align="right">Phone</TableCell>
+                <TableCell align="right">Email</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <Row key={`${row.firstName}-${row.lastName}`} row={row} />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+    </>
   );
 }
