@@ -184,9 +184,9 @@ function Home() {
          </div>
     */}
 
-        <Link to="/addnewcustomer">Add New Customer </Link> 
-        <Link to="/tablecustomerslist">Customers List </Link> 
-        <Link to="/usersignup">Sign Up </Link>
+      <Link to="/addnewcustomer">Add New Customer </Link>
+      <Link to="/tablecustomerslist">Customers List </Link>
+      <Link to="/usersignup">Sign Up </Link>
     </>
   );
 }

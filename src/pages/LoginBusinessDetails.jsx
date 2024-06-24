@@ -1,11 +1,19 @@
 import React, { useState } from "react";
-import CustomerCreateArea from "../components/CustomerCreateArea";
+import BusinessCreateArea from "../components/BusinessCreateArea";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import Zoom from "@mui/material/Zoom";
 
-function AddNewCustomer() {
+/**
+|--------------------------------------------------
+| This Page is for the user (business owner).
+| after the user login, he will need to fill the 
+| details of his business in this page.
+|--------------------------------------------------
+*/
+
+function LoginBusinessDetails() {
   const [isExpand, setExpand] = useState(false);
 
   const fabStyle = {
@@ -31,4 +39,4 @@ function AddNewCustomer() {
   );
 }
 
-export default AddNewCustomer;
+export default LoginBusinessDetails;
