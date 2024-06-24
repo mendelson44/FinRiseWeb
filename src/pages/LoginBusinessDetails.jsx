@@ -28,6 +28,7 @@ function LoginBusinessDetails() {
 
   return (
     <>
+ 
       <h1>add customer</h1>
       <Zoom in={true}>
         <Fab style={fabStyle} onClick={toggleForm}>

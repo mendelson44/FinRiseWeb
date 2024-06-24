@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import "./styles/styles.css";
-import Header from "./components/Header";
+import "./styles/header.css";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import LoginBusinessDetails from "./pages/LoginBusinessDetails";
 import CustomerList from "./pages/CustomerList";
+import Header from "./components/Header";
 
 function App() {
-  //<Route path="/customerslist" element= {<CustomersList />}/>
   return (
     <>
       <Header />
