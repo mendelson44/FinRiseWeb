@@ -37,6 +37,7 @@ function SignUp(){
 
     return(
     <>
+   
         <h2>SignUp</h2>
         
         <Zoom in={true}>

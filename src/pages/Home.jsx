@@ -4,9 +4,13 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import "../styles/home.css";
 
+
+
+
 function Home() {
   return (
     <>
+    
       <img
         src="src/assets/Original on transparent.png"
         alt="FinRise Logo"
@@ -184,8 +188,8 @@ function Home() {
          </div>
     */}
 
-      <Link to="/addnewcustomer">Add New Customer </Link>
-      <Link to="/tablecustomerslist">Customers List </Link>
+      <Link to="/LoginBusinessDetails">Login Business Details </Link>
+      <Link to="/customerlist">Customers List </Link>
       <Link to="/usersignup">Sign Up </Link>
     </>
   );
