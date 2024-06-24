@@ -34,7 +34,7 @@ function LoginBusinessDetails() {
           {isExpand ? <RemoveIcon /> : <AddIcon />}
         </Fab>
       </Zoom>
-      <CustomerCreateArea isExpand={isExpand} />
+      <BusinessCreateArea isExpand={isExpand} />
     </>
   );
 }

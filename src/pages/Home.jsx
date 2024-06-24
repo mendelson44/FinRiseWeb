@@ -183,10 +183,14 @@ function Home() {
             <p>Address: 123 Finance St, Business City, BC 12345</p>
          </div>
     */}
-
-      <Link to="/addnewcustomer">Add New Customer </Link>
-      <Link to="/tablecustomerslist">Customers List </Link>
-      <Link to="/usersignup">Sign Up </Link>
+      <ul>
+        <li>
+          <Link to="/LoginBusinessDetails">Login Business Details </Link>
+        </li>
+        <li>
+          <Link to="/tablecustomerslist">Customers List </Link>
+        </li>
+      </ul>
     </>
   );
 }

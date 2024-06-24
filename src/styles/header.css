@@ -1,69 +1,60 @@
 /* App.css - Styling for Header component */
-h1 {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 300;
-    color: white; /* White text for visibility against the background */
-    margin-bottom: 0;
-    padding-left: 5px; /* Padding for some space from the edge */
-}
 
 nav {
-    background-color: rgb(14, 186, 151); /* Calming green-blue background */
-    display: flex; /* Enables flexbox layout */
-    align-items: center; /* Centers items vertically within the nav */
-    padding: 20px 20px; /* Padding on the top/bottom and left/right */
-    justify-content: space-between;
+  background-color: rgb(14, 186, 151); /* Calming green-blue background */
+  display: flex; /* Enables flexbox layout */
+  align-items: center; /* Centers items vertically within the nav */
+  padding: 20px 20px; /* Padding on the top/bottom and left/right */
+  justify-content: space-between;
+  box-shadow: 0 10px 4px -4px rgba(0, 0, 0, 0.2);
 }
 
 nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex; /* Makes the list horizontal */
-    align-items: center; /* Centers items vertically */
-   
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Makes the list horizontal */
+  align-items: center; /* Centers items vertically */
 }
 
 nav ul li {
-    margin-right: 20px; /* Space between menu items */
+  margin-right: 20px; /* Space between menu items */
 }
 
-
 nav ul li:nth-child(4) {
-    margin-left: 950px; /* Adjust the margin as needed */
+  margin-left: 950px; /* Adjust the margin as needed */
 }
 
 nav ul li a {
-    text-decoration: none;
-    color: white; /* White text for readability */
-    font-size: 16px;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+  text-decoration: none;
+  color: white; /* White text for readability */
+  font-size: 16px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
-nav ul li a:hover, nav ul li a:focus {
-    color: #90e0ef; /* Light blue for hover state */
-    text-decoration: underline; /* Underline on hover for visual feedback */
+nav ul li a:hover,
+nav ul li a:focus {
+  color: #90e0ef; /* Light blue for hover state */
+  text-decoration: underline; /* Underline on hover for visual feedback */
 }
-
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    nav {
-        flex-direction: column; /* Stacks the items vertically on small screens */
-    }
+  nav {
+    flex-direction: column; /* Stacks the items vertically on small screens */
+  }
 
-    nav h1, nav ul {
-        text-align: center; /* Centers content on small screens */
-        width: 100%; /* Full width for alignment */
-        
-    }
-    nav ul{
-        justify-content: space-around;
-    }
+  nav h1,
+  nav ul {
+    text-align: center; /* Centers content on small screens */
+    width: 100%; /* Full width for alignment */
+  }
+  nav ul {
+    justify-content: space-around;
+  }
 
-    nav ul li {
-        display: block;
-        margin-bottom: 10px; /* Space between stacked links */
-    }
-
+  nav ul li {
+    display: block;
+    margin-bottom: 10px; /* Space between stacked links */
+  }
 }

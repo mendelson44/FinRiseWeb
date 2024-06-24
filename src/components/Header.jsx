@@ -37,11 +37,13 @@ function Header() {
             <Link to="/login">Login</Link>
           </li>
           <li>
-            <Link to="/usersignup">Sign Up</Link>
+            <Link to="/signup">Sign Up</Link>
+          </li>
+          <li>
+            <Clock />
           </li>
         </ul>
       </nav>
-      <Clock />
     </>
   );
 }

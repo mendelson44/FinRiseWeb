@@ -74,7 +74,7 @@ export default function LoginFinal(props) {
           Log in
         </Button>
         <Typography
-          endDecorator={<Link href="/usersignup">Sign up</Link>}
+          endDecorator={<Link href="/signup">Sign up</Link>}
           fontSize="sm"
           sx={{ alignSelf: "center" }}
         >
