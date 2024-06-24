@@ -12,6 +12,7 @@ nav {
     display: flex; /* Enables flexbox layout */
     align-items: center; /* Centers items vertically within the nav */
     padding: 20px 20px; /* Padding on the top/bottom and left/right */
+    justify-content: space-between;
 }
 
 nav ul {
