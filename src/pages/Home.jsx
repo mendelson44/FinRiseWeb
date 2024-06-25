@@ -186,7 +186,7 @@ function Home() {
 
       <Link to="/LoginBusinessDetails">Login Business Details </Link>
       <Link to="/customerlist">Customers List </Link>
-      <Link to="/usersignup">Sign Up </Link>
+      <Link to="/signup">Sign Up </Link>
     </>
   );
 }
