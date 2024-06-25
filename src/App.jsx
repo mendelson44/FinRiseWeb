@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import "./styles/styles.css";
-import "./styles/header.css";
+
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
