@@ -21,13 +21,8 @@ function LoginBusinessDetails() {
     color: "black",
     backgroundColor: "rgb(14, 186, 151)",
   };
-
-  
-
   return (
     <>
-      <h1>add customer</h1>
- 
      <BackHeader/>
         <BusinessCreateArea  />
     </>

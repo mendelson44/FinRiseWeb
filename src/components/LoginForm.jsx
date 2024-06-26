@@ -27,7 +27,7 @@ export default function LoginFinal(props) {
         sx={{
           width: 300,
           mx: "auto", // margin left & right
-          my: 4, // margin top & bottom
+          my: 2, // margin top & bottom
           py: 3, // padding top & bottom
           px: 2, // padding left & right
           display: "flex",
