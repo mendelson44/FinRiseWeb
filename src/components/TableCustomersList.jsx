@@ -15,6 +15,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TableSearch from "./TableSearch"; // Import TableSearch component
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 // Function to create sample data
 function createData(firstName, lastName, address, phone, email) {
@@ -44,6 +45,14 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = useState(false);
 
+  const handleDelete = () => {
+    const confirmDelete = window.confirm("You've requested to delete a transaction from the customer's history. This action is irreversible.\n\nAre you sure you want to proceed?");
+    if (confirmDelete) {
+      // Perform deletion logic here
+      console.log("Transaction deleted");
+    }
+  };
+  
   return (
     <>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -75,6 +84,7 @@ function Row(props) {
                     <TableCell>Date</TableCell>
                     <TableCell>Customer ID</TableCell>
                     <TableCell>File</TableCell>
+                    <TableCell></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -95,6 +105,16 @@ function Row(props) {
                           <FileDownloadIcon fontSize="small" />
                         </IconButton>
                         {historyRow.file}
+                      </TableCell>
+                      <TableCell>
+                        <IconButton
+                          aria-label="delete"
+                          size="small"
+                          color="primary"
+                          onClick={handleDelete}
+                        >
+                          <DeleteOutlinedIcon />
+                        </IconButton>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -154,11 +174,21 @@ export default function CollapsibleTable() {
             <TableHead>
               <TableRow>
                 <TableCell />
-                <TableCell>First Name</TableCell>
-                <TableCell>Last Name</TableCell>
-                <TableCell align="right">Address</TableCell>
-                <TableCell align="right">Phone</TableCell>
-                <TableCell align="right">Email</TableCell>
+                <TableCell>
+                  <Typography variant="h6">First Name</Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="h6">Last Name</Typography>
+                </TableCell>
+                <TableCell align="right">
+                  <Typography variant="h6">Address</Typography>
+                </TableCell>
+                <TableCell align="right">
+                  <Typography variant="h6">Phone</Typography>
+                </TableCell>
+                <TableCell align="right">
+                  <Typography variant="h6">Email</Typography>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
