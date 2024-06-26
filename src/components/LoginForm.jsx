@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import Sheet from "@mui/joy/Sheet";
 import CssBaseline from "@mui/joy/CssBaseline";
 import Typography from "@mui/joy/Typography";
@@ -10,11 +11,13 @@ import Link from "@mui/joy/Link";
 import "@fontsource/inter";
 
 export default function LoginFinal(props) {
+  const navigate = useNavigate();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   const handleLogin = () => {
     props.onLoginAttempt({ email, password });
+    navigate('/Lobi'); // Navigate to '/lobi' after login
   };
 
   return (
@@ -65,7 +68,7 @@ export default function LoginFinal(props) {
         </FormControl>
         <Button
           sx={{
-            mt: 1 /* margin top */,
+            mt: 1, /* margin top */
             color: "white", // text color
             backgroundColor: "rgb(14, 186, 151)", // background color
           }}

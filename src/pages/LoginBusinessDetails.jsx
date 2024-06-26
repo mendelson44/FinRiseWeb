@@ -4,6 +4,7 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import Zoom from "@mui/material/Zoom";
+import BackHeader from "../components/BackHeader";
 
 /**
 |--------------------------------------------------
@@ -29,7 +30,7 @@ function LoginBusinessDetails() {
   return (
     <>
  
-      <h1>add customer</h1>
+     <BackHeader/>
       <Zoom in={true}>
         <Fab style={fabStyle} onClick={toggleForm}>
           {isExpand ? <RemoveIcon /> : <AddIcon />}

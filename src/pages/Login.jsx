@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/login.css";
 import LoginFinal from "../components/LoginForm";
-
+import BackHeader from "../components/BackHeader";
 
 
 function Login(){
@@ -15,7 +15,7 @@ function Login(){
 
     return(
     <>
-    
+    <BackHeader/>
     <div className="login-container">
         <img src="src/assets/logo with text.png" alt="logo FinRize" className="logo"/>
         <LoginFinal

@@ -3,21 +3,18 @@ import { Link } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import "../styles/home.css";
-
-
-
-
+import Header from "../components/Header";
 function Home() {
   return (
     <>
-    
+      <Header/>
       <img
         src="src/assets/Original on transparent.png"
         alt="FinRise Logo"
         className="logo"
       />
       <div className="custom-text">
-        <p>
+        <Typography variant="body1" gutterBottom>
           Empowers you to track income and expenses, create invoices and payment
           orders,
           <br />
@@ -25,7 +22,7 @@ function Home() {
           <br />
           This easy-to-use and powerful tool puts you in control of your
           finances and helps you achieve your business goals.
-        </p>
+          </Typography>
       </div>
 
       <div
@@ -160,37 +157,7 @@ function Home() {
             Address: 123 Finance St, Business City, BC 12345
           </Typography>
         </Box>
-      </div>
-
-      {/*  <div id = "services" class="boxes-container">
-            <div class= "box">
-                <h3>Track Income and Expenses</h3>
-                <p>Monitor your financial performance with real-time tracking of income and expenses.</p>
-
-            </div>
-            <div class= "box">
-                <h3>Create Invoices</h3>
-                <p>Generate professional invoices quickly and easily, and keep your billing organized.</p>
-
-            </div>
-            <div class= "box">
-                <h3>Financial Reports</h3>
-                <p>Prepare detailed financial reports to understand your business better and make informed decisions.</p>
-
-            </div>
-
-        </div>
-        <div id="contact" class="contact-info">
-            <h3>Contact Us</h3>
-            <p>Email: support@finrize.com</p>
-            <p>Phone: +1 (234) 567-890</p>
-            <p>Address: 123 Finance St, Business City, BC 12345</p>
-         </div>
-    */}
-
-      <Link to="/LoginBusinessDetails">Login Business Details </Link>
-      <Link to="/customerlist">Customers List </Link>
-      <Link to="/usersignup">Sign Up </Link>
+      </div> 
     </>
   );
 }

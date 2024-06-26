@@ -9,25 +9,34 @@ import Login from "./pages/Login";
 import SignUp from "./pages/UserSignUp";
 import LoginBusinessDetails from "./pages/LoginBusinessDetails";
 import CustomerList from "./pages/CustomerList";
-import Header from "./components/Header";
+import AddNewCustomer from "./pages/AddNewCustomer";
+import Lobi from "./pages/Lobi";
+
 
 function App() {
   return (
     <>
-    
-<Header/>
+  
       <Routes> 
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/usersignup" element={<SignUp />} />
+        <Route path="/usersignup" element={<SignUp />} /> 
         <Route
           path="/LoginBusinessDetails"
           element={<LoginBusinessDetails />}
         />
+        <Route
+          path="/AddNewCustomer"
+          element={<AddNewCustomer />}
+        />
+        <Route
+          path="/Lobi"
+          element={<Lobi />}
+        />
         <Route path="/customerlist" element={<CustomerList />} />
 
       </Routes>
-      <Footer />
+    {/*  <Footer /> */}
     </>
   );
 }
