@@ -5,6 +5,8 @@ import ImageUploader from "../components/ImageUploader";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Input from "@mui/joy/Input";
+import BackHeader from "../components/BackHeader";
+import { Link } from "react-router-dom";
 import "../styles/signup.css";
 
 function SignUp() {
@@ -32,29 +34,20 @@ function SignUp() {
     // Here you would usually send the formData to a server or some other handling function
     //TODO: 1. check if this email is not used in the database (GET)
     //      2. if not, create new user (POST)
+    
   };
 
   return (
     <>
-      <Zoom in={true}>
-        <form className="form-container" onSubmit={handleSubmit} style={{}}>
-          <h1 style={{ fontSize: "25px", color: "black" }}>
-            Hey!
-            <br />
-            Money is waiting for you!
-          </h1>
-          <br /> <hr />
-          <label htmlFor="avatar">Avatar:</label>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              marginBottom: "20px",
-              marginTop: "10px",
-            }}
-          >
-            <ImageUploader />
-          </div>
+    <BackHeader/>
+            <Zoom in={true}>
+                <form className='form-container' onSubmit={handleSubmit} style={{}}>
+                    <h1 style={{ fontSize: "25px", color: "black" }}>Hey!<br />Money is waiting for you!</h1>
+                    <br /> <hr />
+                    <label htmlFor="avatar">Avatar:</label>
+                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px', marginTop: '10px' }}>
+                        <ImageUploader />
+                    </div>
           <label htmlFor="firstName">First Name:</label>
           <input
             type="text"
@@ -94,12 +87,16 @@ function SignUp() {
               onChange={handleChange}
             />
           </FormControl>
+          <Link to="/LoginBusinessDetails">
+
+
           <Button
             style={{ backgroundColor: "rgb(14, 186, 151)" }}
             type="submit"
-          >
+            >
             Submit
           </Button>
+            </Link>
         </form>
       </Zoom>
     </>

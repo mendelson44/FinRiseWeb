@@ -15,7 +15,6 @@ import BackHeader from "../components/BackHeader";
 */
 
 function LoginBusinessDetails() {
-  const [isExpand, setExpand] = useState(false);
 
   const fabStyle = {
     margin: "15px",
@@ -23,21 +22,14 @@ function LoginBusinessDetails() {
     backgroundColor: "rgb(14, 186, 151)",
   };
 
-  function toggleForm() {
-    setExpand(!isExpand);
-  }
+  
 
   return (
     <>
       <h1>add customer</h1>
  
      <BackHeader/>
-      <Zoom in={true}>
-        <Fab style={fabStyle} onClick={toggleForm}>
-          {isExpand ? <RemoveIcon /> : <AddIcon />}
-        </Fab>
-      </Zoom>
-      <BusinessCreateArea isExpand={isExpand} />
+        <BusinessCreateArea  />
     </>
   );
 }

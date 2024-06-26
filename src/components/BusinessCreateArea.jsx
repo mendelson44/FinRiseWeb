@@ -56,7 +56,7 @@ function BusinessCreateArea(props) {
 
   return (
     <>
-      <Zoom in={props.isExpand}>
+      <Zoom in={true}>
         <form className="form-container" onSubmit={handleSubmit}>
           <h1 style={{ fontSize: "25px", color: "black" }}>
             Let's talk Business
@@ -129,13 +129,15 @@ function BusinessCreateArea(props) {
             onChange={handleChange}
             required
           />
+          <Link to={"/lobi"}>
           <Button
             style={{ backgroundColor: "rgb(14, 186, 151)" }}
             type="submit"
             onClick={handleClick({ vertical: "bottom", horizontal: "center" })}
-          >
+            >
             Submit
           </Button>
+            </Link>
           <Snackbar
             anchorOrigin={{ vertical, horizontal }}
             open={open}
