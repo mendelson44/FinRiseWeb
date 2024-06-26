@@ -29,6 +29,7 @@ function LoginBusinessDetails() {
 
   return (
     <>
+      <h1>add customer</h1>
  
      <BackHeader/>
       <Zoom in={true}>

@@ -1,4 +1,31 @@
-.login-container{
-    display: flex;
-    
+.login-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  padding: 0;
+}
+
+.login-form {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-logo {
+  background-color: rgb(14, 186, 151);
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 8px 0 8px 10px rgba(0, 0, 0, 0.2);
+  z-index: -1;
+}
+
+.login-logo img {
+  width: 400px;
 }

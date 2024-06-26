@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import Clock from "./Clock";
 import "../styles/header.css";
 
 function Header() {
@@ -37,11 +37,13 @@ function Header() {
             <Link to="/login">Login</Link>
           </li>
           <li>
-            <Link to="/usersignup">Sign Up</Link>
+            <Link to="/signup">Sign Up</Link>
+          </li>
+          <li>
+            <Clock />
           </li>
         </ul>
       </nav>
-      
     </>
   );
 }
