@@ -15,7 +15,6 @@ import BackHeader from "../components/BackHeader";
 */
 
 function LoginBusinessDetails() {
-
   const fabStyle = {
     margin: "15px",
     color: "black",
@@ -23,8 +22,8 @@ function LoginBusinessDetails() {
   };
   return (
     <>
-     <BackHeader/>
-        <BusinessCreateArea  />
+      <BackHeader />
+      <BusinessCreateArea />
     </>
   );
 }
