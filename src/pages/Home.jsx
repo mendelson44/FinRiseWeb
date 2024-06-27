@@ -7,7 +7,7 @@ import Header from "../components/Header";
 function Home() {
   return (
     <>
-      <Header/>
+      <Header />
       <img
         src="src/assets/Original on transparent.png"
         alt="FinRise Logo"
@@ -22,7 +22,7 @@ function Home() {
           <br />
           This easy-to-use and powerful tool puts you in control of your
           finances and helps you achieve your business goals.
-          </Typography>
+        </Typography>
       </div>
 
       <div
@@ -157,7 +157,7 @@ function Home() {
             Address: 123 Finance St, Business City, BC 12345
           </Typography>
         </Box>
-      </div> 
+      </div>
     </>
   );
 }

@@ -13,7 +13,7 @@ import ImageUploader from "../components/ImageUploader";
 
 import "@fontsource/inter";
 
-function SignUpForm() {
+function SignUpForm(props) {
   const navigate = useNavigate();
 
   // State to store form data
@@ -21,6 +21,7 @@ function SignUpForm() {
     email: "",
     firstName: "",
     lastName: "",
+    avatar: "",
     password: "",
   });
 
@@ -36,11 +37,10 @@ function SignUpForm() {
   // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Form data submitted:", formData);
-    // Here you would usually send the formData to a server or some other handling function
-    //TODO: 1. check if this email is not used in the database (GET)
-    //      2. if not, create new user (POST)
-    navigate('/LoginBusinessDetails'); // Navigate to '/LoginBusinessDetails' after submit
+    console.log("Form data submitted:");
+    props.onSignUpAttempt(formData);
+
+    navigate("/LoginBusinessDetails"); // Navigate to '/LoginBusinessDetails' after submit
   };
 
   return (
@@ -70,21 +70,25 @@ function SignUpForm() {
             <Typography level="body-sm">Sign up to get started.</Typography>
             <FormControl
               sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
-                <FormLabel style={{
-                    fontWeight: 'bold',
-                    display: 'block',
-                    margin:'auto',
-                    textAlign: 'center',}}
-                >Avatar</FormLabel>
+              <FormLabel
+                style={{
+                  fontWeight: "bold",
+                  display: "block",
+                  margin: "auto",
+                  textAlign: "center",
+                }}
+              >
+                Avatar
+              </FormLabel>
               <ImageUploader />
             </FormControl>
             <FormControl>
-              <FormLabel style={{ fontWeight: 'bold' }}>First Name</FormLabel>
+              <FormLabel style={{ fontWeight: "bold" }}>First Name</FormLabel>
               <Input
                 name="firstName"
                 type="text"
@@ -95,7 +99,7 @@ function SignUpForm() {
               />
             </FormControl>
             <FormControl>
-              <FormLabel style={{ fontWeight: 'bold' }} >Last Name</FormLabel>
+              <FormLabel style={{ fontWeight: "bold" }}>Last Name</FormLabel>
               <Input
                 name="lastName"
                 type="text"
@@ -105,7 +109,7 @@ function SignUpForm() {
               />
             </FormControl>
             <FormControl>
-              <FormLabel style={{ fontWeight: 'bold' }}>Email</FormLabel>
+              <FormLabel style={{ fontWeight: "bold" }}>Email</FormLabel>
               <Input
                 name="email"
                 type="email"
@@ -115,7 +119,19 @@ function SignUpForm() {
               />
             </FormControl>
             <FormControl>
-              <FormLabel style={{ fontWeight: 'bold' }}>Password</FormLabel>
+              <FormLabel style={{ fontWeight: "bold" }}>
+                Nickname (avatar)
+              </FormLabel>
+              <Input
+                name="avatar"
+                type="text"
+                placeholder="Enter your Nickname"
+                value={formData.avatar}
+                onChange={handleChange}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel style={{ fontWeight: "bold" }}>Password</FormLabel>
               <Input
                 name="password"
                 type="password"

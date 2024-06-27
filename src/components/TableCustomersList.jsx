@@ -15,7 +15,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TableSearch from "./TableSearch"; // Import TableSearch component
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 
 // Function to create sample data
 function createData(firstName, lastName, address, phone, email) {
@@ -46,13 +46,15 @@ function Row(props) {
   const [open, setOpen] = useState(false);
 
   const handleDelete = () => {
-    const confirmDelete = window.confirm("You've requested to delete a transaction from the customer's history. This action is irreversible.\n\nAre you sure you want to proceed?");
+    const confirmDelete = window.confirm(
+      "You've requested to delete a transaction from the customer's history. This action is irreversible.\n\nAre you sure you want to proceed?"
+    );
     if (confirmDelete) {
       // Perform deletion logic here
       console.log("Transaction deleted");
     }
   };
-  
+
   return (
     <>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>

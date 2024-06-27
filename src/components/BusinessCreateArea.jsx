@@ -130,14 +130,17 @@ function BusinessCreateArea(props) {
             required
           />
           <Link to={"/lobi"}>
-          <Button
-            style={{ backgroundColor: "rgb(14, 186, 151)" }}
-            type="submit"
-            onClick={handleClick({ vertical: "bottom", horizontal: "center" })}
+            <Button
+              style={{ backgroundColor: "rgb(14, 186, 151)" }}
+              type="submit"
+              onClick={handleClick({
+                vertical: "bottom",
+                horizontal: "center",
+              })}
             >
-            Submit
-          </Button>
-            </Link>
+              Submit
+            </Button>
+          </Link>
           <Snackbar
             anchorOrigin={{ vertical, horizontal }}
             open={open}

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import Button from '@mui/material/Button';
-import SearchIcon from '@mui/icons-material/Search';
+import React, { useState } from "react";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import Button from "@mui/material/Button";
+import SearchIcon from "@mui/icons-material/Search";
 
 const TableSearch = ({ rows, setFilteredRows }) => {
-  const [filterText, setFilterText] = useState('');
+  const [filterText, setFilterText] = useState("");
 
   const handleFilterChange = (event) => {
     const searchText = event.target.value.toLowerCase();
@@ -22,12 +22,12 @@ const TableSearch = ({ rows, setFilteredRows }) => {
   };
 
   const clearFilter = () => {
-    setFilterText('');
+    setFilterText("");
     setFilteredRows(rows);
   };
 
   return (
-    <Box display="flex"  sx={{ marginTop: '0.5rem' }}>
+    <Box display="flex" sx={{ marginTop: "0.5rem" }}>
       <TextField
         label="Filter by Name"
         variant="outlined"
@@ -37,11 +37,7 @@ const TableSearch = ({ rows, setFilteredRows }) => {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <Button
-                variant="contained"
-                size="small"
-                onClick={clearFilter}
-              >
+              <Button variant="contained" size="small" onClick={clearFilter}>
                 Clear
               </Button>
             </InputAdornment>

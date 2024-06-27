@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sheet from "@mui/joy/Sheet";
 import CssBaseline from "@mui/joy/CssBaseline";
@@ -12,12 +12,23 @@ import "@fontsource/inter";
 
 export default function LoginFinal(props) {
   const navigate = useNavigate();
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setLoginData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const handleLogin = () => {
-    props.onLoginAttempt({ email, password });
-    navigate('/Lobi'); // Navigate to '/lobi' after login
+    props.onLoginAttempt(loginData);
+    navigate("/Lobi"); // Navigate to '/lobi' after login
   };
 
   return (
@@ -51,8 +62,8 @@ export default function LoginFinal(props) {
             name="email"
             type="email"
             placeholder="user@email.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={loginData.email}
+            onChange={handleChange}
           />
         </FormControl>
         <FormControl>
@@ -62,13 +73,13 @@ export default function LoginFinal(props) {
             name="password"
             type="password"
             placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={loginData.password}
+            onChange={handleChange}
           />
         </FormControl>
         <Button
           sx={{
-            mt: 1, /* margin top */
+            mt: 1 /* margin top */,
             color: "white", // text color
             backgroundColor: "rgb(14, 186, 151)", // background color
           }}

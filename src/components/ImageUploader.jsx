@@ -25,6 +25,7 @@ function ImageUploader() {
   const [imageUrl, setImageUrl] = useState();
   const handleChange = (info) => {
     if (info.file.status === "uploading") {
+      console.log(imageUrl);
       setLoading(true);
       return;
     }

@@ -5,11 +5,9 @@ import SideMenu from "../components/SideMenu";
 import AddNewCustomerForm from "../components/AddNewCustomerForm";
 
 function AddNewCustomer() {
-  
   return (
     <>
-    
-    <AddNewCustomerForm/>
+      <AddNewCustomerForm />
     </>
   );
 }
