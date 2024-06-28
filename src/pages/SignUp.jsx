@@ -3,26 +3,33 @@ import BackHeader from "../components/BackHeader";
 import "../styles/signup.css";
 import users from "/data/users.js";
 import HorizontalLinearStepper from "../components/HorizontalLinearStepper";
-
+import SignUpForm from "../components/SignUpForm";
+import axios from "axios";
 function SignUp() {
+  const postData = async (data) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8084/superapp/users",
+        data
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error making POST request:", error);
+    }
+  };
   function onSignUpAttempt(details) {
-    console.log("login Attempt");
-    //TODO: find User By Email
-    console.log(users);
-
     const newUser = {
       email: details.email,
-      role: "MINI_APP_USER",
+      role: "ADMIN",
       username: `${details.firstName} ${details.lastName}`,
       avatar: details.avatar,
     };
 
-    // Here you would usually send the formData to a server or some other handling function
-    //TODO: 1. check if this email is not used in the database (GET)
-    //      2. if not, create new user (POST)
-    users.push(newUser);
-    console.log(users);
+    postData(newUser);
   }
+
+  //users.push(newUser);
+  console.log(users);
 
   return (
     <>
@@ -33,7 +40,8 @@ function SignUp() {
         </div>
 
         <div className="signup-form"></div>
-        <HorizontalLinearStepper />
+        {/* <HorizontalLinearStepper /> */}
+        <SignUpForm onSignUpAttempt={onSignUpAttempt} />
       </div>
     </>
   );
