@@ -4,20 +4,10 @@ import "../styles/signup.css";
 import users from "/data/users.js";
 import HorizontalLinearStepper from "../components/HorizontalLinearStepper";
 import SignUpForm from "../components/SignUpForm";
-import axios from "axios";
+import * as userService from "../services/userService";
+
 function SignUp() {
-  const postData = async (data) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:8084/superapp/users",
-        data
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error making POST request:", error);
-    }
-  };
-  function onSignUpAttempt(details) {
+  const onSignUpAttempt = async (details) => {
     const newUser = {
       email: details.email,
       role: "ADMIN",
@@ -25,10 +15,14 @@ function SignUp() {
       avatar: details.avatar,
     };
 
-    postData(newUser);
-  }
+    try {
+      const responseData = await userService.createUser(newUser);
+      console.log(responseData);
+    } catch (error) {
+      console.error("Error during sign-up attempt:", error);
+    }
+  };
 
-  //users.push(newUser);
   console.log(users);
 
   return (

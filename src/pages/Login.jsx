@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/login.module.css";
 import LoginFinal from "../components/LoginForm";
 import BackHeader from "../components/BackHeader";
-import axios from "axios";
+import * as userService from "../services/userService";
+
 function Login() {
   const [data, setData] = useState(null); // Define state for storing data
 
@@ -12,26 +13,17 @@ function Login() {
     }
   }, [data]);
 
-  const fetchData = async (superapp, currentEmail) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8084/superapp/users/login/${superapp}/${currentEmail}`
-      );
-      setData(response.data);
-      console.log(
-        `My Response: ${response.status} ${JSON.stringify(response.data)}`
-      );
-    } catch (error) {
-      console.error("Error making GET request:", error);
-    }
-  };
-
-  function loginAttempt(details) {
+  const loginAttempt = async (details) => {
     console.log("login Attempt");
-    fetchData("2024b.noa.sharabi", details.email);
-
+    try {
+      const fetchedData = await userService.fetchData(details.email);
+      setData(fetchedData);
+      console.log(`My Data: ${JSON.stringify(fetchedData)}`);
+    } catch (error) {
+      console.error("Error during login attempt:", error);
+    }
     console.log(`My Data: ${data}`);
-  }
+  };
 
   return (
     <>
