@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "../styles/customerCreateArea.css";
 import Zoom from "@mui/material/Zoom";
-import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
-import { Link } from "react-router-dom";
 
 /**
 |--------------------------------------------------
@@ -14,31 +12,12 @@ import { Link } from "react-router-dom";
 */
 
 function BusinessCreateArea(props) {
-  // State to store form data
-  const [formData, setFormData] = useState({
-    registrationNumber: "",
-    ownerId: "",
-    businessName: "",
-    city: "",
-    address: "",
-    phoneNumber: "",
-  });
 
-  // Handle form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    props.updateData({ [name]: value });
   };
 
-  // Handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Form data submitted:", formData);
-    // Here you would usually send the formData to a server or some other handling function
-  };
 
   const [state, setState] = React.useState({
     open: false,
@@ -57,7 +36,7 @@ function BusinessCreateArea(props) {
   return (
     <>
       <Zoom in={true}>
-        <form className="form-container" onSubmit={handleSubmit}>
+        <form className="form-container" >
           <h1 style={{ fontSize: "25px", color: "black" }}>
             Let's talk Business
           </h1>
@@ -75,16 +54,16 @@ function BusinessCreateArea(props) {
             id="businessRegistrationNumber"
             placeholder="Enter your Business registration"
             name="registrationNumber"
-            value={formData.registrationNumber}
+            value={props.data.registrationNumber}
             onChange={handleChange}
             required
           />
           <label htmlFor="ID">ID:</label>
           <input
             type="text"
-            id="ownerId"
-            name="ownerId"
-            value={formData.ownerId}
+            id="businessId"
+            name="businessId"
+            value={props.data.businessId}
             placeholder="Enter your ID"
             onChange={handleChange}
             required
@@ -93,9 +72,9 @@ function BusinessCreateArea(props) {
           <input
             type="text"
             id="businessName"
-            name="businessName"
+            name="name"
             placeholder="Enter your Business name"
-            value={formData.businessName}
+            value={props.data.name}
             onChange={handleChange}
             required
           />
@@ -104,7 +83,7 @@ function BusinessCreateArea(props) {
             type="text"
             id="city"
             name="city"
-            value={formData.city}
+            value={props.data.city}
             placeholder="Enter your City"
             onChange={handleChange}
             required
@@ -115,7 +94,7 @@ function BusinessCreateArea(props) {
             id="address"
             name="address"
             placeholder="Enter your address"
-            value={formData.address}
+            value={props.data.address}
             onChange={handleChange}
             required
           />
@@ -124,23 +103,11 @@ function BusinessCreateArea(props) {
             type="tel"
             id="phoneNumber"
             name="phoneNumber"
-            value={formData.phoneNumber}
+            value={props.data.phoneNumber}
             placeholder="Enter your Phone Number"
             onChange={handleChange}
             required
           />
-          <Link to={"/lobi"}>
-            <Button
-              style={{ backgroundColor: "rgb(14, 186, 151)" }}
-              type="submit"
-              onClick={handleClick({
-                vertical: "bottom",
-                horizontal: "center",
-              })}
-            >
-              Submit
-            </Button>
-          </Link>
           <Snackbar
             anchorOrigin={{ vertical, horizontal }}
             open={open}

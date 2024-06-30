@@ -1,21 +1,24 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+// Import your components
 import SignUpForm from "./SignUpForm";
-import BusinessCreateArea from "./BusinessCreateArea";
+import BusinessCreateArea from './BusinessCreateArea';
+import SignUpReview from './SignUpReview';
 
-const views = [<SignUpForm />, <BusinessCreateArea />];
 const steps = ["User Details", "Business Details", "Review"];
-export default function HorizontalLinearStepper() {
-  const [activeStep, setActiveStep] = useState(0);
-  const [skipped, setSkipped] = useState(new Set());
+
+export default function HorizontalLinearStepper(props) {
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [skipped, setSkipped] = React.useState(new Set());
 
   const isStepOptional = (step) => {
-    return step === 1;
+    //return step === 1;
+    return false;
   };
 
   const isStepSkipped = (step) => {
@@ -52,34 +55,52 @@ export default function HorizontalLinearStepper() {
     });
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
+  const handleSubmit = () => {
+    props.onSignUpAttempt();
   };
 
-  const handleSignUpAttempt = (details) => {
-    console.log("Sign Up Attempt", details);
-    // Your logic here
-  };
-
-  const renderStepContent = (step) => {
+  const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <SignUpForm onSignUpAttempt={handleSignUpAttempt} />;
+        return <SignUpForm 
+        data={props.newUser.essentialDetails} 
+        updateData={props.updateEssentialDetails}
+        dataExtra={props.newUser.extraDetails}
+        updateDataExtra={props.updateExtraDetails}
+        setFirstName={props.setFirstName}
+        setLastName={props.setLastName}
+        />;
       case 1:
-        return <BusinessCreateArea />;
+        return <BusinessCreateArea 
+        data={props.newUser.extraDetails.businessDetails} 
+        updateData={props.updateBusinessDetails} 
+        />;
       case 2:
-        return (
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            Review your details and submit
-          </Typography>
-        );
+        return <SignUpReview 
+        data={props.newUser}
+        />;
       default:
-        return "Unknown step";
+        return 'Unknown step';
     }
   };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: '100%' }}>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
@@ -104,17 +125,15 @@ export default function HorizontalLinearStepper() {
           <Typography sx={{ mt: 2, mb: 1 }}>
             All steps completed - you&apos;re finished
           </Typography>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleReset}>Reset</Button>
+          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            <Box sx={{ flex: '1 1 auto' }} />
+            <Button onClick={handleSubmit}>Submit Form</Button>
           </Box>
         </React.Fragment>
       ) : (
         <React.Fragment>
-          {renderStepContent(activeStep)}
-          <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
-
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+          <Box sx={{mt: "20px"}}>{getStepContent(activeStep)}</Box>
+          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
               color="inherit"
               disabled={activeStep === 0}
@@ -123,7 +142,7 @@ export default function HorizontalLinearStepper() {
             >
               Back
             </Button>
-            <Box sx={{ flex: "1 1 auto" }} />
+            <Box sx={{ flex: '1 1 auto' }} />
             {isStepOptional(activeStep) && (
               <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
                 Skip
@@ -131,7 +150,7 @@ export default function HorizontalLinearStepper() {
             )}
 
             <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? "Finish" : "Next"}
+              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </Button>
           </Box>
         </React.Fragment>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Zoom from "@mui/material/Zoom";
 import Sheet from "@mui/joy/Sheet";
 import CssBaseline from "@mui/joy/CssBaseline";
@@ -7,41 +6,32 @@ import Typography from "@mui/joy/Typography";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Input from "@mui/joy/Input";
-import Button from "@mui/joy/Button";
 import Link from "@mui/joy/Link";
 import ImageUploader from "../components/ImageUploader";
-
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import "@fontsource/inter";
 
 function SignUpForm(props) {
-  const navigate = useNavigate();
 
-  // State to store form data
-  const [formData, setFormData] = useState({
-    email: "",
-    firstName: "",
-    lastName: "",
-    avatar: "",
-    password: "",
-  });
-
-  // Handle form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    props.updateData({ [name]: value });
   };
-
-  // Handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Form data submitted:");
-    props.onSignUpAttempt(formData);
-
-    navigate("/LoginBusinessDetails"); // Navigate to '/LoginBusinessDetails' after submit
+  const handleChangeExtra = (event) => {
+    const { name, value } = event.target;
+    if (name === 'firstName') {
+      props.setFirstName(value);
+    } else if (name === 'lastName') {
+      props.setLastName(value);
+    } else {
+      props.updateData({ [name]: value });
+    }
   };
+  function onImageUpload(url){
+    props.dataExtra.profileImageUrl=url;
+  }
 
   return (
     <main className="signup-container">
@@ -50,7 +40,7 @@ function SignUpForm(props) {
         <Zoom in={true}>
           <Sheet
             component="form"
-            onSubmit={handleSubmit}
+            //onSubmit={handleSubmit}
             sx={{
               width: 600,
               py: 3,
@@ -85,7 +75,7 @@ function SignUpForm(props) {
               >
                 Avatar
               </FormLabel>
-              <ImageUploader />
+              <ImageUploader onImageUpload={onImageUpload}/>
             </FormControl>
             <FormControl>
               <FormLabel style={{ fontWeight: "bold" }}>First Name</FormLabel>
@@ -93,8 +83,8 @@ function SignUpForm(props) {
                 name="firstName"
                 type="text"
                 placeholder="Enter your First Name"
-                value={formData.firstName}
-                onChange={handleChange}
+                value={props.dataExtra.firstName}
+                onChange={handleChangeExtra}
                 required
               />
             </FormControl>
@@ -104,8 +94,8 @@ function SignUpForm(props) {
                 name="lastName"
                 type="text"
                 placeholder="Enter your Last Name"
-                value={formData.lastName}
-                onChange={handleChange}
+                value={props.dataExtra.lastName}
+                onChange={handleChangeExtra}
               />
             </FormControl>
             <FormControl>
@@ -114,7 +104,7 @@ function SignUpForm(props) {
                 name="email"
                 type="email"
                 placeholder="Enter your Email"
-                value={formData.email}
+                value={props.data.email}
                 onChange={handleChange}
               />
             </FormControl>
@@ -126,30 +116,37 @@ function SignUpForm(props) {
                 name="avatar"
                 type="text"
                 placeholder="Enter your Nickname"
-                value={formData.avatar}
+                value={props.data.avatar}
                 onChange={handleChange}
               />
             </FormControl>
+            <FormControl sx={{ml: "5px"}}>
+              <FormLabel id="demo-radio-buttons-group-label" style={{fontWeight: "bold"}}>Role</FormLabel>
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue="MINI_APP_USER"
+                name="role"
+                row={true}
+                value={props.data.role}
+                onChange={handleChange}
+              >
+                <FormControlLabel value="ADMIN" control={<Radio />} label="Admin" />
+                <FormControlLabel value="MINI_APP_USER" control={<Radio />} label="Miniapp User" />
+                <FormControlLabel value="SUPER_APP_USER" control={<Radio />} label="Superapp User" />
+              </RadioGroup>
+            </FormControl>
+
             <FormControl>
               <FormLabel style={{ fontWeight: "bold" }}>Password</FormLabel>
               <Input
                 name="password"
                 type="password"
                 placeholder="Enter your Password"
-                value={formData.password}
-                onChange={handleChange}
+                value={props.data.password}
+                onChange={handleChangeExtra}
               />
             </FormControl>
-            <Button
-              sx={{
-                mt: 1,
-                color: "white",
-                backgroundColor: "rgb(14, 186, 151)",
-              }}
-              type="submit"
-            >
-              Submit
-            </Button>
+            
             <Typography
               endDecorator={<Link href="/login">Log in</Link>}
               fontSize="sm"

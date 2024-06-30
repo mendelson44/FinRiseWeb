@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Flex, message, Upload } from "antd";
+import { storage } from "../services/firebaseConfig";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-const getBase64 = (img, callback) => {
-  const reader = new FileReader();
-  reader.addEventListener("load", () => callback(reader.result));
-  reader.readAsDataURL(img);
-};
 
 const beforeUpload = (file) => {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
@@ -20,25 +17,46 @@ const beforeUpload = (file) => {
   return isJpgOrPng && isLt2M;
 };
 
-function ImageUploader() {
+function ImageUploader(props) {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
-  const handleChange = (info) => {
-    if (info.file.status === "uploading") {
-      console.log(imageUrl);
-      setLoading(true);
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (url) => {
+  
+  
+  const handleUpload = (file) => {
+    setLoading(true);
+    const storageRef = ref(storage, `images/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        // Optional: Handle progress updates
+      },
+      (error) => {
+        message.error("Upload failed");
         setLoading(false);
-        setImageUrl(url);
-      });
-    } else {
-      setLoading(false);
+      },
+      () => {
+        // Get the download URL
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log("File available at", downloadURL);
+          setLoading(false);
+          setImageUrl(downloadURL);
+          message.success("Upload successful");
+          props.onImageUpload(downloadURL);
+        });
+      }
+    );
+  };
+
+  const handleChange = ({ file }) => {
+    if (beforeUpload(file)) {
+      handleUpload(file);
     }
   };
+
+
+
   const uploadButton = (
     <button
       style={{
@@ -64,8 +82,11 @@ function ImageUploader() {
         listType="picture-circle"
         className="avatar-uploader"
         showUploadList={false}
-        action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
         beforeUpload={beforeUpload}
+        customRequest={({ file, onSuccess }) => {
+          handleUpload(file);
+          onSuccess("ok");
+        }}
         onChange={handleChange}
       >
         {imageUrl ? (
@@ -74,6 +95,8 @@ function ImageUploader() {
             alt="avatar"
             style={{
               width: "100%",
+              height: "100%",
+              objectFit: "cover", // Ensures the image is not distorted
             }}
           />
         ) : (
