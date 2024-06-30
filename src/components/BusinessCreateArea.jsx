@@ -12,12 +12,10 @@ import Snackbar from "@mui/material/Snackbar";
 */
 
 function BusinessCreateArea(props) {
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     props.updateData({ [name]: value });
   };
-
 
   const [state, setState] = React.useState({
     open: false,
@@ -36,7 +34,7 @@ function BusinessCreateArea(props) {
   return (
     <>
       <Zoom in={true}>
-        <form className="form-container" >
+        <form className="form-container">
           <h1 style={{ fontSize: "25px", color: "black" }}>
             Let's talk Business
           </h1>

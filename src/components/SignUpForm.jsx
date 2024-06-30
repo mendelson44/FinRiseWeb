@@ -8,29 +8,28 @@ import FormLabel from "@mui/joy/FormLabel";
 import Input from "@mui/joy/Input";
 import Link from "@mui/joy/Link";
 import ImageUploader from "../components/ImageUploader";
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import "@fontsource/inter";
 
 function SignUpForm(props) {
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     props.updateData({ [name]: value });
   };
   const handleChangeExtra = (event) => {
     const { name, value } = event.target;
-    if (name === 'firstName') {
+    if (name === "firstName") {
       props.setFirstName(value);
-    } else if (name === 'lastName') {
+    } else if (name === "lastName") {
       props.setLastName(value);
     } else {
       props.updateData({ [name]: value });
     }
   };
-  function onImageUpload(url){
-    props.dataExtra.profileImageUrl=url;
+  function onImageUpload(url) {
+    props.dataExtra.profileImageUrl = url;
   }
 
   return (
@@ -75,7 +74,7 @@ function SignUpForm(props) {
               >
                 Avatar
               </FormLabel>
-              <ImageUploader onImageUpload={onImageUpload}/>
+              <ImageUploader onImageUpload={onImageUpload} />
             </FormControl>
             <FormControl>
               <FormLabel style={{ fontWeight: "bold" }}>First Name</FormLabel>
@@ -120,8 +119,13 @@ function SignUpForm(props) {
                 onChange={handleChange}
               />
             </FormControl>
-            <FormControl sx={{ml: "5px"}}>
-              <FormLabel id="demo-radio-buttons-group-label" style={{fontWeight: "bold"}}>Role</FormLabel>
+            <FormControl sx={{ ml: "5px" }}>
+              <FormLabel
+                id="demo-radio-buttons-group-label"
+                style={{ fontWeight: "bold" }}
+              >
+                Role
+              </FormLabel>
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="MINI_APP_USER"
@@ -130,9 +134,21 @@ function SignUpForm(props) {
                 value={props.data.role}
                 onChange={handleChange}
               >
-                <FormControlLabel value="ADMIN" control={<Radio />} label="Admin" />
-                <FormControlLabel value="MINI_APP_USER" control={<Radio />} label="Miniapp User" />
-                <FormControlLabel value="SUPER_APP_USER" control={<Radio />} label="Superapp User" />
+                <FormControlLabel
+                  value="ADMIN"
+                  control={<Radio />}
+                  label="Admin"
+                />
+                <FormControlLabel
+                  value="MINI_APP_USER"
+                  control={<Radio />}
+                  label="Miniapp User"
+                />
+                <FormControlLabel
+                  value="SUPER_APP_USER"
+                  control={<Radio />}
+                  label="Superapp User"
+                />
               </RadioGroup>
             </FormControl>
 
@@ -146,7 +162,7 @@ function SignUpForm(props) {
                 onChange={handleChangeExtra}
               />
             </FormControl>
-            
+
             <Typography
               endDecorator={<Link href="/login">Log in</Link>}
               fontSize="sm"
