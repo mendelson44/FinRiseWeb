@@ -168,7 +168,7 @@ export default function CollapsibleTable() {
   return (
     <>
       <div style={{ padding: "20px" }}>
-        <p style={{ backgroundColor: "white", padding: "20px" }}>
+        <p style={{ backgroundColor: "white", padding: "30px" }}>
           <TableSearch /> {/* Include TableSearch component here */}
         </p>
         <TableContainer component={Paper}>

@@ -1,60 +1,33 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import Box from "@mui/material/Box";
-import Fab from "@mui/material/Fab";
+import React from 'react';
+import LayoutComponent from '../components/LayoutComponent';
+import TableCustomerList from '../components/TableCustomersList';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import AddIcon from "@mui/icons-material/Add";
-import Typography from "@mui/material/Typography";
-import TableCustomerList from "../components/TableCustomersList";
-import SideMenu from "../components/SideMenu";
-import BackHeader from "../components/BackHeader";
 
-function CustomerList() {
-  const navigate = useNavigate();
-
-  const handleAddClick = () => {
-    navigate("/addnewcustomer");
-  };
-
+const CustomerList = () => {
   return (
-    <div>
-      <BackHeader />
-      <div style={{ display: "flex", marginTop: "10px" }}>
-        {/* SideMenu component */}
-        <div style={{ marginRight: "20px" }}>
-          <SideMenu />
-        </div>
-        <div style={{ flex: 1, position: "relative" }}>
-          <Box
-            sx={{
-              position: "fixed",
-              top: "90px",
-              right: "20px",
-            }}
-          >
-            <Fab
-              style={{ backgroundColor: "rgb(14, 186, 151)", color: "#fff" }}
-              aria-label="add"
-              onClick={handleAddClick}
-            >
-              <AddIcon />
-            </Fab>
-          </Box>
-          <h1
-            style={{
-              fontSize: "30px",
-              color: "black",
-              textAlign: "left",
-              marginTop: "30px",
-              fontWeight: "bold",
-            }}
-          >
-            Customer list
-          </h1>
-          <TableCustomerList />
-        </div>
+    <LayoutComponent>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+        <h1
+          style={{
+            fontSize: '30px',
+            color: 'black',
+            textAlign: 'left',
+            marginTop: '30px',
+            fontWeight: 'bold',
+            marginBottom: 0,
+          }}
+        >
+          Customer list
+        </h1>
+        <Link to="/AddNewCustomer">
+          <AddIcon fontSize="large" style={{ color: '#007bff', cursor: 'pointer' }} />
+        </Link>
+        
       </div>
-    </div>
+      <TableCustomerList />
+    </LayoutComponent>
   );
-}
+};
 
 export default CustomerList;

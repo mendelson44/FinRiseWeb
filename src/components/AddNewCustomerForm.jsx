@@ -1,9 +1,7 @@
-import { Zoom } from "@mui/material";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-import SideMenu from "./SideMenu";
-import BackHeader from "./BackHeader";
+import { Zoom } from "@mui/material";
 import { FormControl } from "@mui/joy";
 
 function AddNewCustomerForm() {
@@ -23,9 +21,6 @@ function AddNewCustomerForm() {
     branchNumber: "",
   });
 
-  // Hook to navigate to different routes
-  const navigate = useNavigate();
-
   // Handle form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -39,17 +34,18 @@ function AddNewCustomerForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Client Details Submitted:", clientDetails);
-    navigate("/customerlist");
+    // Use Link to navigate to /customerlist
   };
 
   return (
     <>
-      <BackHeader />
-      <div style={{ display: "flex", flexDirection: "row", marginTop: "0px" }}>
-        {/* SideMenu component */}
-        <div style={{ marginRight: "20px" }}>
-          <SideMenu />
-        </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          marginTop: "0px",
+        }}
+      >
         <div
           style={{
             flex: 1,
@@ -59,173 +55,174 @@ function AddNewCustomerForm() {
           }}
         >
           <Zoom in={true}>
-            <form
-              className="form-container"
-              onSubmit={handleSubmit}
+          <form
+            className="form-container"
+            onSubmit={handleSubmit}
+            style={{
+              margin: "20px",
+              maxWidth: "600px",
+              width: "100%",
+              backgroundColor: "#fff",
+              padding: "20px",
+              borderRadius: "8px",
+              boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+            }}
+          >
+            <h1
               style={{
-                margin: "20px",
-                maxWidth: "600px",
-                width: "100%",
-                backgroundColor: "#fff",
-                padding: "20px",
-                borderRadius: "8px",
-                boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+                fontSize: "25px",
+                color: "black",
+                textAlign: "center",
+                fontWeight: "bold",
+                marginBottom: "30px",
               }}
             >
-              <h1
+              Add New Client
+            </h1>
+
+            <label htmlFor="clientName">Client Name:</label>
+            <input
+              type="text"
+              id="clientName"
+              name="clientName"
+              value={clientDetails.clientName}
+              placeholder="Enter Client Name"
+              onChange={handleChange}
+              required
+              style={{ width: "100%", padding: "10px", margin: "10px 0" }}
+            />
+
+            <label htmlFor="businessType">Business Type:</label>
+            <input
+              type="text"
+              id="businessType"
+              name="businessType"
+              value={clientDetails.businessType}
+              placeholder="Enter Business Type"
+              onChange={handleChange}
+              style={{ width: "100%", padding: "10px", margin: "10px 0" }}
+            />
+
+            <label htmlFor="phone">Phone:</label>
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              value={clientDetails.phone}
+              placeholder="Enter Phone"
+              onChange={handleChange}
+              style={{ width: "100%", padding: "10px", margin: "10px 0" }}
+            />
+
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={clientDetails.email}
+              placeholder="Enter Email"
+              onChange={handleChange}
+              style={{ width: "100%", padding: "10px", margin: "10px 0" }}
+            />
+
+            <label htmlFor="country">Country:</label>
+            <input
+              type="text"
+              id="country"
+              name="country"
+              value={clientDetails.country}
+              placeholder="Enter Country"
+              onChange={handleChange}
+              style={{ width: "100%", padding: "10px", margin: "10px 0" }}
+            />
+
+            <label htmlFor="city">City:</label>
+            <input
+              type="text"
+              id="city"
+              name="city"
+              value={clientDetails.city}
+              placeholder="Enter City"
+              onChange={handleChange}
+              style={{ width: "100%", padding: "10px", margin: "10px 0" }}
+            />
+
+            <label htmlFor="street">Street and Number:</label>
+            <input
+              type="text"
+              id="street"
+              name="street"
+              value={clientDetails.street}
+              placeholder="Enter Street and Number"
+              onChange={handleChange}
+              style={{ width: "100%", padding: "10px", margin: "10px 0" }}
+            />
+
+            <label htmlFor="zipcode">Zip Code:</label>
+            <input
+              type="text"
+              id="zipcode"
+              name="zipcode"
+              value={clientDetails.zipcode}
+              placeholder="Enter Zip Code"
+              onChange={handleChange}
+              style={{ width: "100%", padding: "10px", margin: "10px 0" }}
+            />
+
+            <FormControl style={{ marginBottom: "20px", width: "100%" }}>
+              <label htmlFor="paymentMethod">Payment Method:</label>
+              <select
+                id="paymentMethod"
+                name="paymentMethod"
+                value={clientDetails.paymentMethod}
+                onChange={handleChange}
                 style={{
-                  fontSize: "25px",
-                  color: "black",
-                  textAlign: "center",
-                  fontWeight: "bold",
-                  marginBottom: "30px",
+                  width: "100%",
+                  height: "50px",
+                  fontSize: "16px",
+                  padding: "10px",
                 }}
               >
-                Add New Client
-              </h1>
+                <option value="credit-card">Credit Card</option>
+                <option value="bank-transfer">Bank Transfer</option>
+                <option value="cash">Cash</option>
+              </select>
+            </FormControl>
 
-              <label htmlFor="clientName">Client Name:</label>
-              <input
-                type="text"
-                id="clientName"
-                name="clientName"
-                value={clientDetails.clientName}
-                placeholder="Enter Client Name"
-                onChange={handleChange}
-                required
-                style={{ width: "100%", padding: "10px", margin: "10px 0" }}
-              />
+            <label htmlFor="bankName">Bank Name:</label>
+            <input
+              type="text"
+              id="bankName"
+              name="bankName"
+              value={clientDetails.bankName}
+              placeholder="Enter Bank Name"
+              onChange={handleChange}
+              style={{ width: "100%", padding: "10px", margin: "10px 0" }}
+            />
 
-              <label htmlFor="businessType">Business Type:</label>
-              <input
-                type="text"
-                id="businessType"
-                name="businessType"
-                value={clientDetails.businessType}
-                placeholder="Enter Business Type"
-                onChange={handleChange}
-                style={{ width: "100%", padding: "10px", margin: "10px 0" }}
-              />
+            <label htmlFor="accountNumber">Account Number:</label>
+            <input
+              type="text"
+              id="accountNumber"
+              name="accountNumber"
+              value={clientDetails.accountNumber}
+              placeholder="Enter Account Number"
+              onChange={handleChange}
+              style={{ width: "100%", padding: "10px", margin: "10px 0" }}
+            />
 
-              <label htmlFor="phone">Phone:</label>
-              <input
-                type="text"
-                id="phone"
-                name="phone"
-                value={clientDetails.phone}
-                placeholder="Enter Phone"
-                onChange={handleChange}
-                style={{ width: "100%", padding: "10px", margin: "10px 0" }}
-              />
+            <label htmlFor="branchNumber">Branch Number:</label>
+            <input
+              type="text"
+              id="branchNumber"
+              name="branchNumber"
+              value={clientDetails.branchNumber}
+              placeholder="Enter Branch Number"
+              onChange={handleChange}
+              style={{ width: "100%", padding: "10px", margin: "10px 0" }}
+            />
 
-              <label htmlFor="email">Email:</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={clientDetails.email}
-                placeholder="Enter Email"
-                onChange={handleChange}
-                style={{ width: "100%", padding: "10px", margin: "10px 0" }}
-              />
-
-              <label htmlFor="country">Country:</label>
-              <input
-                type="text"
-                id="country"
-                name="country"
-                value={clientDetails.country}
-                placeholder="Enter Country"
-                onChange={handleChange}
-                style={{ width: "100%", padding: "10px", margin: "10px 0" }}
-              />
-
-              <label htmlFor="city">City:</label>
-              <input
-                type="text"
-                id="city"
-                name="city"
-                value={clientDetails.city}
-                placeholder="Enter City"
-                onChange={handleChange}
-                style={{ width: "100%", padding: "10px", margin: "10px 0" }}
-              />
-
-              <label htmlFor="street">Street and Number:</label>
-              <input
-                type="text"
-                id="street"
-                name="street"
-                value={clientDetails.street}
-                placeholder="Enter Street and Number"
-                onChange={handleChange}
-                style={{ width: "100%", padding: "10px", margin: "10px 0" }}
-              />
-
-              <label htmlFor="zipcode">Zip Code:</label>
-              <input
-                type="text"
-                id="zipcode"
-                name="zipcode"
-                value={clientDetails.zipcode}
-                placeholder="Enter Zip Code"
-                onChange={handleChange}
-                style={{ width: "100%", padding: "10px", margin: "10px 0" }}
-              />
-
-              <FormControl style={{ marginBottom: "20px", width: "100%" }}>
-                <label htmlFor="paymentMethod">Payment Method:</label>
-                <select
-                  id="paymentMethod"
-                  name="paymentMethod"
-                  value={clientDetails.paymentMethod}
-                  onChange={handleChange}
-                  style={{
-                    width: "100%",
-                    height: "50px",
-                    fontSize: "16px",
-                    padding: "10px",
-                  }}
-                >
-                  <option value="credit-card">Credit Card</option>
-                  <option value="bank-transfer">Bank Transfer</option>
-                  <option value="cash">Cash</option>
-                </select>
-              </FormControl>
-
-              <label htmlFor="bankName">Bank Name:</label>
-              <input
-                type="text"
-                id="bankName"
-                name="bankName"
-                value={clientDetails.bankName}
-                placeholder="Enter Bank Name"
-                onChange={handleChange}
-                style={{ width: "100%", padding: "10px", margin: "10px 0" }}
-              />
-
-              <label htmlFor="accountNumber">Account Number:</label>
-              <input
-                type="text"
-                id="accountNumber"
-                name="accountNumber"
-                value={clientDetails.accountNumber}
-                placeholder="Enter Account Number"
-                onChange={handleChange}
-                style={{ width: "100%", padding: "10px", margin: "10px 0" }}
-              />
-
-              <label htmlFor="branchNumber">Branch Number:</label>
-              <input
-                type="text"
-                id="branchNumber"
-                name="branchNumber"
-                value={clientDetails.branchNumber}
-                placeholder="Enter Branch Number"
-                onChange={handleChange}
-                style={{ width: "100%", padding: "10px", margin: "10px 0" }}
-              />
-
+            <Link to="/customerlist" style={{ textDecoration: "none" }}>
               <Button
                 style={{
                   backgroundColor: "rgb(14, 186, 151)",
@@ -235,7 +232,8 @@ function AddNewCustomerForm() {
               >
                 ADD
               </Button>
-            </form>
+            </Link>
+          </form>
           </Zoom>
         </div>
       </div>

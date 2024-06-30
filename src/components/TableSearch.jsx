@@ -27,7 +27,7 @@ const TableSearch = ({ rows, setFilteredRows }) => {
   };
 
   return (
-    <Box display="flex" sx={{ marginTop: "0.5rem" }}>
+    <Box display="flex" sx={{ marginTop: "1rem" }}>
       <TextField
         label="Filter by Name"
         variant="outlined"
