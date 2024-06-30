@@ -1,15 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import BackHeader from "../components/BackHeader";
 import "../styles/signup.css";
 import HorizontalLinearStepper from "../components/HorizontalLinearStepper";
 import * as userService from "../services/userService";
+import * as objectService from "../services/objectService";
 
 function SignUp() {
-
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-
- 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   const [newUser, setNewUser] = useState({
     essentialDetails: {
@@ -30,10 +28,10 @@ function SignUp() {
         city: "",
         address: "",
         phoneNumber: "",
-      }
-    }
+      },
+    },
   });
-  
+
   useEffect(() => {
     setNewUser((prevUser) => ({
       ...prevUser,
@@ -54,8 +52,8 @@ function SignUp() {
       ...prevUser,
       essentialDetails: {
         ...prevUser.essentialDetails,
-        ...details
-      }
+        ...details,
+      },
     }));
   };
 
@@ -64,8 +62,8 @@ function SignUp() {
       ...prevUser,
       extraDetails: {
         ...prevUser.extraDetails,
-        ...details
-      }
+        ...details,
+      },
     }));
   };
 
@@ -76,19 +74,26 @@ function SignUp() {
         ...prevUser.extraDetails,
         businessDetails: {
           ...prevUser.extraDetails.businessDetails,
-          ...businessDetails
-        }
-      }
+          ...businessDetails,
+        },
+      },
     }));
   };
-const onSignUpAttempt = async () => {
-    console.log(`Attempting SignUp!!!!! \n ${newUser}`)
-    // try {
-    //   const responseData = await userService.createUser(newUser);
-    //   console.log(responseData);
-    // } catch (error) {
-    //   console.error("Error during sign-up attempt:", error);
-    // }
+  const onSignUpAttempt = async () => {
+    console.log(`Attempting SignUp!!!!! \n ${newUser}`);
+    try {
+      const responseDataEssential = await userService.createUser(
+        newUser.essentialDetails
+      );
+      console.log(`Response EssentialDetails: ${responseData}`);
+
+      const responseDataExtra = await objectService.createObject(
+        newUser.extraDetails
+      );
+      console.log(`Response ExtraDetails: ${responseDataExtra}`);
+    } catch (error) {
+      console.error("Error during sign-up attempt:", error);
+    }
   };
 
   console.log(newUser);
@@ -101,14 +106,14 @@ const onSignUpAttempt = async () => {
           <img src="src/assets/White on transparent .png" alt="logo FinRise" />
         </div>
         <div className="stepper-container">
-          <HorizontalLinearStepper 
-          onSignUpAttempt={onSignUpAttempt}
-          newUser={newUser}
-          updateEssentialDetails={updateEssentialDetails}
-          updateExtraDetails={updateExtraDetails}
-          updateBusinessDetails={updateBusinessDetails}
-          setFirstName={setFirstName}
-          setLastName={setLastName}
+          <HorizontalLinearStepper
+            onSignUpAttempt={onSignUpAttempt}
+            newUser={newUser}
+            updateEssentialDetails={updateEssentialDetails}
+            updateExtraDetails={updateExtraDetails}
+            updateBusinessDetails={updateBusinessDetails}
+            setFirstName={setFirstName}
+            setLastName={setLastName}
           />
         </div>
       </div>
