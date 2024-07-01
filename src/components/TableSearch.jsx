@@ -1,56 +1,38 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
-import Button from "@mui/material/Button";
-import SearchIcon from "@mui/icons-material/Search";
+import React from "react";
+import { AudioOutlined } from "@ant-design/icons";
+import { Input, Space } from "antd";
 
-const TableSearch = ({ rows, setFilteredRows }) => {
-  const [filterText, setFilterText] = useState("");
+const { Search } = Input;
 
-  const handleFilterChange = (event) => {
-    const searchText = event.target.value.toLowerCase();
-    setFilterText(searchText);
+const suffix = (
+	<AudioOutlined
+		style={{
+			fontSize: 16,
+			color: "#1677ff",
+		}}
+	/>
+);
 
-    const filteredData = rows.filter(
-      (row) =>
-        row.firstName.toLowerCase().includes(searchText) ||
-        row.lastName.toLowerCase().includes(searchText)
-    );
+const onSearch = (value, _e, info) => console.log(info?.source, value);
 
-    setFilteredRows(filteredData);
-  };
-
-  const clearFilter = () => {
-    setFilterText("");
-    setFilteredRows(rows);
-  };
-
-  return (
-    <Box display="flex" sx={{ marginTop: "1rem" }}>
-      <TextField
-        label="Filter by Name"
-        variant="outlined"
-        size="small"
-        value={filterText}
-        onChange={handleFilterChange}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <Button variant="contained" size="small" onClick={clearFilter}>
-                Clear
-              </Button>
-            </InputAdornment>
-          ),
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-        }}
-      />
-    </Box>
-  );
-};
+const TableSearch = () => (
+	<div
+		style={{
+			display: "flex",
+			justifyContent: "flex-end",
+			marginBottom: "10px",
+		}}
+	>
+		<Space direction="vertical">
+			<Search
+				placeholder="Search by Name"
+				allowClear
+				enterButton="Search"
+				size="large"
+				onSearch={onSearch}
+			/>
+		</Space>
+	</div>
+);
 
 export default TableSearch;
