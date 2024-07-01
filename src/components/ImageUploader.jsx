@@ -4,7 +4,6 @@ import { Flex, message, Upload } from "antd";
 import { storage } from "../services/firebaseConfig";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-
 const beforeUpload = (file) => {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
   if (!isJpgOrPng) {
@@ -20,8 +19,7 @@ const beforeUpload = (file) => {
 function ImageUploader(props) {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
-  
-  
+
   const handleUpload = (file) => {
     setLoading(true);
     const storageRef = ref(storage, `images/${file.name}`);
@@ -54,8 +52,6 @@ function ImageUploader(props) {
       handleUpload(file);
     }
   };
-
-
 
   const uploadButton = (
     <button

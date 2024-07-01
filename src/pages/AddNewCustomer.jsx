@@ -1,6 +1,6 @@
 import React from "react";
 import AddNewCustomerForm from "../components/AddNewCustomerForm";
-import LayoutComponent from '../components/LayoutComponent';
+import LayoutComponent from "../components/LayoutComponent";
 
 function AddNewCustomer() {
   return (
@@ -13,4 +13,3 @@ function AddNewCustomer() {
 }
 
 export default AddNewCustomer;
-

@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import AccordionExpand from "./AccordionExpand";
 
-
 function SignUpReview(props) {
-
   return (
     <>
-      <AccordionExpand data={props.data}/>
+      <AccordionExpand data={props.data} />
     </>
   );
 }
