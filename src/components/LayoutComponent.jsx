@@ -23,10 +23,10 @@ const LayoutComponent = ({ children }) => {
       icon: <FileOutlined />,
       label: 'Documents',
       children: [
-        { key: '5', label: 'Tax Invoice' },
-        { key: '6', label: 'Quotation' },
-        { key: '7', label: 'Receipt' },
-        { key: '8', label: 'Receipt Tax Invoice' },
+        { key: '5', label: 'Tax Invoice',linkTo: '/taxinvoice' },
+        { key: '6', label: 'Quotation',linkTo: '/quotation' },
+        { key: '7', label: 'Receipt',linkTo:'/receipt' },
+        { key: '8', label: 'Receipt Tax Invoice',linkTo: '/receiptTaxInvoice' },
       ],
     },
     {

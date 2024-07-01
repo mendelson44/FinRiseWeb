@@ -167,11 +167,10 @@ const rows = [
 export default function CollapsibleTable() {
   return (
     <>
-      <div style={{ padding: "20px" }}>
-        <p style={{ backgroundColor: "white", padding: "30px" }}>
-          <TableSearch /> {/* Include TableSearch component here */}
-        </p>
+    
+      <div style={{ margin: "50px" }}>
         <TableContainer component={Paper}>
+          <TableSearch/> {/* Include TableSearch component here */}
           <Table aria-label="collapsible table">
             <TableHead>
               <TableRow>

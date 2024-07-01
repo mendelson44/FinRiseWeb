@@ -1,8 +1,7 @@
 import React from "react";
 import LayoutComponent from "../components/LayoutComponent";
-import DateCalendar from "../components/DateCalendar";
 
-function Lobi() {
+function Receipt() {
   return (
     <>
     <LayoutComponent>
@@ -17,12 +16,9 @@ function Lobi() {
               fontWeight: 'bold',
             }}
           >
-            Dashboard
+            Receipt
             <hr />
           </h1>
-        </div>
-        <div style={{ marginRight:"2px",marginTop:"100px" }}>
-          <DateCalendar />
         </div>
       </div>
     </LayoutComponent>
@@ -30,4 +26,4 @@ function Lobi() {
   );
 }
 
-export default Lobi;
+export default Receipt;
