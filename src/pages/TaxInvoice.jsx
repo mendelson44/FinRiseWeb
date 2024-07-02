@@ -17,15 +17,12 @@ function TaxInvoice() {
 								fontWeight: "bold",
 							}}
 						>
-							Tax Invoice Form
+							Tax Invoice Document
 							<hr />
 						</h1>
 					</div>
-					{/*}	<div style={{ marginRight: "2px", marginTop: "100px" }}>
-						<TaxInvoiceForm />
-					</div>
-            */}
 				</div>
+				<TaxInvoiceForm />
 			</LayoutComponent>
 		</>
 	);

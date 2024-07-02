@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	Container,
 	TextField,
@@ -12,6 +12,7 @@ import {
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
+import { Alert } from "antd";
 
 const currencies = [
 	{ value: "ILS", label: "Shekel" },
@@ -19,102 +20,190 @@ const currencies = [
 ];
 
 const TaxInvoiceForm = () => {
-	const [paymentDate, setPaymentDate] = React.useState(null);
-	const [issueDate, setIssueDate] = React.useState(null);
-	const [currency, setCurrency] = React.useState("ILS");
+	const [paymentDate, setPaymentDate] = useState(null);
+	const [issueDate, setIssueDate] = useState(null);
+	const [currency, setCurrency] = useState("ILS");
+	const [showAlert, setShowAlert] = useState(false);
+
+	const handleSubmit = () => {
+		setShowAlert(true); // Show the alert on form submission
+	};
 
 	return (
-		<Container>
-			<Typography variant="h6" gutterBottom>
-				Tax Invoice Form
-			</Typography>
-			<Box sx={{ border: "1px solid #ddd", padding: 2, borderRadius: 2 }}>
-				<Grid container spacing={2}>
-					<Grid item xs={12} sm={6}>
-						<DatePicker
-							label="Payment Due Date"
-							value={paymentDate}
-							onChange={(newValue) => setPaymentDate(newValue)}
-							renderInput={(params) => <TextField {...params} fullWidth />}
-						/>
-					</Grid>
-					<Grid item xs={12} sm={6}>
-						<DatePicker
-							label="Document Date"
-							value={issueDate}
-							onChange={(newValue) => setIssueDate(newValue)}
-							renderInput={(params) => (
-								<TextField
-									{...params}
-									fullWidth
-									InputProps={{ endAdornment: <SearchIcon /> }}
-								/>
-							)}
-						/>
-					</Grid>
-					<Grid item xs={12}>
-						<TextField required label="Customer Name" fullWidth />
-					</Grid>
-					<Grid item xs={12}>
-						<TextField label="Document Description" fullWidth />
-					</Grid>
-					<Grid item xs={12} sm={4}>
-						<TextField
-							label="Quantity"
-							type="number"
-							defaultValue={1}
-							fullWidth
-						/>
-					</Grid>
-					<Grid item xs={12} sm={4}>
-						<TextField
-							select
-							label="Currency"
-							value={currency}
-							onChange={(e) => setCurrency(e.target.value)}
-							fullWidth
-						>
-							{currencies.map((option) => (
-								<MenuItem key={option.value} value={option.value}>
-									{option.label}
-								</MenuItem>
-							))}
-						</TextField>
-					</Grid>
-					<Grid item xs={12} sm={4}>
-						<TextField
-							label="Unit Price"
-							type="number"
-							defaultValue={0}
-							fullWidth
-						/>
-					</Grid>
-					<Grid item xs={12}>
-						<TextField
-							label="Service or Product Description"
-							fullWidth
-							InputProps={{
-								endAdornment: (
-									<IconButton>
-										<SearchIcon />
-									</IconButton>
-								),
+		<>
+			<Container
+				sx={{
+					padding: 0,
+					margin: 0,
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "flex-start",
+					width: "100%",
+				}}
+			>
+				<Typography variant="h5" gutterBottom marginTop={3}>
+					Document Details
+				</Typography>
+				<Box
+					sx={{
+						border: "1px solid #ddd",
+						padding: 2,
+						borderRadius: 2,
+						marginTop: "10px",
+						width: "100%", // Ensure the box takes the full width
+					}}
+				>
+					<Grid container spacing={2}>
+						<Grid item xs={12}>
+							<TextField required label="Customer Name" fullWidth />
+						</Grid>
+						<Grid item xs={12} sm={6}>
+							<DatePicker
+								label="Payment Due Date"
+								value={paymentDate}
+								onChange={(newValue) => setPaymentDate(newValue)}
+								renderInput={(params) => <TextField {...params} fullWidth />}
+							/>
+						</Grid>
+						<Grid item xs={12} sm={6}>
+							<DatePicker
+								label="Document Date"
+								value={issueDate}
+								onChange={(newValue) => setIssueDate(newValue)}
+								renderInput={(params) => (
+									<TextField
+										{...params}
+										fullWidth
+										InputProps={{ endAdornment: <SearchIcon /> }}
+									/>
+								)}
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField label="Document Description" fullWidth />
+						</Grid>
+						<Grid item xs={12} sm={4}>
+							<TextField
+								label="Quantity"
+								type="number"
+								defaultValue={1}
+								fullWidth
+							/>
+						</Grid>
+						<Grid item xs={12} sm={4}>
+							<TextField
+								select
+								label="Currency"
+								value={currency}
+								onChange={(e) => setCurrency(e.target.value)}
+								fullWidth
+							>
+								{currencies.map((option) => (
+									<MenuItem key={option.value} value={option.value}>
+										{option.label}
+									</MenuItem>
+								))}
+							</TextField>
+						</Grid>
+						<Grid item xs={12} sm={4}>
+							<TextField
+								label="Unit Price"
+								type="number"
+								defaultValue={0}
+								fullWidth
+							/>
+						</Grid>
+						<Box
+							sx={{
+								display: "flex",
+								justifyContent: "flex-start",
+								marginLeft: 3,
+								marginTop: 2,
 							}}
-						/>
+						>
+							<Typography variant="h6" gutterBottom>
+								List of Items
+							</Typography>
+						</Box>
+						<Grid item xs={12}>
+							<TextField
+								label="Service or Product Description"
+								fullWidth
+								InputProps={{
+									endAdornment: (
+										<IconButton>
+											<SearchIcon />
+										</IconButton>
+									),
+								}}
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<Button variant="outlined" startIcon={<AddIcon />}>
+								Add to Item List
+							</Button>
+						</Grid>
 					</Grid>
-					<Grid item xs={12}>
-						<Button variant="outlined" startIcon={<AddIcon />}>
-							Add to Item List
-						</Button>
+				</Box>
+			</Container>
+
+			<Container
+				sx={{
+					padding: 0,
+					margin: 0,
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "flex-start",
+					marginTop: "20px", // Adjust spacing as needed
+					width: "100%", // Ensure the container takes the full width
+				}}
+			>
+				<Typography variant="h5" gutterBottom>
+					Notes in the Document
+				</Typography>
+				<Box
+					sx={{
+						border: "1px solid #ddd",
+						padding: 2,
+						borderRadius: 2,
+						width: "100%", // Ensure the box takes the full width
+					}}
+				>
+					<Grid container spacing={4}>
+						<Grid item xs={12}>
+							<TextField
+								label="Notes in the bottom of the document"
+								multiline
+								rows={4}
+								fullWidth
+							/>
+						</Grid>
 					</Grid>
-					<Grid item xs={12}>
-						<Button variant="contained" color="primary">
-							Submit
-						</Button>
-					</Grid>
-				</Grid>
+				</Box>
+			</Container>
+
+			{showAlert && (
+				<Alert
+					message="Success"
+					description="The Document was created successfully."
+					type="success"
+					showIcon
+				/>
+			)}
+
+			<Box
+				sx={{
+					display: "flex",
+					justifyContent: "flex-start",
+					marginLeft: 3,
+					marginTop: 2,
+				}}
+			>
+				<Button variant="contained" color="primary" onClick={handleSubmit}>
+					Submit
+				</Button>
 			</Box>
-		</Container>
+		</>
 	);
 };
 
