@@ -119,38 +119,6 @@ function SignUpForm(props) {
                 onChange={handleChange}
               />
             </FormControl>
-            <FormControl sx={{ ml: "5px" }}>
-              <FormLabel
-                id="demo-radio-buttons-group-label"
-                style={{ fontWeight: "bold" }}
-              >
-                Role
-              </FormLabel>
-              <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="MINI_APP_USER"
-                name="role"
-                row={true}
-                value={props.data.role}
-                onChange={handleChange}
-              >
-                <FormControlLabel
-                  value="ADMIN"
-                  control={<Radio />}
-                  label="Admin"
-                />
-                <FormControlLabel
-                  value="MINI_APP_USER"
-                  control={<Radio />}
-                  label="Miniapp User"
-                />
-                <FormControlLabel
-                  value="SUPER_APP_USER"
-                  control={<Radio />}
-                  label="Superapp User"
-                />
-              </RadioGroup>
-            </FormControl>
 
             <FormControl>
               <FormLabel style={{ fontWeight: "bold" }}>Password</FormLabel>

@@ -18,15 +18,19 @@
     "@mui/material": "^5.15.21",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@mui/x-date-pickers": "^7.8.0",
+    "@react-pdf/renderer": "^3.4.4",
     "@tanstack/react-query": "^5.45.1",
     "antd": "^5.18.3",
     "axios": "^1.7.2",
+    "date-fns": "^2.29.2",
     "firebase": "^10.12.2",
     "material-react-table": "^2.13.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1",
-    "styled-components": "^6.1.11"
+    "save": "^2.9.0",
+    "styled-components": "^6.1.11",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

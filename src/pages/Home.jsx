@@ -4,12 +4,15 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import "../styles/home.css";
 import Header from "../components/Header";
+import PDFFile from "../components/PDFFile";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 function Home() {
   return (
     <>
       <Header />
+
       <img
-        src="src/assets/Original on transparent.png"
+        src="src/assets/OriginalOnTransparent.png"
         alt="FinRise Logo"
         className="logo"
       />

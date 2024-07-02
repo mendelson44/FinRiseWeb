@@ -8,7 +8,8 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import user from "/data/newUser";
+import logo from "../assets/logo.png";
+
 export default function AccordionExpand(props) {
   return (
     <div>
@@ -22,6 +23,10 @@ export default function AccordionExpand(props) {
         </AccordionSummary>
         <AccordionDetails>
           <List>
+            <ListItem style={{ justifyContent: "center" }}>
+              <img src={logo} alt="profile picture" style={{ width: "50%" }} />
+            </ListItem>
+            <hr />
             <ListItem>
               <ListItemText
                 primary={`User Name: ${props.data.essentialDetails.userName}`}
@@ -36,6 +41,7 @@ export default function AccordionExpand(props) {
             <ListItem>
               <ListItemText
                 primary={`Role: ${props.data.essentialDetails.role}`}
+                secondary={`(default)`}
               />
             </ListItem>
             <ListItem>

@@ -4,6 +4,7 @@ import "../styles/signup.css";
 import HorizontalLinearStepper from "../components/HorizontalLinearStepper";
 import * as userService from "../services/userService";
 import * as objectService from "../services/objectService";
+import * as constants from "../utils/constants";
 
 function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -12,7 +13,7 @@ function SignUp() {
   const [newUser, setNewUser] = useState({
     essentialDetails: {
       email: "",
-      role: "",
+      role: `${constants.MINI_APP_USER}`,
       userName: `${firstName} ${lastName}`,
       avatar: "",
     },
@@ -103,7 +104,7 @@ function SignUp() {
       <BackHeader />
       <div className="signup-container">
         <div className="signup-logo">
-          <img src="src/assets/White on transparent .png" alt="logo FinRise" />
+          <img src={constants.IMAGES.WHITE_ON_TRANSPARENT} alt="logo FinRise" />
         </div>
         <div className="stepper-container">
           <HorizontalLinearStepper
