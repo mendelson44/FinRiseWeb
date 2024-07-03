@@ -25,8 +25,12 @@ export default function AccordionExpand(props) {
         <AccordionDetails>
           <List>
             <ListItem style={{ justifyContent: "center" }}>
-              <img src={logo} alt="profile picture" style={{ width: "50%" }} />
-              <Avatar>YB</Avatar>
+              <Avatar
+                alt="profile_image"
+                src={props.data.extraDetails.profileImageUrl}
+              >
+                YB
+              </Avatar>
             </ListItem>
             <hr />
             <ListItem>
