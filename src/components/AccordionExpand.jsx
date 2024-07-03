@@ -9,6 +9,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import logo from "../assets/logo.png";
+import { Avatar } from "@mui/material";
 
 export default function AccordionExpand(props) {
   return (
@@ -25,6 +26,7 @@ export default function AccordionExpand(props) {
           <List>
             <ListItem style={{ justifyContent: "center" }}>
               <img src={logo} alt="profile picture" style={{ width: "50%" }} />
+              <Avatar>YB</Avatar>
             </ListItem>
             <hr />
             <ListItem>

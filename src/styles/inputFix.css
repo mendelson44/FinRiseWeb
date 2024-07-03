@@ -1,0 +1,10 @@
+/* Use higher specificity to override Ant Design styles */
+.custom-input input,
+.custom-input textarea,
+.custom-input select {
+  box-sizing: content-box !important;
+}
+
+.custom-input label {
+  margin-top: 6px;
+}
