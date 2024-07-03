@@ -218,9 +218,16 @@ const TaxInvoiceForm = () => {
           marginTop: 2,
         }}
       >
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
-          Submit
-        </Button>
+        <Box sx={{ mr: 2 }}>
+          <Button variant="outlined" color="primary" onClick={handleSubmit}>
+            Preview
+          </Button>
+        </Box>
+        <Box>
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
+            Submit
+          </Button>
+        </Box>
       </Box>
     </>
   );
