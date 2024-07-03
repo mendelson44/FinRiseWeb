@@ -3,6 +3,7 @@ import styles from "../styles/login.module.css";
 import LoginFinal from "../components/LoginForm";
 import BackHeader from "../components/BackHeader";
 import * as userService from "../services/userService";
+import * as constants from "../utils/constants";
 
 function Login() {
   const [data, setData] = useState(null); // Define state for storing data
@@ -29,11 +30,11 @@ function Login() {
     <>
       <BackHeader />
       <div className={styles.container}>
-        <div className={styles.signupLogo}>
-          <img src="src/assets/White on transparent .png" alt="logo FinRise" />
+        <div className={styles.loginLogo}>
+          <img src={constants.IMAGES.WHITE_ON_TRANSPARENT} alt="logo FinRise" />
         </div>
 
-        <div className={styles.signupForm}>
+        <div className={styles.loginForm}>
           <LoginFinal onLoginAttempt={loginAttempt} />
         </div>
       </div>
