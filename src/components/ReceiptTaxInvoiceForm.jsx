@@ -19,11 +19,18 @@ const currencies = [
 	{ value: "USD", label: "Dollar" },
 ];
 
-const TaxInvoiceForm = () => {
+const paymentTypes = [
+	{ value: "bank_transfer", label: "Bank Transfer" },
+	{ value: "credit_card", label: "Credit Card" },
+	{ value: "cash", label: "Cash" },
+];
+
+const ReceiptTaxInvoiceForm = () => {
 	const [paymentDate, setPaymentDate] = useState(null);
 	const [issueDate, setIssueDate] = useState(null);
 	const [currency, setCurrency] = useState("ILS");
 	const [showAlert, setShowAlert] = useState(false);
+	const [paymentType, setPaymentType] = useState("bank_transfer");
 
 	const handleSubmit = () => {
 		setShowAlert(true); // Show the alert on form submission
@@ -151,6 +158,91 @@ const TaxInvoiceForm = () => {
 					</Grid>
 				</Grid>
 			</Box>
+			<Box
+				sx={{
+					border: "4px solid #ddd",
+					padding: 2,
+					borderRadius: 2,
+					marginTop: "10px",
+					width: "100%", // Ensure the box takes the full width
+				}}
+			>
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "flex-start",
+						marginBottom: "20px",
+					}}
+				>
+					<Typography variant="h5" gutterBottom>
+						Details of Receipts
+					</Typography>
+					<Typography variant="h7" gutterBottom>
+						How you were paid?
+					</Typography>
+				</Box>
+				<Grid container spacing={2}>
+					<Grid item xs={12}>
+						<TextField
+							select
+							id="payment-type"
+							label="Payment Type"
+							value={paymentType}
+							onChange={(e) => setPaymentType(e.target.value)}
+							fullWidth
+						>
+							{paymentTypes.map((option) => (
+								<MenuItem key={option.value} value={option.value}>
+									{option.label}
+								</MenuItem>
+							))}
+						</TextField>
+					</Grid>
+
+					<Grid item xs={12} sm={2}>
+						<DatePicker
+							id="date-basic"
+							label="Date"
+							value={issueDate}
+							onChange={(newValue) => setIssueDate(newValue)}
+							renderInput={(params) => (
+								<TextField
+									{...params}
+									fullWidth
+									InputProps={{ endAdornment: <SearchIcon /> }}
+								/>
+							)}
+						/>
+					</Grid>
+
+					<Grid item xs={12} sm={4}>
+						<TextField
+							id="unit-price"
+							label="Unit Price"
+							type="number"
+							defaultValue={0}
+							fullWidth
+						/>
+					</Grid>
+					<Grid item xs={4}>
+						<TextField
+							select
+							id="currency-basic"
+							label="Currency"
+							value={currency}
+							onChange={(e) => setCurrency(e.target.value)}
+							fullWidth
+						>
+							{currencies.map((option) => (
+								<MenuItem key={option.value} value={option.value}>
+									{option.label}
+								</MenuItem>
+							))}
+						</TextField>
+					</Grid>
+				</Grid>
+			</Box>
 
 			<Box
 				sx={{
@@ -209,4 +301,4 @@ const TaxInvoiceForm = () => {
 	);
 };
 
-export default TaxInvoiceForm;
+export default ReceiptTaxInvoiceForm;

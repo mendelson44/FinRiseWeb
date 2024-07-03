@@ -1,6 +1,6 @@
 import React from "react";
 import LayoutComponent from "../components/LayoutComponent";
-
+import ReceiptTaxInvoiceForm from "../components/ReceiptTaxInvoiceForm";
 function ReceiptTaxInvoice() {
 	return (
 		<>
@@ -21,6 +21,7 @@ function ReceiptTaxInvoice() {
 						</h1>
 					</div>
 				</div>
+				<ReceiptTaxInvoiceForm />
 			</LayoutComponent>
 		</>
 	);
