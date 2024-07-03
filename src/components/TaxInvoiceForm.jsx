@@ -37,175 +37,170 @@ const TaxInvoiceForm = () => {
 
 	return (
 		<>
-			<Container
+			<Typography variant="h5" gutterBottom marginTop={3}>
+				Document Details
+			</Typography>
+			<Box
 				sx={{
-					padding: 0,
-					margin: 0,
-					display: "flex",
-					flexDirection: "column",
-					alignItems: "flex-start",
-					width: "100%",
+					border: "2px solid #ddd",
+					padding: 2,
+					borderRadius: 2,
+					marginTop: "10px",
+					width: "100%", // Ensure the box takes the full width
 				}}
 			>
-				<Typography variant="h5" gutterBottom marginTop={3}>
-					Document Details
-				</Typography>
-				<Box
-					sx={{
-						border: "1px solid #ddd",
-						padding: 2,
-						borderRadius: 2,
-						marginTop: "10px",
-						width: "100%", // Ensure the box takes the full width
-					}}
-				>
-					<Grid container spacing={3}>
-						<Grid item xs={12}>
-							<TextField
-								required
-								label="Customer Name"
-								fullWidth
-								className="custom-input"
-							/>
-						</Grid>
-						<Grid item xs={12} sm={6}>
-							<DatePicker
-								label="Payment Due Date"
-								value={paymentDate}
-								className="custom-input"
-								onChange={(newValue) => setPaymentDate(newValue)}
-								renderInput={(params) => (
-									<TextField {...params} fullWidth className="custom-input" />
-								)}
-							/>
-						</Grid>
-						<Grid item xs={12} sm={6}>
-							<DatePicker
-								label="Document Date"
-								value={issueDate}
-								className="custom-input"
-								onChange={(newValue) => setIssueDate(newValue)}
-								renderInput={(params) => (
-									<TextField
-										{...params}
-										fullWidth
-										className="custom-input"
-										InputProps={{ endAdornment: <SearchIcon /> }}
-									/>
-								)}
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<TextField
-								label="Document Description"
-								fullWidth
-								className="custom-input"
-							/>
-						</Grid>
-						<Grid item xs={12} sm={4}>
-							<TextField
-								label="Quantity"
-								type="number"
-								defaultValue={1}
-								fullWidth
-								className="custom-input"
-							/>
-						</Grid>
-						<Grid item xs={12} sm={4}>
-							<TextField
-								select
-								label="Currency"
-								value={currency}
-								onChange={(e) => setCurrency(e.target.value)}
-								fullWidth
-								className="custom-input"
-							>
-								{currencies.map((option) => (
-									<MenuItem key={option.value} value={option.value}>
-										{option.label}
-									</MenuItem>
-								))}
-							</TextField>
-						</Grid>
-						<Grid item xs={12} sm={4}>
-							<TextField
-								label="Unit Price"
-								type="number"
-								defaultValue={0}
-								fullWidth
-								className="custom-input"
-							/>
-						</Grid>
-						<Box
-							sx={{
-								display: "flex",
-								justifyContent: "flex-start",
-								marginLeft: 3,
-								marginTop: 2,
-							}}
-						>
-							<Typography variant="h6" gutterBottom>
-								List of Items
-							</Typography>
-						</Box>
-						<Grid item xs={12}>
-							<TextField
-								label="Service or Product Description"
-								fullWidth
-								className="custom-input"
-								InputProps={{
-									endAdornment: (
-										<IconButton>
-											<SearchIcon />
-										</IconButton>
-									),
-								}}
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<Button variant="outlined" startIcon={<AddIcon />}>
-								Add to Item List
-							</Button>
-						</Grid>
+				<Grid container spacing={3}>
+					<Grid item xs={12}>
+						<TextField
+							required
+							label="Customer Name"
+							fullWidth
+							className="custom-input"
+						/>
 					</Grid>
-				</Box>
-			</Container>
+					<Grid item xs={12} sm={2}>
+						<DatePicker
+							label="Payment Due Date"
+							value={paymentDate}
+							className="custom-input"
+							onChange={(newValue) => setPaymentDate(newValue)}
+							renderInput={(params) => (
+								<TextField {...params} fullWidth className="custom-input" />
+							)}
+						/>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<DatePicker
+							label="Document Date"
+							value={issueDate}
+							className="custom-input"
+							onChange={(newValue) => setIssueDate(newValue)}
+							renderInput={(params) => (
+								<TextField
+									{...params}
+									fullWidth
+									className="custom-input"
+									InputProps={{ endAdornment: <SearchIcon /> }}
+								/>
+							)}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<TextField
+							label="Document Description"
+							fullWidth
+							className="custom-input"
+						/>
+					</Grid>
 
-			<Container
+					<Box
+						sx={{
+							display: "flex",
+							justifyContent: "flex-start",
+							marginLeft: 3,
+							marginTop: 2,
+						}}
+					>
+						<Typography variant="h6" gutterBottom>
+							List of Items
+						</Typography>
+					</Box>
+					<Grid item xs={12}>
+						<TextField
+							label="Service or Product Description"
+							fullWidth
+							className="custom-input"
+							InputProps={{
+								endAdornment: (
+									<IconButton>
+										<SearchIcon />
+									</IconButton>
+								),
+							}}
+						/>
+					</Grid>
+					<Grid item xs={6} sm={2}>
+						<TextField
+							label="Quantity"
+							type="number"
+							defaultValue={1}
+							fullWidth
+							className="custom-input"
+						/>
+					</Grid>
+					<Grid item xs={6} sm={2}>
+						<TextField
+							label="Unit Price"
+							type="number"
+							defaultValue={0}
+							fullWidth
+							className="custom-input"
+						/>
+					</Grid>
+					<Grid item xs={6} sm={2}>
+						<TextField
+							select
+							label="Currency"
+							value={currency}
+							onChange={(e) => setCurrency(e.target.value)}
+							fullWidth
+							className="custom-input"
+						>
+							{currencies.map((option) => (
+								<MenuItem key={option.value} value={option.value}>
+									{option.label}
+								</MenuItem>
+							))}
+						</TextField>
+					</Grid>
+					<Grid item xs={6} sm={2}>
+						<TextField
+							select
+							label="Vat"
+							value={vatStatus}
+							onChange={(e) => setVatStatus(e.target.value)}
+							fullWidth
+							className="custom-input"
+						>
+							{vat.map((option) => (
+								<MenuItem key={option.value} value={option.value}>
+									{option.label}
+								</MenuItem>
+							))}
+						</TextField>
+					</Grid>
+					<Grid item xs={12}>
+						<Button variant="outlined" startIcon={<AddIcon />}>
+							Add to Item List
+						</Button>
+					</Grid>
+				</Grid>
+			</Box>
+
+			<Box
 				sx={{
-					padding: 0,
-					margin: 0,
-					display: "flex",
-					flexDirection: "column",
-					alignItems: "flex-start",
-					marginTop: "20px", // Adjust spacing as needed
-					width: "100%", // Ensure the container takes the full width
+					border: "2px solid #ddd",
+					padding: 2,
+					borderRadius: 2,
+					marginTop: 2,
+					width: "100%", // Ensure the box takes the full width
 				}}
 			>
 				<Typography variant="h5" gutterBottom>
 					Notes in the Document
 				</Typography>
-				<Box
-					sx={{
-						border: "1px solid #ddd",
-						padding: 2,
-						borderRadius: 2,
-						width: "100%", // Ensure the box takes the full width
-					}}
-				>
-					<Grid container spacing={4}>
-						<Grid item xs={12}>
-							<TextField
-								label="Notes in the bottom of the document"
-								multiline
-								rows={4}
-								fullWidth
-								className="custom-input"
-							/>
-						</Grid>
+				<Grid container spacing={4}>
+					<Grid item xs={12}>
+						<TextField
+							label="Notes in the bottom of the document"
+							multiline
+							rows={4}
+							fullWidth
+							className="custom-input"
+						/>
 					</Grid>
-				</Box>
-			</Container>
+				</Grid>
+			</Box>
 
 			{showAlert && (
 				<Alert

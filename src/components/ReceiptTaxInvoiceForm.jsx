@@ -13,6 +13,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import { Alert } from "antd";
+import "../styles/inputFix.css";
 
 const currencies = [
 	{ value: "ILS", label: "Shekel" },
@@ -45,7 +46,7 @@ const ReceiptTaxInvoiceForm = () => {
 		<>
 			<Box
 				sx={{
-					border: "4px solid #ddd",
+					border: "2px solid #ddd",
 					padding: 2,
 					borderRadius: 2,
 					marginTop: 2,
@@ -58,26 +59,28 @@ const ReceiptTaxInvoiceForm = () => {
 				<Grid container spacing={2}>
 					<Grid item xs={12}>
 						<TextField
-							id="customer-name"
 							required
 							label="Customer Name"
 							fullWidth
+							className="custom-input"
 						/>
 					</Grid>
 					<Grid item xs={12} sm={2}>
 						<DatePicker
-							id="payment-due-date"
 							label="Payment Due Date"
 							value={paymentDate}
+							className="custom-input"
 							onChange={(newValue) => setPaymentDate(newValue)}
-							renderInput={(params) => <TextField {...params} fullWidth />}
+							renderInput={(params) => (
+								<TextField {...params} fullWidth className="custom-input" />
+							)}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<DatePicker
-							id="document-date"
 							label="Document Date"
 							value={issueDate}
+							className="custom-input"
 							onChange={(newValue) => setIssueDate(newValue)}
 							renderInput={(params) => (
 								<TextField
@@ -90,9 +93,9 @@ const ReceiptTaxInvoiceForm = () => {
 					</Grid>
 					<Grid item xs={12}>
 						<TextField
-							id="document-description"
 							label="Document Description"
 							fullWidth
+							className="custom-input"
 						/>
 					</Grid>
 
@@ -110,9 +113,9 @@ const ReceiptTaxInvoiceForm = () => {
 					</Box>
 					<Grid item xs={12}>
 						<TextField
-							id="service-or-product-description"
 							label="Service or Product Description"
 							fullWidth
+							className="custom-input"
 							InputProps={{
 								endAdornment: (
 									<IconButton>
@@ -124,30 +127,30 @@ const ReceiptTaxInvoiceForm = () => {
 					</Grid>
 					<Grid item xs={6} sm={2}>
 						<TextField
-							id="quantity-basic"
 							label="Quantity"
 							type="number"
 							defaultValue={1}
 							fullWidth
+							className="custom-input"
 						/>
 					</Grid>
 					<Grid item xs={6} sm={2}>
 						<TextField
-							id="unit-price"
 							label="Unit Price"
 							type="number"
 							defaultValue={0}
 							fullWidth
+							className="custom-input"
 						/>
 					</Grid>
 					<Grid item xs={6} sm={2}>
 						<TextField
 							select
-							id="currency-basic"
 							label="Currency"
 							value={currency}
 							onChange={(e) => setCurrency(e.target.value)}
 							fullWidth
+							className="custom-input"
 						>
 							{currencies.map((option) => (
 								<MenuItem key={option.value} value={option.value}>
@@ -159,11 +162,11 @@ const ReceiptTaxInvoiceForm = () => {
 					<Grid item xs={6} sm={2}>
 						<TextField
 							select
-							id="vat-basic"
-							label="vat"
+							label="Vat"
 							value={vatStatus}
 							onChange={(e) => setVatStatus(e.target.value)}
 							fullWidth
+							className="custom-input"
 						>
 							{vat.map((option) => (
 								<MenuItem key={option.value} value={option.value}>
@@ -182,7 +185,7 @@ const ReceiptTaxInvoiceForm = () => {
 			</Box>
 			<Box
 				sx={{
-					border: "4px solid #ddd",
+					border: "2px solid #ddd",
 					padding: 2,
 					borderRadius: 2,
 					marginTop: "10px",
@@ -208,11 +211,11 @@ const ReceiptTaxInvoiceForm = () => {
 					<Grid item xs={12}>
 						<TextField
 							select
-							id="payment-type"
 							label="Payment Type"
 							value={paymentType}
 							onChange={(e) => setPaymentType(e.target.value)}
 							fullWidth
+							className="custom-input"
 						>
 							{paymentTypes.map((option) => (
 								<MenuItem key={option.value} value={option.value}>
@@ -224,9 +227,9 @@ const ReceiptTaxInvoiceForm = () => {
 
 					<Grid item xs={12} sm={2}>
 						<DatePicker
-							id="date-basic"
 							label="Date"
 							value={issueDate}
+							className="custom-input"
 							onChange={(newValue) => setIssueDate(newValue)}
 							renderInput={(params) => (
 								<TextField
@@ -240,18 +243,18 @@ const ReceiptTaxInvoiceForm = () => {
 
 					<Grid item xs={12} sm={4}>
 						<TextField
-							id="unit-price"
 							label="Unit Price"
 							type="number"
 							defaultValue={0}
 							fullWidth
+							className="custom-input"
 						/>
 					</Grid>
 					<Grid item xs={4}>
 						<TextField
 							select
-							id="currency-basic"
 							label="Currency"
+							className="custom-input"
 							value={currency}
 							onChange={(e) => setCurrency(e.target.value)}
 							fullWidth
@@ -268,7 +271,7 @@ const ReceiptTaxInvoiceForm = () => {
 
 			<Box
 				sx={{
-					border: "4px solid #ddd",
+					border: "2px solid #ddd",
 					padding: 2,
 					borderRadius: 2,
 					marginTop: 2,
@@ -281,11 +284,11 @@ const ReceiptTaxInvoiceForm = () => {
 				<Grid container spacing={4}>
 					<Grid item xs={12}>
 						<TextField
-							id="notes"
 							label="Notes in the bottom of the document"
 							multiline
 							rows={4}
 							fullWidth
+							className="custom-input"
 						/>
 					</Grid>
 				</Grid>

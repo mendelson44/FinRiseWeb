@@ -13,6 +13,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import { Alert } from "antd";
+import "../styles/inputFix.css";
 
 const currencies = [
 	{ value: "ILS", label: "Shekel" },
@@ -39,7 +40,7 @@ function ReceiptForm() {
 		<>
 			<Box
 				sx={{
-					border: "4px solid #ddd",
+					border: "2px solid #ddd",
 					padding: 2,
 					borderRadius: 2,
 					marginTop: 2,
@@ -52,18 +53,18 @@ function ReceiptForm() {
 				<Grid container spacing={2}>
 					<Grid item xs={12}>
 						<TextField
-							id="customer-name"
 							required
 							label="Customer Name"
 							fullWidth
+							className="custom-input"
 						/>
 					</Grid>
 
 					<Grid item xs={12} sm={2}>
 						<DatePicker
-							id="document-date"
 							label="Document Date"
 							value={issueDate}
+							className="custom-input"
 							onChange={(newValue) => setIssueDate(newValue)}
 							renderInput={(params) => (
 								<TextField
@@ -77,9 +78,9 @@ function ReceiptForm() {
 
 					<Grid item xs={12} sm={2}>
 						<TextField
-							id="document-description"
 							label="Document Description"
 							fullWidth
+							className="custom-input"
 						/>
 					</Grid>
 				</Grid>
@@ -87,7 +88,7 @@ function ReceiptForm() {
 
 			<Box
 				sx={{
-					border: "4px solid #ddd",
+					border: "2px solid #ddd",
 					padding: 2,
 					borderRadius: 2,
 					marginTop: "10px",
@@ -113,7 +114,7 @@ function ReceiptForm() {
 					<Grid item xs={12}>
 						<TextField
 							select
-							id="payment-type"
+							className="custom-input"
 							label="Payment Type"
 							value={paymentType}
 							onChange={(e) => setPaymentType(e.target.value)}
@@ -129,7 +130,7 @@ function ReceiptForm() {
 
 					<Grid item xs={12} sm={2}>
 						<DatePicker
-							id="date-basic"
+							className="custom-input"
 							label="Date"
 							value={issueDate}
 							onChange={(newValue) => setIssueDate(newValue)}
@@ -145,7 +146,7 @@ function ReceiptForm() {
 
 					<Grid item xs={12} sm={4}>
 						<TextField
-							id="unit-price"
+							className="custom-input"
 							label="Unit Price"
 							type="number"
 							defaultValue={0}
@@ -155,7 +156,7 @@ function ReceiptForm() {
 					<Grid item xs={4}>
 						<TextField
 							select
-							id="currency-basic"
+							className="custom-input"
 							label="Currency"
 							value={currency}
 							onChange={(e) => setCurrency(e.target.value)}
@@ -172,7 +173,7 @@ function ReceiptForm() {
 			</Box>
 			<Box
 				sx={{
-					border: "4px solid #ddd",
+					border: "2px solid #ddd",
 					padding: 2,
 					borderRadius: 2,
 					marginTop: 2,
@@ -185,7 +186,7 @@ function ReceiptForm() {
 				<Grid container spacing={4}>
 					<Grid item xs={12}>
 						<TextField
-							id="notes"
+							className="custom-input"
 							label="Notes in the bottom of the document"
 							multiline
 							rows={4}
