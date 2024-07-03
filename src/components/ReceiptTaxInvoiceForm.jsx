@@ -24,8 +24,13 @@ const paymentTypes = [
 	{ value: "credit_card", label: "Credit Card" },
 	{ value: "cash", label: "Cash" },
 ];
+const vat = [
+	{ value: "before", label: "Before" },
+	{ value: "after", label: "After" },
+];
 
 const ReceiptTaxInvoiceForm = () => {
+	const [vatStatus, setVatStatus] = useState("before");
 	const [paymentDate, setPaymentDate] = useState(null);
 	const [issueDate, setIssueDate] = useState(null);
 	const [currency, setCurrency] = useState("ILS");
@@ -117,7 +122,7 @@ const ReceiptTaxInvoiceForm = () => {
 							}}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={6} sm={2}>
 						<TextField
 							id="quantity-basic"
 							label="Quantity"
@@ -126,7 +131,16 @@ const ReceiptTaxInvoiceForm = () => {
 							fullWidth
 						/>
 					</Grid>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={6} sm={2}>
+						<TextField
+							id="unit-price"
+							label="Unit Price"
+							type="number"
+							defaultValue={0}
+							fullWidth
+						/>
+					</Grid>
+					<Grid item xs={6} sm={2}>
 						<TextField
 							select
 							id="currency-basic"
@@ -142,15 +156,23 @@ const ReceiptTaxInvoiceForm = () => {
 							))}
 						</TextField>
 					</Grid>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={6} sm={2}>
 						<TextField
-							id="unit-price"
-							label="Unit Price"
-							type="number"
-							defaultValue={0}
+							select
+							id="vat-basic"
+							label="vat"
+							value={vatStatus}
+							onChange={(e) => setVatStatus(e.target.value)}
 							fullWidth
-						/>
+						>
+							{vat.map((option) => (
+								<MenuItem key={option.value} value={option.value}>
+									{option.label}
+								</MenuItem>
+							))}
+						</TextField>
 					</Grid>
+
 					<Grid item xs={12}>
 						<Button variant="outlined" startIcon={<AddIcon />}>
 							Add to Item List
