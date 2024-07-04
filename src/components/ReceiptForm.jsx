@@ -114,6 +114,7 @@ function ReceiptForm() {
 					<Grid item xs={12}>
 						<TextField
 							select
+							required
 							className="custom-input"
 							label="Payment Type"
 							value={paymentType}
@@ -146,8 +147,9 @@ function ReceiptForm() {
 
 					<Grid item xs={12} sm={4}>
 						<TextField
+							required
 							className="custom-input"
-							label="Unit Price"
+							label="Sum"
 							type="number"
 							defaultValue={0}
 							fullWidth
@@ -155,6 +157,7 @@ function ReceiptForm() {
 					</Grid>
 					<Grid item xs={4}>
 						<TextField
+							required
 							select
 							className="custom-input"
 							label="Currency"

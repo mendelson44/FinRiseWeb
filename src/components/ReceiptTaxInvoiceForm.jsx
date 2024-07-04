@@ -32,7 +32,6 @@ const vat = [
 
 const ReceiptTaxInvoiceForm = () => {
 	const [vatStatus, setVatStatus] = useState("before");
-	const [paymentDate, setPaymentDate] = useState(null);
 	const [issueDate, setIssueDate] = useState(null);
 	const [currency, setCurrency] = useState("ILS");
 	const [showAlert, setShowAlert] = useState(false);
@@ -63,17 +62,6 @@ const ReceiptTaxInvoiceForm = () => {
 							label="Customer Name"
 							fullWidth
 							className="custom-input"
-						/>
-					</Grid>
-					<Grid item xs={12} sm={2}>
-						<DatePicker
-							label="Payment Due Date"
-							value={paymentDate}
-							className="custom-input"
-							onChange={(newValue) => setPaymentDate(newValue)}
-							renderInput={(params) => (
-								<TextField {...params} fullWidth className="custom-input" />
-							)}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
@@ -113,6 +101,7 @@ const ReceiptTaxInvoiceForm = () => {
 					</Box>
 					<Grid item xs={12}>
 						<TextField
+							required
 							label="Service or Product Description"
 							fullWidth
 							className="custom-input"
@@ -127,6 +116,7 @@ const ReceiptTaxInvoiceForm = () => {
 					</Grid>
 					<Grid item xs={6} sm={2}>
 						<TextField
+							required
 							label="Quantity"
 							type="number"
 							defaultValue={1}
@@ -136,6 +126,7 @@ const ReceiptTaxInvoiceForm = () => {
 					</Grid>
 					<Grid item xs={6} sm={2}>
 						<TextField
+							required
 							label="Unit Price"
 							type="number"
 							defaultValue={0}
@@ -211,6 +202,7 @@ const ReceiptTaxInvoiceForm = () => {
 					<Grid item xs={12}>
 						<TextField
 							select
+							required
 							label="Payment Type"
 							value={paymentType}
 							onChange={(e) => setPaymentType(e.target.value)}
@@ -243,7 +235,8 @@ const ReceiptTaxInvoiceForm = () => {
 
 					<Grid item xs={12} sm={4}>
 						<TextField
-							label="Unit Price"
+							required
+							label="Sum"
 							type="number"
 							defaultValue={0}
 							fullWidth
@@ -253,6 +246,7 @@ const ReceiptTaxInvoiceForm = () => {
 					<Grid item xs={4}>
 						<TextField
 							select
+							required
 							label="Currency"
 							className="custom-input"
 							value={currency}
