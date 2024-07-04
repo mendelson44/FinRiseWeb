@@ -11,8 +11,6 @@ import Link from "@mui/joy/Link";
 import "@fontsource/inter";
 
 export default function LoginFinal(props) {
-  const navigate = useNavigate();
-
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -28,7 +26,6 @@ export default function LoginFinal(props) {
 
   const handleLogin = () => {
     props.onLoginAttempt(loginData);
-    navigate("/Lobi"); // Navigate to '/lobi' after login
   };
 
   return (

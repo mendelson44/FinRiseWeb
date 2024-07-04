@@ -28,15 +28,19 @@ export default function AccordionExpand(props) {
               <Avatar
                 alt="profile_image"
                 src={props.data.extraDetails.profileImageUrl}
+                sx={{ width: 150, height: 150 }}
               >
-                YB
+                {!props.data.extraDetails.profileImageUrl &&
+                  props.data.extraDetails.firstName &&
+                  props.data.extraDetails.lastName &&
+                  `${props.data.extraDetails.firstName[0]}${props.data.extraDetails.lastName[0]}`}
               </Avatar>
             </ListItem>
             <hr />
             <ListItem>
               <ListItemText
                 primary={`User Name: ${props.data.essentialDetails.userName}`}
-                secondary={`(first: ${props.data.extraDetails.firstName} last:${props.data.extraDetails.lastName})`}
+                secondary={`(first: ${props.data.extraDetails.firstName} last: ${props.data.extraDetails.lastName})`}
               />
             </ListItem>
             <ListItem>

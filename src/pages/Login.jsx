@@ -20,8 +20,18 @@ function Login() {
       const fetchedData = await userService.fetchData(details.email);
       setData(fetchedData);
       console.log(`My Data: ${JSON.stringify(fetchedData)}`);
+
+      if (fetchedData.ok) {
+        const userData = await fetchedData.json();
+        Cookies.set("user", JSON.stringify(userData), { expires: 1 });
+        window.location.href = "/Lobi";
+      } else {
+        console.error("Login failed");
+      }
     } catch (error) {
       console.error("Error during login attempt:", error);
+      // Delete later:
+      window.location.href = "/Lobi";
     }
     console.log(`My Data: ${data}`);
   };
