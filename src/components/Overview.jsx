@@ -1,4 +1,4 @@
-import { Box, Avatar, Typography } from "@mui/material";
+import { Box, Avatar, Typography, Link as MuiLink } from "@mui/material";
 import React from "react";
 import DateCalendar from "./DateCalendar";
 import { Link } from "react-router-dom";
@@ -32,57 +32,53 @@ function Overview() {
 			<div
 				style={{
 					display: "flex",
-					flexDirection: "column",
-					alignItems: "right",
 					justifyContent: "space-between",
+					alignItems: "flex-start",
+					marginTop: "20px",
 				}}
 			>
-				<Box
-					sx={{
-						border: "1px solid #ddd",
-						padding: 2,
-						borderRadius: 2,
-						marginTop: 4,
-						width: "20%",
-						display: "flex",
-						flexWrap: "wrap",
-						justifyContent: "left",
-						typography: "body1",
-						"& > :not(style) ~ :not(style)": {
-							ml: 2,
-						},
-					}}
-					onClick={preventDefault}
-				>
-					<Link to="/taxinvoice">All Documents</Link>
-					<Link to="/customerlist">My Customers</Link>
-				</Box>
-				<Box
-					sx={{
-						border: "4px solid #ddd",
-						padding: 2,
-						borderRadius: 2,
-						marginTop: 5,
-						width: "75%",
-					}}
-				></Box>
-				<Box
-					sx={{
-						border: "4px solid #ddd",
-						padding: 2,
-						borderRadius: 2,
-						marginTop: 5,
-						width: "75%",
-					}}
-				></Box>
-			</div>
-			<div
-				style={{
-					display: "flex",
-					justifyContent: "flex-end",
-				}}
-			>
-				<DateCalendar />
+				<div style={{ flex: 1 }}>
+					<Box
+						sx={{
+							border: "1px solid #ddd",
+							padding: 2,
+							borderRadius: 2,
+							marginTop: 4,
+							width: "30%",
+							display: "flex",
+							flexWrap: "wrap",
+							typography: "body1",
+							"& > :not(style) ~ :not(style)": {
+								ml: 2,
+							},
+						}}
+						onClick={preventDefault}
+					>
+						<Link to="/taxinvoice">All Documents</Link>
+						<Link to="/customerlist">My Customers</Link>
+					</Box>
+					<Box
+						sx={{
+							border: "4px solid #ddd",
+							padding: 1,
+							borderRadius: 2,
+							marginTop: 5,
+							width: "90%",
+						}}
+					></Box>
+					<Box
+						sx={{
+							border: "4px solid #ddd",
+							padding: 1,
+							borderRadius: 2,
+							marginTop: 5,
+							width: "90%",
+						}}
+					></Box>
+				</div>
+				<div style={{ marginRight: "50px" }}>
+					<DateCalendar />
+				</div>
 			</div>
 		</>
 	);

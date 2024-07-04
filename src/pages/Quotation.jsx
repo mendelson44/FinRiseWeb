@@ -1,6 +1,6 @@
 import React from "react";
 import LayoutComponent from "../components/LayoutComponent";
-import TaxInvoiceForm from "../components/TaxInvoiceForm";
+import QuotationForm from "../components/QuotationForm";
 
 function Quotation() {
 	return (
@@ -22,7 +22,7 @@ function Quotation() {
 						</h1>
 					</div>
 				</div>
-				<TaxInvoiceForm />
+				<QuotationForm />
 			</LayoutComponent>
 		</>
 	);
