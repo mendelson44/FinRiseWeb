@@ -15,23 +15,23 @@ import Receipt from "./pages/Receipt";
 import ReceiptTaxInvoice from "./pages/ReceiptTaxInvoice";
 
 function App() {
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/AddNewCustomer" element={<AddNewCustomer />} />
-        <Route path="/Lobi" element={<Lobi />} />
-        <Route path="/customerlist" element={<CustomerList />} />
-        <Route path="/taxinvoice" element={<TaxInvoice />} />
-        <Route path="/quotation" element={<Quotation />} />
-        <Route path="/receipt" element={<Receipt />} />
-        <Route path="/receiptTaxInvoice" element={<ReceiptTaxInvoice />} />
-      </Routes>
-      {/*  <Footer /> */}
-    </>
-  );
+	return (
+		<>
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/signup" element={<SignUp />} />
+				<Route path="/AddNewCustomer" element={<AddNewCustomer />} />
+				<Route path="/Lobi" element={<Lobi />} />
+				<Route path="/customerlist" element={<CustomerList />} />
+				<Route path="/taxinvoice" element={<TaxInvoice />} />
+				<Route path="/quotation" element={<Quotation />} />
+				<Route path="/receipt" element={<Receipt />} />
+				<Route path="/receiptTaxInvoice" element={<ReceiptTaxInvoice />} />
+			</Routes>
+			{/*  <Footer /> */}
+		</>
+	);
 }
 
 export default App;
