@@ -20,7 +20,6 @@ import {
 	Euro,
 	AttachMoneySharp,
 	MonetizationOnSharp,
-	Bolt,
 } from "@mui/icons-material";
 
 const preventDefault = (event) => event.preventDefault();

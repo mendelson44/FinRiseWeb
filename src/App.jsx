@@ -13,6 +13,7 @@ import Lobi from "./pages/Lobi";
 import Quotation from "./pages/Quotation";
 import Receipt from "./pages/Receipt";
 import ReceiptTaxInvoice from "./pages/ReceiptTaxInvoice";
+import Account from "./pages/Account";
 
 function App() {
 	return (
@@ -28,6 +29,7 @@ function App() {
 				<Route path="/quotation" element={<Quotation />} />
 				<Route path="/receipt" element={<Receipt />} />
 				<Route path="/receiptTaxInvoice" element={<ReceiptTaxInvoice />} />
+				<Route path="/account" element={<Account />} />
 			</Routes>
 			{/*  <Footer /> */}
 		</>

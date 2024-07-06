@@ -55,7 +55,7 @@ const LayoutComponent = ({ children }) => {
 			label: "Profile",
 			children: [
 				{ key: "11", label: "Settings" },
-				{ key: "12", label: "Account" },
+				{ key: "12", label: "Account", linkTo: "/account" },
 			],
 		},
 	];
