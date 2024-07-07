@@ -12,6 +12,8 @@ import { Button } from "antd";
 import exportCustomerListToExcel from "../utils/exportExcel";
 import Row from "./Row";
 import customers from "../../data/customers";
+import Row from "./Row";
+import customers from "../../data/customers";
 
 // Main component rendering the table
 export default function CollapsibleTable() {

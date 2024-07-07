@@ -55,6 +55,56 @@ const customers = [
         },
       ],
     },
+    documents: {
+      taxInvoices: [
+        {
+          data: {
+            isOpen: false,
+            payDate: `26.7.24`,
+            hasTax: false,
+          },
+        },
+        {
+          data: {
+            isOpen: false,
+            payDate: `12.6.24`,
+            hasTax: true,
+          },
+        },
+      ],
+      quotes: [
+        {
+          data: {
+            hasTax: true,
+          },
+        },
+      ],
+      receipts: [
+        {
+          data: {
+            taxInvoiceId: "112233",
+            paymentMethod: "credit card",
+          },
+        },
+      ],
+      deliveryNotes: [
+        {
+          data: {
+            hasTax: true,
+            nameOfDeliveryPerson: "Jeff",
+            signature: "jeff",
+          },
+        },
+      ],
+      receiptTaxInvoices: [
+        {
+          data: {
+            hasTax: true,
+            paymentMethod: "credit card",
+          },
+        },
+      ],
+    },
   },
   {
     firstName: "Inbar",
@@ -119,6 +169,56 @@ const customers = [
     address: "456 Elm St",
     phone: "555-5678",
     email: "roy@example.com",
+    documents: {
+      taxInvoices: [
+        {
+          data: {
+            isOpen: false,
+            payDate: `26.7.24`,
+            hasTax: false,
+          },
+        },
+        {
+          data: {
+            isOpen: false,
+            payDate: `12.6.24`,
+            hasTax: true,
+          },
+        },
+      ],
+      quotes: [
+        {
+          data: {
+            hasTax: true,
+          },
+        },
+      ],
+      receipts: [
+        {
+          data: {
+            taxInvoiceId: "112233",
+            paymentMethod: "credit card",
+          },
+        },
+      ],
+      deliveryNotes: [
+        {
+          data: {
+            hasTax: true,
+            nameOfDeliveryPerson: "Jeff",
+            signature: "jeff",
+          },
+        },
+      ],
+      receiptTaxInvoices: [
+        {
+          data: {
+            hasTax: true,
+            paymentMethod: "credit card",
+          },
+        },
+      ],
+    },
     documents: {
       taxInvoices: [
         {
@@ -300,6 +400,56 @@ export const cutomers1 = [
     address: "202 Cedar St",
     phone: "555-8765",
     email: "noa@example.com",
+    documents: {
+      taxInvoices: [
+        {
+          data: {
+            isOpen: false,
+            payDate: `26.7.24`,
+            hasTax: false,
+          },
+        },
+        {
+          data: {
+            isOpen: false,
+            payDate: `12.6.24`,
+            hasTax: true,
+          },
+        },
+      ],
+      quotes: [
+        {
+          data: {
+            hasTax: true,
+          },
+        },
+      ],
+      receipts: [
+        {
+          data: {
+            taxInvoiceId: "112233",
+            paymentMethod: "credit card",
+          },
+        },
+      ],
+      deliveryNotes: [
+        {
+          data: {
+            hasTax: true,
+            nameOfDeliveryPerson: "Jeff",
+            signature: "jeff",
+          },
+        },
+      ],
+      receiptTaxInvoices: [
+        {
+          data: {
+            hasTax: true,
+            paymentMethod: "credit card",
+          },
+        },
+      ],
+    },
   },
 ];
 
