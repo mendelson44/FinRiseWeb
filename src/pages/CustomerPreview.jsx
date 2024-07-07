@@ -1,11 +1,7 @@
 import React from "react";
 import LayoutComponent from "../components/LayoutComponent";
-import TableCustomerList from "../components/TableCustomersList";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
-import AddIcon from "@mui/icons-material/Add";
-import BasicTable from "../components/BasicTable";
-
-const CustomerList = () => {
+import CustomizedTables from "../components/FormTable";
+const CustomerPreview = () => {
   return (
     <LayoutComponent>
       <div
@@ -26,19 +22,16 @@ const CustomerList = () => {
             marginBottom: 0,
           }}
         >
-          Customer list
+          Customer Preview
         </h1>
-
-        <Link to="/AddNewCustomer">
-          <AddIcon
-            fontSize="large"
-            style={{ color: "#007bff", cursor: "pointer" }}
-          />
-        </Link>
       </div>
-      <BasicTable />
+      <h2>
+        Forms: <hr />
+      </h2>
+      <br />
+      <CustomizedTables />
     </LayoutComponent>
   );
 };
 
-export default CustomerList;
+export default CustomerPreview;

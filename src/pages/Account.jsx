@@ -1,8 +1,8 @@
 import React from "react";
 import LayoutComponent from "../components/LayoutComponent";
-import QuotationForm from "../components/QuotationForm";
+import AccountDetails from "../components/AccountDetails";
 
-function Quotation() {
+function Account() {
 	return (
 		<>
 			<LayoutComponent>
@@ -17,15 +17,15 @@ function Quotation() {
 								fontWeight: "bold",
 							}}
 						>
-							Quotation Document
+							Account
 							<hr />
 						</h1>
 					</div>
 				</div>
-				<QuotationForm />
+				<AccountDetails />
 			</LayoutComponent>
 		</>
 	);
 }
 
-export default Quotation;
+export default Account;

@@ -19,9 +19,8 @@ const currencies = [
 	{ value: "USD", label: "Dollar" },
 ];
 
-const TaxInvoiceForm = () => {
+const QuotationForm = () => {
 	const [vatStatus, setVatStatus] = useState("before");
-	const [paymentDate, setPaymentDate] = useState(null);
 	const [issueDate, setIssueDate] = useState(null);
 	const [currency, setCurrency] = useState("ILS");
 	const [showAlert, setShowAlert] = useState(false);
@@ -71,17 +70,6 @@ const TaxInvoiceForm = () => {
 									className="custom-input"
 									InputProps={{ endAdornment: <SearchIcon /> }}
 								/>
-							)}
-						/>
-					</Grid>
-					<Grid item xs={12} sm={6}>
-						<DatePicker
-							label="Payment Due Date"
-							value={paymentDate}
-							className="custom-input"
-							onChange={(newValue) => setPaymentDate(newValue)}
-							renderInput={(params) => (
-								<TextField {...params} fullWidth className="custom-input" />
 							)}
 						/>
 					</Grid>
@@ -236,4 +224,4 @@ const TaxInvoiceForm = () => {
 	);
 };
 
-export default TaxInvoiceForm;
+export default QuotationForm;

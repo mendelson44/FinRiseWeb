@@ -9,6 +9,7 @@ import {
 	BookOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
+import Cookies from "js-cookie";
 
 const { Header, Content, Sider } = Layout;
 
@@ -54,15 +55,23 @@ const LayoutComponent = ({ children }) => {
 			label: "Profile",
 			children: [
 				{ key: "11", label: "Settings" },
-				{ key: "12", label: "Account" },
+				{ key: "12", label: "Account", linkTo: "/account" },
 			],
 		},
 	];
 
+	const userCookie = Cookies.get("user");
+	const user = userCookie ? JSON.parse(userCookie) : null;
+	console.log("After -get Cookies: " + user);
+	if (!user) {
+		// Redirect to login if user not found
+		// window.location.href = "/login";
+		//return null;
+	}
+
 	return (
 		<Layout style={{ minHeight: "100vh" }}>
 			<Header className="header">
-				<div className="logo" />
 				<Menu
 					theme="dark"
 					mode="horizontal"
