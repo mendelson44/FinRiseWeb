@@ -21,8 +21,8 @@ const LayoutComponent = ({ children }) => {
 			label: "Dashboard",
 			children: [
 				{ key: "1", label: "Overview", linkTo: "/lobi" }, // Add linkTo for Overview
-				{ key: "3", label: "Reports" },
-				{ key: "4", label: "Customers", linkTo: "/customerlist" }, // Add linkTo for Customers
+				{ key: "3", label: "Incomes" },
+				{ key: "4", label: "My Customers", linkTo: "/customerlist" }, // Add linkTo for Customers
 			],
 		},
 		{

@@ -58,6 +58,13 @@ const styles = StyleSheet.create({
 		fontSize: 10,
 		fontFamily: "Times-Roman",
 		marginTop: "100px",
+		textAlign: "left",
+	},
+	textDigitalSignature: {
+		fontSize: 10,
+		fontFamily: "Times-Roman",
+		marginTop: "100px",
+		textAlign: "right",
 	},
 	image: {
 		width: 150, // Adjust width
@@ -78,6 +85,7 @@ const styles = StyleSheet.create({
 		fontFamily: "Times-Roman",
 	},
 	table: {
+		//סגנון עבור הטבלה
 		display: "table",
 		width: "auto",
 		borderStyle: "solid",
@@ -89,9 +97,11 @@ const styles = StyleSheet.create({
 		marginTop: 40,
 	},
 	tableRow: {
+		//סגנון עבור שורה בטבלה
 		flexDirection: "row",
 	},
 	tableColHeader: {
+		//סגנון עבור העמודות בטבלה
 		width: "33.33%",
 		backgroundColor: "rgb(14, 186, 151)",
 		color: "white",
@@ -102,6 +112,7 @@ const styles = StyleSheet.create({
 		textAlign: "left",
 	},
 	tableCol: {
+		//סגנון עבור העמודות בטבלה
 		width: "33.33%",
 		borderStyle: "solid",
 		borderWidth: 1,
@@ -110,20 +121,23 @@ const styles = StyleSheet.create({
 		textAlign: "left",
 	},
 	tableCell: {
+		//סגנון עבור התאים של הטבלה
 		margin: 5,
 		fontSize: 10,
 	},
 	tableCellHeader: {
+		//סגנון עבור התאים של הטבלה
 		margin: 5,
 		fontSize: 10,
 		fontWeight: "bold",
 	},
 	tableRowEven: {
+		//סגנון עבור שורה זוגית בטבלה
 		backgroundColor: "#f2f2f2",
 	},
 });
 
-const PDFFile = () => {
+const PDFReceiptFile = () => {
 	const pageColors = ["#f5f5f5", "#f5f5f5", "#f5f5f5"];
 	const pages = [
 		{
@@ -159,7 +173,7 @@ const PDFFile = () => {
 							</View>
 							<View style={[styles.title, styles.underline]}>
 								<View style={styles.titleTypeDoc}>
-									<Text> Tax Invoice #</Text>
+									<Text> Receipt #</Text>
 									{/* HERE WE NEED TO ENTER THE REAL DETAILS */}
 								</View>
 								<View style={styles.titleDate}>
@@ -171,25 +185,28 @@ const PDFFile = () => {
 							<View style={styles.table}>
 								<View style={styles.tableRow}>
 									<View style={styles.tableColHeader}>
-										<Text style={styles.tableCellHeader}>
-											Product Description{" "}
-										</Text>
+										<Text style={styles.tableCellHeader}>Payment Type </Text>
+									</View>
+									<View style={styles.tableColHeader}>
+										<Text style={styles.tableCellHeader}>Date</Text>
 									</View>
 									<View style={styles.tableColHeader}>
 										<Text style={styles.tableCellHeader}>Price</Text>
 									</View>
-									<View style={styles.tableColHeader}>
-										<Text style={styles.tableCellHeader}>Total</Text>
-									</View>
 								</View>
 								{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
 							</View>
+							<View style={styles.title}>
+								<View style={styles.textNotes}>
+									<Text>Notes:</Text>
+									{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
+								</View>
 
-							<View style={styles.textNotes}>
-								<Text>Notes:</Text>
-								{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
+								<View style={styles.textDigitalSignature}>
+									<Text>Digital signature</Text>
+									{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
+								</View>
 							</View>
-
 							<Text
 								style={styles.pageNumber}
 								render={({ pageNumber, totalPages }) =>
@@ -204,4 +221,4 @@ const PDFFile = () => {
 	);
 };
 
-export default PDFFile;
+export default PDFReceiptFile;

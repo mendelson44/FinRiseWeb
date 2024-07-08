@@ -5,10 +5,13 @@ import Box from "@mui/material/Box";
 import "../styles/home.css";
 import Header from "../components/Header";
 
-import PDFFile from "../components/PDFFile";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import IconButton from "@mui/material/IconButton";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import PDFQuotationFile from "../components/PDFQuotationFile";
+import PDFReceiptFile from "../components/PDFReceiptFile";
+import PDFTaxInvoiceFile from "../components/PDFTaxInvoiceFile";
+import PDFDeliveryNoteFile from "../components/PDFDeliveryNoteFile";
 
 function Home() {
 	return (
@@ -32,7 +35,79 @@ function Home() {
 				</Typography>
 			</div>
 			{/* button for look pdf*/}
-			<PDFDownloadLink document={<PDFFile />} fileName="FORM">
+			<h1>Tax Invoice</h1>
+			<PDFDownloadLink document={<PDFTaxInvoiceFile />} fileName="FORM">
+				{({ loading }) =>
+					loading ? (
+						<IconButton
+							disabled
+							aria-label="download file"
+							size="small"
+							color="primary" // Set color to primary (blue)
+						>
+							<FileDownloadIcon fontSize="small" />
+						</IconButton>
+					) : (
+						<IconButton
+							aria-label="download file"
+							size="small"
+							color="primary" // Set color to primary (blue)
+						>
+							<FileDownloadIcon fontSize="small" />
+						</IconButton>
+					)
+				}
+			</PDFDownloadLink>
+
+			<h1>Receipt</h1>
+			<PDFDownloadLink document={<PDFReceiptFile />} fileName="FORM">
+				{({ loading }) =>
+					loading ? (
+						<IconButton
+							disabled
+							aria-label="download file"
+							size="small"
+							color="primary" // Set color to primary (blue)
+						>
+							<FileDownloadIcon fontSize="small" />
+						</IconButton>
+					) : (
+						<IconButton
+							aria-label="download file"
+							size="small"
+							color="primary" // Set color to primary (blue)
+						>
+							<FileDownloadIcon fontSize="small" />
+						</IconButton>
+					)
+				}
+			</PDFDownloadLink>
+
+			<h1>Quotation</h1>
+			<PDFDownloadLink document={<PDFQuotationFile />} fileName="FORM">
+				{({ loading }) =>
+					loading ? (
+						<IconButton
+							disabled
+							aria-label="download file"
+							size="small"
+							color="primary" // Set color to primary (blue)
+						>
+							<FileDownloadIcon fontSize="small" />
+						</IconButton>
+					) : (
+						<IconButton
+							aria-label="download file"
+							size="small"
+							color="primary" // Set color to primary (blue)
+						>
+							<FileDownloadIcon fontSize="small" />
+						</IconButton>
+					)
+				}
+			</PDFDownloadLink>
+			<h1>DeliveryNote</h1>
+			<PDFDownloadLink document={<PDFDeliveryNoteFile />} fileName="FORM">
 				{({ loading }) =>
 					loading ? (
 						<IconButton

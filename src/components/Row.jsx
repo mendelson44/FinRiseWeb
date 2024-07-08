@@ -7,7 +7,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import PDFFile from "./PDFFile";
+import PDFTaxInvoiceFile from "./PDFTaxInvoiceFile";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import TableRow from "@mui/material/TableRow";
 import Table from "@mui/material/Table";
@@ -17,106 +17,109 @@ import Typography from "@mui/material/Typography";
 import TableHead from "@mui/material/TableHead";
 
 function Row(props) {
-  const { customer } = props;
-  const [open, setOpen] = useState(false);
+	const { customer } = props;
+	const [open, setOpen] = useState(false);
 
-  const handleDelete = () => {
-    const confirmDelete = window.confirm(
-      "You've requested to delete a transaction from the customer's history. This action is irreversible.\n\nAre you sure you want to proceed?"
-    );
-    if (confirmDelete) {
-      // Perform deletion logic here
-      console.log("Transaction deleted");
-    }
-  };
+	const handleDelete = () => {
+		const confirmDelete = window.confirm(
+			"You've requested to delete a transaction from the customer's history. This action is irreversible.\n\nAre you sure you want to proceed?"
+		);
+		if (confirmDelete) {
+			// Perform deletion logic here
+			console.log("Transaction deleted");
+		}
+	};
 
-  return (
-    <>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-        <TableCell>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
-        <TableCell>{customer.firstName}</TableCell>
-        <TableCell>{customer.lastName}</TableCell>
-        <TableCell align="right">{customer.address}</TableCell>
-        <TableCell align="right">{customer.phone}</TableCell>
-        <TableCell align="right">{customer.email}</TableCell>
-      </TableRow>
-      {/*----------------------------------------------------------------------*/}
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
-                History
-              </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Type</TableCell>
-                    <TableCell>Date</TableCell>
-                    <TableCell>File</TableCell>
-                    <TableCell></TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {customer.documents.taxInvoices.map((data) => (
-                    <TableRow key={index}>
-                      <TableCell>{`${data.payDate}`}</TableCell>
-                      <TableCell component="th" scope="row">
-                        {`${data.isOpen}`}
-                      </TableCell>
-                      <TableCell>
-                        <PDFDownloadLink document={<PDFFile />} fileName="FORM">
-                          {({ loading }) =>
-                            loading ? (
-                              <IconButton
-                                disabled
-                                aria-label="download file"
-                                size="small"
-                                color="primary" // Set color to primary (blue)
-                              >
-                                <FileDownloadIcon fontSize="small" />
-                              </IconButton>
-                            ) : (
-                              <IconButton
-                                aria-label="download file"
-                                size="small"
-                                color="primary" // Set color to primary (blue)
-                              >
-                                <FileDownloadIcon fontSize="small" />
-                              </IconButton>
-                            )
-                          }
-                        </PDFDownloadLink>
-                        {data.isOpen}
-                      </TableCell>
-                      <TableCell>
-                        <IconButton
-                          aria-label="delete"
-                          size="small"
-                          color="primary"
-                          onClick={handleDelete}
-                        >
-                          <DeleteOutlinedIcon />
-                        </IconButton>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-    </>
-  );
+	return (
+		<>
+			<TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+				<TableCell>
+					<IconButton
+						aria-label="expand row"
+						size="small"
+						onClick={() => setOpen(!open)}
+					>
+						{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+					</IconButton>
+				</TableCell>
+				<TableCell>{customer.firstName}</TableCell>
+				<TableCell>{customer.lastName}</TableCell>
+				<TableCell align="right">{customer.address}</TableCell>
+				<TableCell align="right">{customer.phone}</TableCell>
+				<TableCell align="right">{customer.email}</TableCell>
+			</TableRow>
+			{/*----------------------------------------------------------------------*/}
+			<TableRow>
+				<TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+					<Collapse in={open} timeout="auto" unmountOnExit>
+						<Box sx={{ margin: 1 }}>
+							<Typography variant="h6" gutterBottom component="div">
+								History
+							</Typography>
+							<Table size="small" aria-label="purchases">
+								<TableHead>
+									<TableRow>
+										<TableCell>Type</TableCell>
+										<TableCell>Date</TableCell>
+										<TableCell>File</TableCell>
+										<TableCell></TableCell>
+									</TableRow>
+								</TableHead>
+								<TableBody>
+									{customer.documents.taxInvoices.map((data) => (
+										<TableRow key={index}>
+											<TableCell>{`${data.payDate}`}</TableCell>
+											<TableCell component="th" scope="row">
+												{`${data.isOpen}`}
+											</TableCell>
+											<TableCell>
+												<PDFDownloadLink
+													document={<PDFTaxInvoiceFile />}
+													fileName="FORM"
+												>
+													{({ loading }) =>
+														loading ? (
+															<IconButton
+																disabled
+																aria-label="download file"
+																size="small"
+																color="primary" // Set color to primary (blue)
+															>
+																<FileDownloadIcon fontSize="small" />
+															</IconButton>
+														) : (
+															<IconButton
+																aria-label="download file"
+																size="small"
+																color="primary" // Set color to primary (blue)
+															>
+																<FileDownloadIcon fontSize="small" />
+															</IconButton>
+														)
+													}
+												</PDFDownloadLink>
+												{data.isOpen}
+											</TableCell>
+											<TableCell>
+												<IconButton
+													aria-label="delete"
+													size="small"
+													color="primary"
+													onClick={handleDelete}
+												>
+													<DeleteOutlinedIcon />
+												</IconButton>
+											</TableCell>
+										</TableRow>
+									))}
+								</TableBody>
+							</Table>
+						</Box>
+					</Collapse>
+				</TableCell>
+			</TableRow>
+		</>
+	);
 }
 
 // // Prop types for Row component
