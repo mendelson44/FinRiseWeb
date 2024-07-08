@@ -1,19 +1,13 @@
 import React from "react";
 import {
-	Font,
 	Page,
 	Text,
 	Image,
 	Document,
 	StyleSheet,
+	View,
 } from "@react-pdf/renderer";
 import OriginalOnTransparent from "../assets/OriginalOnTransparent.png";
-import MyCustomFont from "../fonts/Anton-Regular.ttf";
-
-Font.register({
-	family: "AntonFamily",
-	src: MyCustomFont,
-});
 
 const styles = StyleSheet.create({
 	body: {
@@ -22,22 +16,48 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 35,
 	},
 	title: {
-		fontSize: 24,
-		textAlign: "center",
-		fontFamily: "AntonFamily",
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-between",
+		marginTop: "20px",
+	},
+	titleTypeDoc: {
+		fontSize: 15,
+		textAlign: "left",
+		fontFamily: "Times-Roman",
+	},
+	titleDate: {
+		textAlign: "right",
+		fontSize: 15,
+		fontFamily: "Times-Roman",
+	},
+
+	underline: {
+		borderBottom: 1,
+		borderColor: "black",
+	},
+	header: {
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-between",
+		marginTop: 20,
+	},
+	headerRight: {
+		textAlign: "right",
+	},
+	headerLeft: {
+		textAlign: "left",
 	},
 	text: {
-		marginTop: 20,
-		fontSize: 14,
-		textAlign: "justify",
-		fontFamily: "AntonFamily",
+		fontSize: 10,
+		fontFamily: "Times-Roman",
+		marginRight: "auto",
 	},
-	textB: {
-		marginTop: 1,
-		marginRight: 20,
-		fontSize: 12,
-		textAlign: "justify",
-		fontFamily: "AntonFamily",
+
+	textNotes: {
+		fontSize: 10,
+		fontFamily: "Times-Roman",
+		marginTop: "100px",
 	},
 	image: {
 		width: 150, // Adjust width
@@ -46,13 +66,7 @@ const styles = StyleSheet.create({
 		marginVertical: 15,
 		marginHorizontal: 100,
 	},
-	header: {
-		fontSize: 12,
-		marginBottom: 20,
-		textAlign: "center",
-		color: "grey",
-		fontFamily: "AntonFamily",
-	},
+
 	pageNumber: {
 		position: "absolute",
 		fontSize: 12,
@@ -61,7 +75,51 @@ const styles = StyleSheet.create({
 		right: 0,
 		textAlign: "center",
 		color: "grey",
-		fontFamily: "AntonFamily",
+		fontFamily: "Times-Roman",
+	},
+	table: {
+		display: "table",
+		width: "auto",
+		borderStyle: "solid",
+		borderWidth: 1,
+		borderColor: "#bfbfbf",
+		borderRightWidth: 0,
+		borderBottomWidth: 0,
+		marginVertical: 10,
+		marginTop: 40,
+	},
+	tableRow: {
+		flexDirection: "row",
+	},
+	tableColHeader: {
+		width: "33.33%",
+		backgroundColor: "rgb(14, 186, 151)",
+		color: "white",
+		borderStyle: "solid",
+		borderWidth: 1,
+		borderColor: "#bfbfbf",
+		padding: 8,
+		textAlign: "left",
+	},
+	tableCol: {
+		width: "33.33%",
+		borderStyle: "solid",
+		borderWidth: 1,
+		borderColor: "#bfbfbf",
+		padding: 8,
+		textAlign: "left",
+	},
+	tableCell: {
+		margin: 5,
+		fontSize: 10,
+	},
+	tableCellHeader: {
+		margin: 5,
+		fontSize: 10,
+		fontWeight: "bold",
+	},
+	tableRowEven: {
+		backgroundColor: "#f2f2f2",
 	},
 });
 
@@ -69,19 +127,11 @@ const PDFFile = () => {
 	const pageColors = ["#f5f5f5", "#f5f5f5", "#f5f5f5"];
 	const pages = [
 		{
-			text: "FinRize\n",
-			textB: "FinRize\n",
+			text: "From:\n",
+			textB:
+				"FinRize - Rise to financial Success\nTel-Aviv, Mivtsa Kadesh St 38\n",
 			image: OriginalOnTransparent,
-		},
-		{
-			text: "Second page content goes here...",
-			image:
-				"https://www.si.com/.image/ar_4:3%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTcwMzExMzEwNTc0MTAxODM5/lebron-dunk.jpg",
-		},
-		{
-			text: "Third page content goes here...",
-			image:
-				"https://s.yimg.com/ny/api/res/1.2/Aj5UoHHKnNOpdwE6Zz9GIQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MA--/https://s.yimg.com/os/creatr-uploaded-images/2023-01/b02a71d0-a774-11ed-bf7f-08714e8ad300",
+			textC: "To:\n",
 		},
 	];
 	return (
@@ -93,10 +143,53 @@ const PDFFile = () => {
 							key={index}
 							style={{ ...styles.body, backgroundColor: pageColors[index] }}
 						>
-							<Text style={styles.header} fixed></Text>
 							<Image style={styles.image} src={page.image} />
-							<Text style={styles.text}>{page.text}</Text>
-							<Text style={styles.textB}>{page.textB}</Text>
+							<View style={styles.header}>
+								<View style={styles.headerLeft}>
+									<Text style={styles.text}>From:</Text>
+									<Text style={styles.text}>
+										FINRIZE - Rise to financial Success
+									</Text>
+									<Text style={styles.text}>Tel-Aviv, Mivtsa kadesh 38 St</Text>
+								</View>
+								<View style={styles.headerRight}>
+									<Text style={styles.text}>To:</Text>
+									{/* HERE WE NEED TO ENTER THE REAL DETAILS */}
+								</View>
+							</View>
+							<View style={[styles.title, styles.underline]}>
+								<View style={styles.titleTypeDoc}>
+									<Text> Tax Invoice #</Text>
+									{/* HERE WE NEED TO ENTER THE REAL DETAILS */}
+								</View>
+								<View style={styles.titleDate}>
+									<Text>Production Date: </Text>
+									{/* HERE WE NEED TO ENTER THE REAL DETAILS */}
+								</View>
+							</View>
+
+							<View style={styles.table}>
+								<View style={styles.tableRow}>
+									<View style={styles.tableColHeader}>
+										<Text style={styles.tableCellHeader}>
+											Product Description{" "}
+										</Text>
+									</View>
+									<View style={styles.tableColHeader}>
+										<Text style={styles.tableCellHeader}>Price</Text>
+									</View>
+									<View style={styles.tableColHeader}>
+										<Text style={styles.tableCellHeader}>Total</Text>
+									</View>
+								</View>
+								{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
+							</View>
+
+							<View style={styles.textNotes}>
+								<Text>Notes:</Text>
+								{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
+							</View>
+
 							<Text
 								style={styles.pageNumber}
 								render={({ pageNumber, totalPages }) =>

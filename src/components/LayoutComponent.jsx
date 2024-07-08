@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import {
 	ArrowLeftOutlined,
 	DesktopOutlined,
-	BellOutlined,
 	UserOutlined,
 	FileOutlined,
-	BookOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import Cookies from "js-cookie";
+
+import SyncAltIcon from "@mui/icons-material/SyncAlt";
 
 const { Header, Content, Sider } = Layout;
 
@@ -42,21 +42,15 @@ const LayoutComponent = ({ children }) => {
 		},
 		{
 			key: "sub3",
-			icon: <BellOutlined />,
-			label: "Notifications",
-			children: [
-				{ key: "9", label: "Alerts" },
-				{ key: "10", label: "Messages" },
-			],
+			icon: <SyncAltIcon />,
+			label: "Ongoing Management",
+			children: [{ key: "9", label: "Delivery Note", linkTo: "/deliveryNote" }],
 		},
 		{
 			key: "sub4",
 			icon: <UserOutlined />,
 			label: "Profile",
-			children: [
-				{ key: "11", label: "Settings" },
-				{ key: "12", label: "Account", linkTo: "/account" },
-			],
+			children: [{ key: "12", label: "Account", linkTo: "/account" }],
 		},
 	];
 
@@ -86,7 +80,7 @@ const LayoutComponent = ({ children }) => {
 				</Menu>
 			</Header>
 			<Layout>
-				<Sider width={200} style={{ background: "#fff" }}>
+				<Sider width={300} style={{ background: "#fff" }}>
 					<Menu
 						mode="inline"
 						defaultSelectedKeys={["1"]}
