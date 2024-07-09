@@ -7,7 +7,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import * as cus from "../../data/customers";
+
+/*
+  This component is a Table for the Form List display
+*/
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -28,7 +32,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function CustomizedTables() {
+export default function CustomizedTables(props) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -37,23 +41,55 @@ export default function CustomizedTables() {
             <StyledTableCell>Form Type</StyledTableCell>
             <StyledTableCell align="right">Date Modified</StyledTableCell>
             <StyledTableCell align="right">Customer</StyledTableCell>
-            <StyledTableCell align="right">???</StyledTableCell>
-            <StyledTableCell align="right">???</StyledTableCell>
+            <StyledTableCell align="right">Open/Close</StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {cus.cutomers1.map((row) => (
-            <StyledTableRow key={row.name}>
+        {/* <TableBody>
+          {props.customer.forms.map((form) => (
+            <StyledTableRow key={form.id}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {form.type}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell align="right">
+                {form.dateCreated}
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                {props.customer.firstName}
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                {form.isOpen ? "Open" : "Close"}
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                <PDFDownloadLink
+                  document={<PDFTaxInvoiceFile taxInvoice={form} />}
+                  fileName={`Tax Invoice - ${form.dateCreated}`}
+                >
+                  {({ loading }) =>
+                    loading ? (
+                      <IconButton
+                        disabled
+                        aria-label="download file"
+                        size="small"
+                        color="primary" // Set color to primary (blue)
+                      >
+                        <FileDownloadIcon fontSize="small" />
+                      </IconButton>
+                    ) : (
+                      <IconButton
+                        aria-label="download file"
+                        size="small"
+                        color="primary" // Set color to primary (blue)
+                      >
+                        <FileDownloadIcon fontSize="small" />
+                      </IconButton>
+                    )
+                  }
+                </PDFDownloadLink>
+              </StyledTableCell>
             </StyledTableRow>
           ))}
-        </TableBody>
+        </TableBody> */}
       </Table>
     </TableContainer>
   );
