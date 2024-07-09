@@ -8,7 +8,6 @@ import {
 	View,
 } from "@react-pdf/renderer";
 import OriginalOnTransparent from "../assets/OriginalOnTransparent.png";
-
 const styles = StyleSheet.create({
 	body: {
 		paddingTop: 35,
@@ -31,7 +30,6 @@ const styles = StyleSheet.create({
 		fontSize: 15,
 		fontFamily: "Times-Roman",
 	},
-
 	underline: {
 		borderBottom: 1,
 		borderColor: "black",
@@ -53,7 +51,6 @@ const styles = StyleSheet.create({
 		fontFamily: "Times-Roman",
 		marginRight: "auto",
 	},
-
 	textNotes: {
 		fontSize: 10,
 		fontFamily: "Times-Roman",
@@ -72,7 +69,6 @@ const styles = StyleSheet.create({
 		marginVertical: 15,
 		marginHorizontal: 100,
 	},
-
 	pageNumber: {
 		position: "absolute",
 		fontSize: 12,
@@ -135,8 +131,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "#f2f2f2",
 	},
 });
-
-const PDFTaxInvoiceFile = () => {
+const PDFTaxInvoiceFile = (props) => {
 	const pageColors = ["#f5f5f5", "#f5f5f5", "#f5f5f5"];
 	const pages = [
 		{
@@ -166,7 +161,9 @@ const PDFTaxInvoiceFile = () => {
 									<Text style={styles.text}>Tel-Aviv, Mivtsa kadesh 38 St</Text>
 								</View>
 								<View style={styles.headerRight}>
-									<Text style={styles.text}>To:</Text>
+									<Text style={styles.text}>
+										To: {props.taxInvoice.customerName}
+									</Text>
 									{/* HERE WE NEED TO ENTER THE REAL DETAILS */}
 								</View>
 							</View>
@@ -185,7 +182,6 @@ const PDFTaxInvoiceFile = () => {
 									<Text> Payment Due Date: </Text>
 								</View>
 							</View>
-
 							<View style={styles.table}>
 								<View style={styles.tableRow}>
 									<View style={styles.tableColHeader}>
@@ -205,19 +201,16 @@ const PDFTaxInvoiceFile = () => {
 								</View>
 								{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
 							</View>
-
 							<View style={styles.title}>
 								<View style={styles.textNotes}>
 									<Text>Notes:</Text>
 									{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
 								</View>
-
 								<View style={styles.textDigitalSignature}>
 									<Text>Digital signature</Text>
 									{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
 								</View>
 							</View>
-
 							<Text
 								style={styles.pageNumber}
 								render={({ pageNumber, totalPages }) =>
@@ -231,5 +224,4 @@ const PDFTaxInvoiceFile = () => {
 		</>
 	);
 };
-
 export default PDFTaxInvoiceFile;

@@ -14,12 +14,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import { Alert } from "antd";
 import "../styles/inputFix.css";
+//import taxInvoiceArray from "/data/inbar.js";
+
 const currencies = [
 	{ value: "ILS", label: "Shekel" },
 	{ value: "USD", label: "Dollar" },
 ];
 
-const TaxInvoiceForm = () => {
+const TaxInvoiceForm = (props) => {
 	const [vatStatus, setVatStatus] = useState("before");
 	const [paymentDate, setPaymentDate] = useState(null);
 	const [issueDate, setIssueDate] = useState(null);
@@ -31,9 +33,41 @@ const TaxInvoiceForm = () => {
 		{ value: "after", label: "After" },
 	];
 
+	const [newTaxInvoice, setNewTaxInvoice] = useState({
+		customerName: "",
+		createDate: "",
+		paymentDueDate: "",
+		documentDescription: "",
+		productArray: [
+			{
+				name: "",
+				quantity: "",
+				unitPrice: "",
+				currency: "",
+				vat: true,
+			},
+		],
+		notes: "",
+	});
+
+	const updateFormDetails = (details) => {
+		setNewTaxInvoice((prevForm) => ({
+			...prevForm,
+			...details,
+		}));
+	};
+	const handleChange = (event) => {
+		const { name, value } = event.target;
+		updateFormDetails({ [name]: value });
+	};
 	const handleSubmit = () => {
+		//taxInvoiceArray.push(newTaxInvoice);
 		setShowAlert(true); // Show the alert on form submission
 	};
+	const onAddProducts = () => {};
+
+	console.log(newTaxInvoice);
+	//console.log(taxInvoiceArray);
 
 	return (
 		<>
@@ -56,6 +90,9 @@ const TaxInvoiceForm = () => {
 							label="Customer Name"
 							fullWidth
 							className="custom-input"
+							name="customerName"
+							value={TaxInvoiceForm.customerName}
+							onChange={handleChange}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={2}>
@@ -172,7 +209,11 @@ const TaxInvoiceForm = () => {
 						</TextField>
 					</Grid>
 					<Grid item xs={12}>
-						<Button variant="outlined" startIcon={<AddIcon />}>
+						<Button
+							variant="outlined"
+							startIcon={<AddIcon />}
+							onClick={onAddProducts}
+						>
 							Add to Item List
 						</Button>
 					</Grid>

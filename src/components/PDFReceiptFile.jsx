@@ -148,6 +148,7 @@ const PDFReceiptFile = () => {
 			textC: "To:\n",
 		},
 	];
+
 	return (
 		<>
 			<Document>

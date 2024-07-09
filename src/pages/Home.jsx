@@ -4,7 +4,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import "../styles/home.css";
 import Header from "../components/Header";
-
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import IconButton from "@mui/material/IconButton";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
@@ -12,7 +11,7 @@ import PDFQuotationFile from "../components/PDFQuotationFile";
 import PDFReceiptFile from "../components/PDFReceiptFile";
 import PDFTaxInvoiceFile from "../components/PDFTaxInvoiceFile";
 import PDFDeliveryNoteFile from "../components/PDFDeliveryNoteFile";
-
+import taxInvoiceArray from "../../data/inbar.js";
 function Home() {
 	return (
 		<>
@@ -36,7 +35,10 @@ function Home() {
 			</div>
 			{/* button for look pdf*/}
 			<h1>Tax Invoice</h1>
-			<PDFDownloadLink document={<PDFTaxInvoiceFile />} fileName="FORM">
+			<PDFDownloadLink
+				document={<PDFTaxInvoiceFile taxInvoice={taxInvoiceArray[0]} />}
+				fileName="FORM"
+			>
 				{({ loading }) =>
 					loading ? (
 						<IconButton
@@ -58,7 +60,6 @@ function Home() {
 					)
 				}
 			</PDFDownloadLink>
-
 			<h1>Receipt</h1>
 			<PDFDownloadLink document={<PDFReceiptFile />} fileName="FORM">
 				{({ loading }) =>
@@ -82,7 +83,6 @@ function Home() {
 					)
 				}
 			</PDFDownloadLink>
-
 			<h1>Quotation</h1>
 			<PDFDownloadLink document={<PDFQuotationFile />} fileName="FORM">
 				{({ loading }) =>
@@ -172,7 +172,6 @@ function Home() {
 							income and expenses.
 						</Typography>
 					</Box>
-
 					<Box
 						height={200}
 						width={300}
@@ -200,7 +199,6 @@ function Home() {
 							billing organized.
 						</Typography>
 					</Box>
-
 					<Box
 						height={200}
 						width={300}
@@ -265,5 +263,4 @@ function Home() {
 		</>
 	);
 }
-
 export default Home;
