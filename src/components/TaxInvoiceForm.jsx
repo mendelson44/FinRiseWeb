@@ -23,8 +23,8 @@ const currencies = [
 
 const TaxInvoiceForm = (props) => {
 	const [vatStatus, setVatStatus] = useState("before");
-	const [paymentDate, setPaymentDate] = useState(null);
-	const [issueDate, setIssueDate] = useState(null);
+	//const [paymentDate, setPaymentDate] = useState(null);
+	//const [issueDate, setIssueDate] = useState(null);
 	const [currency, setCurrency] = useState("ILS");
 	const [showAlert, setShowAlert] = useState(false);
 
@@ -98,9 +98,12 @@ const TaxInvoiceForm = (props) => {
 					<Grid item xs={12} sm={2}>
 						<DatePicker
 							label="Document Date"
-							value={issueDate}
+							name="createDate" //add
+							value={TaxInvoiceForm.createDate} //add
+							onChange={handleChange} //add
 							className="custom-input"
-							onChange={(newValue) => setIssueDate(newValue)}
+							//value={issueDate}
+							//onChange={(newValue) => setIssueDate(newValue)}
 							renderInput={(params) => (
 								<TextField
 									{...params}
@@ -114,9 +117,12 @@ const TaxInvoiceForm = (props) => {
 					<Grid item xs={12} sm={6}>
 						<DatePicker
 							label="Payment Due Date"
-							value={paymentDate}
 							className="custom-input"
-							onChange={(newValue) => setPaymentDate(newValue)}
+							name="paymentDueDate"
+							value={TaxInvoiceForm.paymentDueDate}
+							onChange={handleChange}
+							//value={paymentDate}
+							//onChange={(newValue) => setPaymentDate(newValue)}
 							renderInput={(params) => (
 								<TextField {...params} fullWidth className="custom-input" />
 							)}
@@ -127,6 +133,9 @@ const TaxInvoiceForm = (props) => {
 							label="Document Description"
 							fullWidth
 							className="custom-input"
+							name="documentDescription"
+							value={TaxInvoiceForm.documentDescription}
+							onChange={handleChange}
 						/>
 					</Grid>
 
@@ -145,6 +154,9 @@ const TaxInvoiceForm = (props) => {
 						<TextField
 							required
 							label="Service or Product Description"
+							name="name"
+							value={TaxInvoiceForm.name}
+							onChange={handleChange}
 							fullWidth
 							className="custom-input"
 							InputProps={{
