@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
 		fontSize: 10,
 		fontFamily: "Times-Roman",
 		marginRight: "auto",
+		fontStyle: "bold",
 	},
 	textNotes: {
 		fontSize: 10,
@@ -61,6 +62,11 @@ const styles = StyleSheet.create({
 		fontFamily: "Times-Roman",
 		marginTop: "100px",
 		textAlign: "right",
+	},
+	textDescription: {
+		textAlign: "center",
+		fontSize: 14,
+		marginTop: "20px",
 	},
 	image: {
 		width: 150, // Adjust width
@@ -173,37 +179,71 @@ const PDFTaxInvoiceFile = (props) => {
 									{/* HERE WE NEED TO ENTER THE REAL DETAILS */}
 								</View>
 								<View style={styles.titleDate}>
-									<Text>Production Date: </Text>
+									<Text>Production Date: {props.taxInvoice.createDate}</Text>
 									{/* HERE WE NEED TO ENTER THE REAL DETAILS */}
 								</View>
 							</View>
 							<View style={styles.title}>
 								<View style={styles.text}>
-									<Text> Payment Due Date: </Text>
+									<Text>
+										{" "}
+										Payment Due Date: {props.taxInvoice.paymentDueDate}
+									</Text>
 								</View>
 							</View>
+							<Text style={styles.textDescription}>
+								Document Description: {props.taxInvoice.documentDescription}
+							</Text>
 							<View style={styles.table}>
 								<View style={styles.tableRow}>
 									<View style={styles.tableColHeader}>
-										<Text style={styles.tableCellHeader}>Quantity </Text>
-									</View>
-									<View style={styles.tableColHeader}>
 										<Text style={styles.tableCellHeader}>
-											Product Description{" "}
+											Product Description
 										</Text>
 									</View>
 									<View style={styles.tableColHeader}>
-										<Text style={styles.tableCellHeader}>Price</Text>
+										<Text style={styles.tableCellHeader}>Quantity</Text>
+									</View>
+									<View style={styles.tableColHeader}>
+										<Text style={styles.tableCellHeader}>Unit Price</Text>
 									</View>
 									<View style={styles.tableColHeader}>
 										<Text style={styles.tableCellHeader}>Total</Text>
 									</View>
 								</View>
+
+								{/* row for product */}
+								<View style={styles.tableRow}>
+									<View style={styles.tableCol}>
+										<Text style={styles.tableCellHeader}>
+											{props.taxInvoice.productArray[0].name}
+										</Text>
+									</View>
+									<View style={styles.tableCol}>
+										<Text style={styles.tableCellHeader}>
+											{props.taxInvoice.productArray[0].quantity}
+										</Text>
+									</View>
+									<View style={styles.tableCol}>
+										<Text style={styles.tableCellHeader}>
+											{props.taxInvoice.productArray[0].unitPrice}
+										</Text>
+									</View>
+									<View style={styles.tableCol}>
+										<Text style={styles.tableCellHeader}>
+											{Number(props.taxInvoice.productArray[0].unitPrice) *
+												Number(props.taxInvoice.productArray[0].quantity)}
+										</Text>
+									</View>
+								</View>
+
 								{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
 							</View>
 							<View style={styles.title}>
 								<View style={styles.textNotes}>
 									<Text>Notes:</Text>
+
+									<Text> {props.taxInvoice.notes}</Text>
 									{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
 								</View>
 								<View style={styles.textDigitalSignature}>
