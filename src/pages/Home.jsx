@@ -12,6 +12,7 @@ import PDFReceiptFile from "../components/PDFReceiptFile";
 import PDFTaxInvoiceFile from "../components/PDFTaxInvoiceFile";
 import PDFDeliveryNoteFile from "../components/PDFDeliveryNoteFile";
 import taxInvoiceArray from "/data/inbar.js";
+import * as inbar from "/data/inbar.js";
 
 function Home() {
 	return (
@@ -37,7 +38,7 @@ function Home() {
 			{/* button for look pdf*/}
 			<h1>Tax Invoice</h1>
 			<PDFDownloadLink
-				document={<PDFTaxInvoiceFile taxInvoice={taxInvoiceArray[0]} />}
+				document={<PDFTaxInvoiceFile taxInvoice={inbar.taxInvoiceArray[0]} />}
 				fileName="FORM"
 			>
 				{({ loading }) =>
@@ -62,7 +63,10 @@ function Home() {
 				}
 			</PDFDownloadLink>
 			<h1>Receipt</h1>
-			<PDFDownloadLink document={<PDFReceiptFile />} fileName="FORM">
+			<PDFDownloadLink
+				document={<PDFReceiptFile receipt={inbar.receiptArray[0]} />}
+				fileName="FORM"
+			>
 				{({ loading }) =>
 					loading ? (
 						<IconButton
@@ -85,7 +89,10 @@ function Home() {
 				}
 			</PDFDownloadLink>
 			<h1>Quotation</h1>
-			<PDFDownloadLink document={<PDFQuotationFile />} fileName="FORM">
+			<PDFDownloadLink
+				document={<PDFQuotationFile quotation={inbar.quotationArray[0]} />}
+				fileName="FORM"
+			>
 				{({ loading }) =>
 					loading ? (
 						<IconButton
@@ -108,7 +115,12 @@ function Home() {
 				}
 			</PDFDownloadLink>
 			<h1>DeliveryNote</h1>
-			<PDFDownloadLink document={<PDFDeliveryNoteFile />} fileName="FORM">
+			<PDFDownloadLink
+				document={
+					<PDFDeliveryNoteFile deliveryNote={inbar.deliveryNoteArray[0]} />
+				}
+				fileName="FORM"
+			>
 				{({ loading }) =>
 					loading ? (
 						<IconButton

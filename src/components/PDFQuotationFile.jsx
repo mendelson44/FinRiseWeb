@@ -65,6 +65,12 @@ const styles = StyleSheet.create({
 		marginTop: "100px",
 		textAlign: "right",
 	},
+
+	textDescription: {
+		textAlign: "center",
+		fontSize: 14,
+		marginTop: "20px",
+	},
 	image: {
 		width: 150, // Adjust width
 		height: 50, // Adjust height
@@ -136,7 +142,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-const PDFQuotationFile = () => {
+const PDFQuotationFile = (props) => {
 	const pageColors = ["#f5f5f5", "#f5f5f5", "#f5f5f5"];
 	const pages = [
 		{
@@ -166,7 +172,9 @@ const PDFQuotationFile = () => {
 									<Text style={styles.text}>Tel-Aviv, Mivtsa kadesh 38 St</Text>
 								</View>
 								<View style={styles.headerRight}>
-									<Text style={styles.text}>To:</Text>
+									<Text style={styles.text}>
+										To: {props.quotation.customerName}
+									</Text>
 									{/* HERE WE NEED TO ENTER THE REAL DETAILS */}
 								</View>
 							</View>
@@ -176,26 +184,63 @@ const PDFQuotationFile = () => {
 									{/* HERE WE NEED TO ENTER THE REAL DETAILS */}
 								</View>
 								<View style={styles.titleDate}>
-									<Text>Production Date: </Text>
+									<Text>Production Date: {props.quotation.createDate} </Text>
 									{/* HERE WE NEED TO ENTER THE REAL DETAILS */}
 								</View>
 							</View>
+							<View style={styles.title}>
+								<View style={styles.text}>
+									<Text>
+										{" "}
+										Payment Due Date: {props.quotation.paymentDueDate}
+									</Text>
+								</View>
+							</View>
+							<Text style={styles.textDescription}>
+								Document Description: {props.quotation.documentDescription}
+							</Text>
 
 							<View style={styles.table}>
 								<View style={styles.tableRow}>
-									<View style={styles.tableColHeader}>
-										<Text style={styles.tableCellHeader}>Quantity </Text>
-									</View>
 									<View style={styles.tableColHeader}>
 										<Text style={styles.tableCellHeader}>
 											Product Description{" "}
 										</Text>
 									</View>
 									<View style={styles.tableColHeader}>
-										<Text style={styles.tableCellHeader}>Price</Text>
+										<Text style={styles.tableCellHeader}>Quantity </Text>
+									</View>
+
+									<View style={styles.tableColHeader}>
+										<Text style={styles.tableCellHeader}>Unit Price</Text>
 									</View>
 									<View style={styles.tableColHeader}>
 										<Text style={styles.tableCellHeader}>Total</Text>
+									</View>
+								</View>
+
+								{/* row for product */}
+								<View style={styles.tableRow}>
+									<View style={styles.tableCol}>
+										<Text style={styles.tableCellHeader}>
+											{props.quotation.productArray[0].name}
+										</Text>
+									</View>
+									<View style={styles.tableCol}>
+										<Text style={styles.tableCellHeader}>
+											{props.quotation.productArray[0].quantity}
+										</Text>
+									</View>
+									<View style={styles.tableCol}>
+										<Text style={styles.tableCellHeader}>
+											{props.quotation.productArray[0].unitPrice}
+										</Text>
+									</View>
+									<View style={styles.tableCol}>
+										<Text style={styles.tableCellHeader}>
+											{Number(props.quotation.productArray[0].unitPrice) *
+												Number(props.quotation.productArray[0].quantity)}
+										</Text>
 									</View>
 								</View>
 								{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
@@ -203,7 +248,7 @@ const PDFQuotationFile = () => {
 							<View style={styles.title}>
 								<View style={styles.textNotes}>
 									<Text>Notes:</Text>
-									{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
+									<Text> {props.quotation.notes}</Text>
 								</View>
 
 								<View style={styles.textDigitalSignature}>

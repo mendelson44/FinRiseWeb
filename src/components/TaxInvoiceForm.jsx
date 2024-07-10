@@ -155,7 +155,7 @@ const TaxInvoiceForm = (props) => {
 							required
 							label="Service or Product Description"
 							name="name"
-							value={TaxInvoiceForm.name}
+							//value={TaxInvoiceForm.name}
 							onChange={handleChange}
 							fullWidth
 							className="custom-input"
