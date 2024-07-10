@@ -69,4 +69,4 @@ export const deliveryNoteArray = [
 	},
 ];
 
-export default taxInvoiceArray;
+export default YOSI;

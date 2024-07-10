@@ -10,6 +10,10 @@ import * as cus from "../../data/customers";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
+/*
+  This component is a Table for the Customer List display
+*/
+
 function moveToCustomer(customer) {
   console.log(`moveToCustomer Clicked: ${JSON.stringify(customer)}`);
 }
@@ -28,7 +32,7 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {cus.cutomers1.map((customer) => (
+          {cus.customers1.map((customer) => (
             <TableRow
               key={customer.email}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -40,12 +44,18 @@ export default function BasicTable() {
               <TableCell align="right">{customer.phone}</TableCell>
               <TableCell align="right">{customer.email}</TableCell>
               <TableCell align="right">
-                <Link to="/CustomerPreview">
+                {console.log("Passing customer:", customer)}
+                <Link
+                  to={{
+                    pathname: "/CustomerPreview",
+                    state: { test: "Hello, World!" },
+                  }}
+                >
                   <IconButton
                     color="primary"
                     aria-label="move to customer window"
                     size="small"
-                    onClick={() => moveToCustomer(customer)}
+                    // onClick={() => moveToCustomer(customer)}
                   >
                     <NavigateNextIcon />
                   </IconButton>

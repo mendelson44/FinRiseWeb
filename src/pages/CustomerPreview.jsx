@@ -1,7 +1,13 @@
 import React from "react";
 import LayoutComponent from "../components/LayoutComponent";
 import CustomizedTables from "../components/FormTable";
+import { useLocation } from "react-router-dom";
+
 const CustomerPreview = () => {
+  const location = useLocation();
+  console.log("location: ", location);
+  const { test } = location.state || {}; // Destructure the customer object from state
+  console.log("after location: " + test);
   return (
     <LayoutComponent>
       <div
@@ -29,7 +35,7 @@ const CustomerPreview = () => {
         Forms: <hr />
       </h2>
       <br />
-      <CustomizedTables />
+      <CustomizedTables customer={test} />
     </LayoutComponent>
   );
 };

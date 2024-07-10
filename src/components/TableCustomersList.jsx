@@ -15,70 +15,70 @@ import customers from "../../data/customers";
 
 // Main component rendering the table
 export default function CollapsibleTable() {
-	const [currCustomers, setCustomers] = useState(customers);
-	const [loading, setLoading] = useState(false);
+  const [currCustomers, setCustomers] = useState(customers);
+  const [loading, setLoading] = useState(false);
 
-	const handleOnExportExcel = () => {
-		setLoading(true);
-		exportCustomerListToExcel(currCustomers);
-		setTimeout(() => {
-			setLoading(false);
-		}, 3000); // wait for 1 second
-	};
+  const handleOnExportExcel = () => {
+    setLoading(true);
+    exportCustomerListToExcel(currCustomers);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000); // wait for 1 second
+  };
 
-	const handleDelete = (customerToDelete) => {
-		setCustomers(
-			currCustomers.filter((customer) => customer !== customerToDelete)
-		);
-	};
+  const handleDelete = (customerToDelete) => {
+    setCustomers(
+      currCustomers.filter((customer) => customer !== customerToDelete)
+    );
+  };
 
-	return (
-		<>
-			<div style={{ margin: "50px" }}>
-				<TableContainer component={Paper}>
-					<div style={{ display: "flex", justifyContent: "space-between" }}>
-						<TableSearch /> {/* Include TableSearch component here */}
-						<Button
-							onClick={handleOnExportExcel}
-							loading={loading}
-							disabled={loading}
-						>
-							Export Excel
-						</Button>
-					</div>
-					<Table aria-label="collapsible table">
-						<TableHead>
-							<TableRow>
-								<TableCell />
-								<TableCell>
-									<Typography variant="h6">First Name</Typography>
-								</TableCell>
-								<TableCell>
-									<Typography variant="h6">Last Name</Typography>
-								</TableCell>
-								<TableCell align="right">
-									<Typography variant="h6">Address</Typography>
-								</TableCell>
-								<TableCell align="right">
-									<Typography variant="h6">Phone</Typography>
-								</TableCell>
-								<TableCell align="right">
-									<Typography variant="h6">Email</Typography>
-								</TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{currCustomers.map((customer) => (
-								<Row
-									key={`${customer.firstName}-${customer.lastName}`}
-									customer={customer}
-									onDelete={handleDelete}
-								/>
-							))}
-						</TableBody>
-					</Table>
-				</TableContainer>
-			</div>
-		</>
-	);
+  return (
+    <>
+      <div style={{ margin: "50px" }}>
+        <TableContainer component={Paper}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <TableSearch /> {/* Include TableSearch component here */}
+            <Button
+              onClick={handleOnExportExcel}
+              loading={loading}
+              disabled={loading}
+            >
+              Export Excel
+            </Button>
+          </div>
+          <Table aria-label="collapsible table">
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell>
+                  <Typography variant="h6">First Name</Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="h6">Last Name</Typography>
+                </TableCell>
+                <TableCell align="right">
+                  <Typography variant="h6">Address</Typography>
+                </TableCell>
+                <TableCell align="right">
+                  <Typography variant="h6">Phone</Typography>
+                </TableCell>
+                <TableCell align="right">
+                  <Typography variant="h6">Email</Typography>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {currCustomers.map((customer) => (
+                <Row
+                  key={`${customer.firstName}-${customer.lastName}`}
+                  customer={customer}
+                  onDelete={handleDelete}
+                />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+    </>
+  );
 }
