@@ -11,7 +11,7 @@ import PDFQuotationFile from "../components/PDFQuotationFile";
 import PDFReceiptFile from "../components/PDFReceiptFile";
 import PDFTaxInvoiceFile from "../components/PDFTaxInvoiceFile";
 import PDFDeliveryNoteFile from "../components/PDFDeliveryNoteFile";
-import taxInvoiceArray from "/data/inbar.js";
+//import taxInvoiceArray from "/data/inbar.js";
 import * as inbar from "/data/inbar.js";
 
 function Home() {
