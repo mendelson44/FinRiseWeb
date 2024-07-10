@@ -17,8 +17,6 @@ export const taxInvoiceArray = [
 	},
 ];
 
-//const str = "yosi";
-
 export const receiptArray = [
 	{
 		customerName: "inbar",
@@ -69,4 +67,4 @@ export const deliveryNoteArray = [
 	},
 ];
 
-export default YOSI;
+export default taxInvoiceArray;
