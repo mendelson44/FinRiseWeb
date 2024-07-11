@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import {
-	Container,
 	TextField,
 	Grid,
 	Button,
-	MenuItem,
 	Typography,
 	Box,
 	IconButton,
+	FormControl,
+	FormLabel,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import SearchIcon from "@mui/icons-material/Search";
@@ -16,39 +16,26 @@ import { Alert } from "antd";
 import "../styles/inputFix.css";
 import ButtonPreview from "./ButtonPreview";
 import PDFTaxInvoiceFile from "./PDFTaxInvoiceFile";
-//import taxInvoiceArray from "/data/inbar.js";
+import Radio from "@mui/joy/Radio";
+import * as constants from "../utils/constants";
+import RadioGroup from "@mui/joy/RadioGroup";
+import List from "@mui/joy/List";
+import ListItem from "@mui/joy/ListItem";
+import ListItemButton from "@mui/joy/ListItemButton";
+import Delete from "@mui/icons-material/Delete";
+import ListItemDecorator from "@mui/joy/ListItemDecorator";
+import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
 
-const currencies = [
-	{ value: "ILS", label: "Shekel" },
-	{ value: "USD", label: "Dollar" },
-];
-
-const TaxInvoiceForm = (props) => {
-	const [vatStatus, setVatStatus] = useState("before");
-	//const [paymentDate, setPaymentDate] = useState(null);
-	//const [issueDate, setIssueDate] = useState(null);
-	const [currency, setCurrency] = useState("ILS");
+const TaxInvoiceForm = () => {
 	const [showAlert, setShowAlert] = useState(false);
 
-	const vat = [
-		{ value: "before", label: "Before" },
-		{ value: "after", label: "After" },
-	];
-
+	//------------------------------------------------------------ Tax Details:
 	const [newTaxInvoice, setNewTaxInvoice] = useState({
 		customerName: "",
 		createDate: "",
 		paymentDueDate: "",
 		documentDescription: "",
-		productArray: [
-			{
-				name: "",
-				quantity: "",
-				unitPrice: "",
-				currency: "",
-				vat: true,
-			},
-		],
+		productArray: [],
 		notes: "",
 	});
 
@@ -58,18 +45,48 @@ const TaxInvoiceForm = (props) => {
 			...details,
 		}));
 	};
-	const handleChange = (event) => {
+	const handleChangeTaxDetails = (event) => {
 		const { name, value } = event.target;
 		updateFormDetails({ [name]: value });
 	};
+	//------------------------------------------------------------ Product Details:
+	const [newProduct, setNewProduct] = useState({
+		name: "",
+		quantity: "",
+		unitPrice: "",
+		currency: constants.CURRENCY.DOLLAR,
+		vat: false,
+	});
+
+	const updateProductDetails = (details) => {
+		setNewProduct((prevDetails) => ({
+			...prevDetails,
+			...details,
+		}));
+	};
+	const handleChangeProductDetails = (event) => {
+		const { name, value } = event.target;
+		updateProductDetails({ [name]: value });
+	};
+	const onAddProduct = () => {
+		newTaxInvoice.productArray.push(newProduct);
+		console.log(newTaxInvoice.productArray);
+		//reset input box's:
+		setNewProduct({
+			name: "",
+			quantity: "",
+			unitPrice: "",
+			currency: constants.CURRENCY.DOLLAR,
+			vat: false,
+		});
+	};
+
 	const handleSubmit = () => {
 		//taxInvoiceArray.push(newTaxInvoice);
 		setShowAlert(true); // Show the alert on form submission
 	};
-	const onAddProducts = () => {};
-
 	console.log(newTaxInvoice);
-	//console.log(taxInvoiceArray);
+	console.log(newProduct);
 
 	return (
 		<>
@@ -93,16 +110,16 @@ const TaxInvoiceForm = (props) => {
 							fullWidth
 							className="custom-input"
 							name="customerName"
-							value={TaxInvoiceForm.customerName}
-							onChange={handleChange}
+							value={newTaxInvoice.customerName}
+							onChange={handleChangeTaxDetails}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={2}>
 						<DatePicker
 							label="Document Date"
 							name="createDate" //add
-							value={TaxInvoiceForm.createDate} //add
-							onChange={handleChange} //add
+							value={newTaxInvoice.createDate} //add
+							onChange={handleChangeTaxDetails} //add
 							className="custom-input"
 							//value={issueDate}
 							//onChange={(newValue) => setIssueDate(newValue)}
@@ -121,8 +138,8 @@ const TaxInvoiceForm = (props) => {
 							label="Payment Due Date"
 							className="custom-input"
 							name="paymentDueDate"
-							value={TaxInvoiceForm.paymentDueDate}
-							onChange={handleChange}
+							value={newTaxInvoice.paymentDueDate}
+							onChange={handleChangeTaxDetails}
 							//value={paymentDate}
 							//onChange={(newValue) => setPaymentDate(newValue)}
 							renderInput={(params) => (
@@ -136,8 +153,8 @@ const TaxInvoiceForm = (props) => {
 							fullWidth
 							className="custom-input"
 							name="documentDescription"
-							value={TaxInvoiceForm.documentDescription}
-							onChange={handleChange}
+							value={newTaxInvoice.documentDescription}
+							onChange={handleChangeTaxDetails}
 						/>
 					</Grid>
 
@@ -149,16 +166,18 @@ const TaxInvoiceForm = (props) => {
 						}}
 					>
 						<Typography variant="h5" gutterBottom marginTop={5}>
-							List of Items
+							Add Items:
 						</Typography>
 					</Box>
+
+					{/* ==================== Product - Start ==================== */}
 					<Grid item xs={12}>
 						<TextField
 							required
 							label="Service or Product Description"
 							name="name"
-							//value={TaxInvoiceForm.name}
-							onChange={handleChange}
+							value={newTaxInvoice.name}
+							onChange={handleChangeProductDetails}
 							fullWidth
 							className="custom-input"
 							InputProps={{
@@ -170,7 +189,7 @@ const TaxInvoiceForm = (props) => {
 							}}
 						/>
 					</Grid>
-					<Grid item xs={6} sm={2}>
+					<Grid item xs={6} sm={3}>
 						<TextField
 							required
 							label="Quantity"
@@ -180,7 +199,7 @@ const TaxInvoiceForm = (props) => {
 							className="custom-input"
 						/>
 					</Grid>
-					<Grid item xs={6} sm={2}>
+					<Grid item xs={6} sm={3}>
 						<TextField
 							required
 							label="Unit Price"
@@ -191,48 +210,126 @@ const TaxInvoiceForm = (props) => {
 						/>
 					</Grid>
 					<Grid item xs={6} sm={2}>
-						<TextField
-							select
-							label="Currency"
-							value={currency}
-							onChange={(e) => setCurrency(e.target.value)}
-							fullWidth
-							className="custom-input"
-						>
-							{currencies.map((option) => (
-								<MenuItem key={option.value} value={option.value}>
-									{option.label}
-								</MenuItem>
-							))}
-						</TextField>
+						<FormControl>
+							<FormLabel>Currency</FormLabel>
+							<RadioGroup
+								defaultValue={constants.CURRENCY.DOLLAR}
+								name="currency"
+								value={newProduct.currency}
+								onChange={handleChangeProductDetails}
+							>
+								<Radio
+									color="primary"
+									orientation="vertical"
+									size="sm"
+									variant="outlined"
+									value={constants.CURRENCY.DOLLAR}
+									label={`Dollar ${constants.CURRENCY.DOLLAR}`}
+								/>
+								<Radio
+									color="primary"
+									orientation="vertical"
+									size="sm"
+									variant="outlined"
+									value={constants.CURRENCY.EURO}
+									label={`Euro ${constants.CURRENCY.EURO}`}
+								/>
+								<Radio
+									color="primary"
+									orientation="vertical"
+									size="sm"
+									variant="outlined"
+									value={constants.CURRENCY.NIS}
+									label={`Nis ${constants.CURRENCY.NIS}`}
+								/>
+							</RadioGroup>
+						</FormControl>
 					</Grid>
-					<Grid item xs={6} sm={2}>
-						<TextField
-							select
-							label="Vat"
-							value={vatStatus}
-							onChange={(e) => setVatStatus(e.target.value)}
-							fullWidth
-							className="custom-input"
-						>
-							{vat.map((option) => (
-								<MenuItem key={option.value} value={option.value}>
-									{option.label}
-								</MenuItem>
-							))}
-						</TextField>
+					<Grid item xs={6} sm={3}>
+						<FormControl>
+							<FormLabel>Vat</FormLabel>
+							<RadioGroup
+								defaultValue={false}
+								name="vat"
+								value={newProduct.vat}
+								onChange={handleChangeProductDetails}
+							>
+								<Radio
+									color="primary"
+									orientation="vertical"
+									size="sm"
+									variant="outlined"
+									value={false}
+									label="Not Included"
+								/>
+								<Radio
+									color="primary"
+									orientation="vertical"
+									size="sm"
+									variant="outlined"
+									value={true}
+									label="Included"
+								/>
+							</RadioGroup>
+						</FormControl>
 					</Grid>
 					<Grid item xs={12}>
 						<Button
 							variant="outlined"
 							startIcon={<AddIcon />}
-							onClick={onAddProducts}
+							onClick={onAddProduct}
 						>
 							Add to Item List
 						</Button>
 					</Grid>
 				</Grid>
+				{/* ==================== Open ==================== */}
+				<Box
+					sx={{
+						display: "flex",
+						justifyContent: "flex-start",
+					}}
+				>
+					<Typography variant="h5" gutterBottom marginTop={5}>
+						Item List:
+					</Typography>
+				</Box>
+				<Box
+					sx={{
+						display: "block",
+						justifyContent: "flex-start",
+						border: "2px solid #ddd",
+						padding: 2,
+						borderRadius: 2,
+						marginTop: "10px",
+						width: "100%", // Ensure the box takes the full width
+					}}
+				>
+					{newTaxInvoice.productArray.map((product) => (
+						<List sx={{ maxWidth: 300 }}>
+							{product.length === 0 ? (
+								"No Products Added"
+							) : (
+								<ListItem
+									endAction={
+										<IconButton aria-label="Delete" size="sm" color="danger">
+											<Delete />
+										</IconButton>
+									}
+								>
+									<ListItemDecorator>
+										<ReceiptLongOutlinedIcon />
+									</ListItemDecorator>{" "}
+								</ListItem>
+							)}
+						</List>
+					))}
+				</Box>
 			</Box>
+
+			{/* ==================== Close ==================== */}
+
+			{/* ==================== Product - End ==================== */}
 
 			<Box
 				sx={{

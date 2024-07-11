@@ -29,5 +29,10 @@ export const FORM_TYPE = {
   DELIVERY_NOTE: "Delivery Note",
   RECEIPT_TAX_INVOICE: "Receipt Tax Invoice",
 };
+export const CURRENCY = {
+  DOLLAR: "$",
+  EURO: "€",
+  NIS: "₪",
+};
 
 export default APP_NAME;
