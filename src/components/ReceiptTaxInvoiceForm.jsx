@@ -14,7 +14,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import { Alert } from "antd";
 import "../styles/inputFix.css";
+import * as constants from "../utils/constants";
 
+{
+	/*
 const currencies = [
 	{ value: "ILS", label: "Shekel" },
 	{ value: "USD", label: "Dollar" },
@@ -30,16 +33,46 @@ const vat = [
 	{ value: "after", label: "After" },
 ];
 
+ */
+}
+
 const ReceiptTaxInvoiceForm = () => {
-	const [vatStatus, setVatStatus] = useState("before");
+	{
+		/*const [vatStatus, setVatStatus] = useState("before");
 	const [issueDate, setIssueDate] = useState(null);
 	const [currency, setCurrency] = useState("ILS");
+const [paymentType, setPaymentType] = useState("bank_transfer");*/
+	}
 	const [showAlert, setShowAlert] = useState(false);
-	const [paymentType, setPaymentType] = useState("bank_transfer");
+
+	//------------------------------------------------------------ Receipt Details:
+	const [newReceiptTax, setNewReceiptTax] = useState({
+		customerName: "",
+		createDate: "",
+		documentDescription: "",
+		paymentType: constants.PAYMENT_TYPE.CREDIT_CARD,
+		currency: constants.CURRENCY.DOLLAR,
+		date: "",
+		price: "",
+		notes: "",
+	});
+
+	const updateFormDetails = (details) => {
+		setNewReceiptTax((prevForm) => ({
+			...prevForm,
+			...details,
+		}));
+	};
+	const handleChangeReceiptTaxDetails = (event) => {
+		const { name, value } = event.target;
+		updateFormDetails({ [name]: value });
+	};
 
 	const handleSubmit = () => {
 		setShowAlert(true); // Show the alert on form submission
 	};
+
+	console.log(newReceiptTax);
 
 	return (
 		<>
@@ -62,14 +95,18 @@ const ReceiptTaxInvoiceForm = () => {
 							label="Customer Name"
 							fullWidth
 							className="custom-input"
+							name="customerName"
+							value={newReceiptTax.customerName}
+							onChange={handleChangeReceiptTaxDetails}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<DatePicker
 							label="Document Date"
-							value={issueDate}
 							className="custom-input"
-							onChange={(newValue) => setIssueDate(newValue)}
+							name="createDate" //add
+							value={newReceiptTax.createDate} //add
+							onChange={handleChangeReceiptTaxDetails} //add
 							renderInput={(params) => (
 								<TextField
 									{...params}
@@ -84,6 +121,9 @@ const ReceiptTaxInvoiceForm = () => {
 							label="Document Description"
 							fullWidth
 							className="custom-input"
+							name="documentDescription"
+							value={newReceiptTax.documentDescription}
+							onChange={handleChangeReceiptTaxDetails}
 						/>
 					</Grid>
 

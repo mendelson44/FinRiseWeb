@@ -1,41 +1,52 @@
 import React, { useState } from "react";
 import {
-	Container,
 	TextField,
 	Grid,
 	Button,
-	MenuItem,
 	Typography,
 	Box,
-	IconButton,
+	FormControl,
+	FormLabel,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import SearchIcon from "@mui/icons-material/Search";
-import AddIcon from "@mui/icons-material/Add";
 import { Alert } from "antd";
 import "../styles/inputFix.css";
-
-const currencies = [
-	{ value: "ILS", label: "Shekel" },
-	{ value: "USD", label: "Dollar" },
-];
-
-const paymentTypes = [
-	{ value: "bank_transfer", label: "Bank Transfer" },
-	{ value: "credit_card", label: "Credit Card" },
-	{ value: "cash", label: "Cash" },
-];
+import ButtonPreview from "./ButtonPreview";
+import Radio from "@mui/joy/Radio";
+import * as constants from "../utils/constants";
+import RadioGroup from "@mui/joy/RadioGroup";
 
 function ReceiptForm() {
-	const [issueDate, setIssueDate] = useState(null);
-	const [currency, setCurrency] = useState("ILS");
 	const [showAlert, setShowAlert] = useState(false);
-	const [paymentType, setPaymentType] = useState("bank_transfer");
+	//------------------------------------------------------------ Receipt Details:
+	const [newReceipt, setNewReceipt] = useState({
+		customerName: "",
+		createDate: "",
+		documentDescription: "",
+		paymentType: constants.PAYMENT_TYPE.CREDIT_CARD,
+		currency: constants.CURRENCY.DOLLAR,
+		date: "",
+		price: "",
+		notes: "",
+	});
+
+	const updateFormDetails = (details) => {
+		setNewReceipt((prevForm) => ({
+			...prevForm,
+			...details,
+		}));
+	};
+	const handleChangeReceiptDetails = (event) => {
+		const { name, value } = event.target;
+		updateFormDetails({ [name]: value });
+	};
 
 	const handleSubmit = () => {
 		setShowAlert(true); // Show the alert on form submission
 	};
 
+	console.log(newReceipt);
 	return (
 		<>
 			<Box
@@ -57,15 +68,19 @@ function ReceiptForm() {
 							label="Customer Name"
 							fullWidth
 							className="custom-input"
+							name="customerName"
+							value={newReceipt.customerName}
+							onChange={handleChangeReceiptDetails}
 						/>
 					</Grid>
 
 					<Grid item xs={12} sm={2}>
 						<DatePicker
 							label="Document Date"
-							value={issueDate}
+							name="createDate" //add
+							value={newReceipt.createDate} //add
+							onChange={handleChangeReceiptDetails} //add
 							className="custom-input"
-							onChange={(newValue) => setIssueDate(newValue)}
 							renderInput={(params) => (
 								<TextField
 									{...params}
@@ -76,11 +91,14 @@ function ReceiptForm() {
 						/>
 					</Grid>
 
-					<Grid item xs={12} sm={2}>
+					<Grid item xs={6}>
 						<TextField
 							label="Document Description"
 							fullWidth
 							className="custom-input"
+							name="documentDescription"
+							value={newReceipt.documentDescription}
+							onChange={handleChangeReceiptDetails}
 						/>
 					</Grid>
 				</Grid>
@@ -106,35 +124,57 @@ function ReceiptForm() {
 					<Typography variant="h5" gutterBottom>
 						Details of Receipts
 					</Typography>
-					<Typography variant="h7" gutterBottom>
+					<Typography variant="h7" sx={{ fontWeight: "bold" }} gutterBottom>
 						How you were paid?
 					</Typography>
 				</Box>
+
+				{/* ==================== Payment - Start ==================== */}
 				<Grid container spacing={2}>
-					<Grid item xs={12}>
-						<TextField
-							select
-							required
-							className="custom-input"
-							label="Payment Type"
-							value={paymentType}
-							onChange={(e) => setPaymentType(e.target.value)}
-							fullWidth
-						>
-							{paymentTypes.map((option) => (
-								<MenuItem key={option.value} value={option.value}>
-									{option.label}
-								</MenuItem>
-							))}
-						</TextField>
+					<Grid item xs={6} sm={2}>
+						<FormControl>
+							<FormLabel>Payment Type</FormLabel>
+							<RadioGroup
+								defaultValue={constants.PAYMENT_TYPE.CREDIT_CARD}
+								name="paymentType"
+								value={newReceipt.paymentType}
+								onChange={handleChangeReceiptDetails}
+							>
+								<Radio
+									color="primary"
+									orientation="vertical"
+									size="sm"
+									variant="outlined"
+									value={constants.PAYMENT_TYPE.CREDIT_CARD}
+									label={` ${constants.PAYMENT_TYPE.CREDIT_CARD}`}
+								/>
+								<Radio
+									color="primary"
+									orientation="vertical"
+									size="sm"
+									variant="outlined"
+									value={constants.PAYMENT_TYPE.CASH}
+									label={` ${constants.PAYMENT_TYPE.CASH}`}
+								/>
+								<Radio
+									color="primary"
+									orientation="vertical"
+									size="sm"
+									variant="outlined"
+									value={constants.PAYMENT_TYPE.BANK_TRANSFER}
+									label={` ${constants.PAYMENT_TYPE.BANK_TRANSFER}`}
+								/>
+							</RadioGroup>
+						</FormControl>
 					</Grid>
 
-					<Grid item xs={12} sm={2}>
+					<Grid item xs={6} sm={3}>
 						<DatePicker
 							className="custom-input"
 							label="Date"
-							value={issueDate}
-							onChange={(newValue) => setIssueDate(newValue)}
+							name="date"
+							value={newReceipt.date}
+							onChange={handleChangeReceiptDetails}
 							renderInput={(params) => (
 								<TextField
 									{...params}
@@ -145,32 +185,54 @@ function ReceiptForm() {
 						/>
 					</Grid>
 
-					<Grid item xs={12} sm={4}>
-						<TextField
-							required
-							className="custom-input"
-							label="Sum"
-							type="number"
-							defaultValue={0}
-							fullWidth
-						/>
-					</Grid>
 					<Grid item xs={4}>
 						<TextField
 							required
-							select
 							className="custom-input"
-							label="Currency"
-							value={currency}
-							onChange={(e) => setCurrency(e.target.value)}
+							label="Total Price"
+							type="number"
+							defaultValue={0}
 							fullWidth
-						>
-							{currencies.map((option) => (
-								<MenuItem key={option.value} value={option.value}>
-									{option.label}
-								</MenuItem>
-							))}
-						</TextField>
+							name="price"
+							value={newReceipt.price}
+							onChange={handleChangeReceiptDetails}
+						/>
+					</Grid>
+					<Grid item xs={3}>
+						<FormControl>
+							<FormLabel>Currency</FormLabel>
+							<RadioGroup
+								defaultValue={constants.CURRENCY.DOLLAR}
+								name="currency"
+								value={newReceipt.currency}
+								onChange={handleChangeReceiptDetails}
+							>
+								<Radio
+									color="primary"
+									orientation="vertical"
+									size="sm"
+									variant="outlined"
+									value={constants.CURRENCY.DOLLAR}
+									label={`Dollar ${constants.CURRENCY.DOLLAR}`}
+								/>
+								<Radio
+									color="primary"
+									orientation="vertical"
+									size="sm"
+									variant="outlined"
+									value={constants.CURRENCY.EURO}
+									label={`Euro ${constants.CURRENCY.EURO}`}
+								/>
+								<Radio
+									color="primary"
+									orientation="vertical"
+									size="sm"
+									variant="outlined"
+									value={constants.CURRENCY.NIS}
+									label={`Nis ${constants.CURRENCY.NIS}`}
+								/>
+							</RadioGroup>
+						</FormControl>
 					</Grid>
 				</Grid>
 			</Box>
@@ -194,6 +256,9 @@ function ReceiptForm() {
 							multiline
 							rows={4}
 							fullWidth
+							name="notes"
+							value={newReceipt.notes}
+							onChange={handleChangeReceiptDetails}
 						/>
 					</Grid>
 				</Grid>

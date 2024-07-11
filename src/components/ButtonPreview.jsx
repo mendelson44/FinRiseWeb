@@ -16,6 +16,37 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	},
 }));
 
+const renderFormType = (form) => {
+	// a function for the form type
+	switch (form.type) {
+		case constants.FORM_TYPE.TAX_INVOICE:
+			return (
+				<StyledTableCell align="right">No action available</StyledTableCell>
+			);
+		case constants.FORM_TYPE.QUOTE:
+			return (
+				<StyledTableCell align="right">No action available</StyledTableCell>
+			);
+		case constants.FORM_TYPE.RECEIPT:
+			return (
+				<StyledTableCell align="right">No action available</StyledTableCell>
+			);
+
+		case constants.FORM_TYPE.DELIVERY_NOTE:
+			return (
+				<StyledTableCell align="right">No action available</StyledTableCell>
+			);
+		case constants.FORM_TYPE.RECEIPT_TAX_INVOICE:
+			return (
+				<StyledTableCell align="right">No action available</StyledTableCell>
+			);
+		default:
+			return (
+				<StyledTableCell align="right">No action available</StyledTableCell>
+			);
+	}
+};
+
 export default function ButtonPreview(props) {
 	const [open, setOpen] = React.useState(false);
 
@@ -49,20 +80,56 @@ export default function ButtonPreview(props) {
 					<CloseIcon />
 				</IconButton>
 				<DialogContent dividers>
-					<Typography gutterBottom>Tax Details:</Typography>
-					<Typography gutterBottom>
-						{`customerName: ${props.details.customerName}`}
+					{" "}
+					<Typography
+						sx={{ color: "#0eba97", fontFamily: "Arial", fontWeight: "bold" }}
+						gutterBottom
+					>
+						Tax invoice Details:
 					</Typography>
 					<Typography gutterBottom>
-						Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-						Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
-						auctor.
+						{`customer Name: ${props.details.customerName}`} <br />
+						{`Production Date: ${props.details.createDate}`}
+						<br />
+						{`Payment Due Date: ${props.details.paymentDueDate}`}
+						<br />
+						{`Document description: ${props.details.documentDescription}`}
 					</Typography>
-					<Typography gutterBottom>
-						Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-						cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
-						dui. Donec ullamcorper nulla non metus auctor fringilla.
+					<Typography
+						sx={{
+							color: "#0eba97",
+							fontFamily: "Arial",
+							fontWeight: "bold",
+							marginTop: 5,
+						}}
+						gutterBottom
+					>
+						Products Details:
 					</Typography>
+					{props.details.productArray.map((product) => (
+						<Typography gutterBottom>
+							{`Product Name: ${product.name}`} <br />
+							{`Quantity: ${product.quantity}`}
+							<br />
+							{`Unit Price: ${product.unitPrice}`}
+							<br />
+							{`Currency: ${product.currency}`}
+							<br />
+							{`Vat: ${product.vat}`}
+						</Typography>
+					))}
+					<Typography
+						sx={{
+							color: "#0eba97",
+							fontFamily: "Arial",
+							fontWeight: "bold",
+							marginTop: 5,
+						}}
+						gutterBottom
+					>
+						Notes:
+					</Typography>
+					<Typography gutterBottom>{props.details.notes}</Typography>
 				</DialogContent>
 			</BootstrapDialog>
 		</React.Fragment>

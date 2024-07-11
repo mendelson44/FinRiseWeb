@@ -6,33 +6,39 @@ import gift from "../assets/gift.png";
 const APP_NAME = "FinRise";
 export const SUPPER_APP_NAME = "2024b.noa.sharabi";
 export const ROLES = {
-  ADMIN: "ADMIN",
-  MINI_APP_USER: "MINI_APP_USER",
-  SUPER_APP_USER: "SUPER_APP_USER",
+	ADMIN: "ADMIN",
+	MINI_APP_USER: "MINI_APP_USER",
+	SUPER_APP_USER: "SUPER_APP_USER",
 };
 
 export const IMAGES = {
-  LOGO: logo,
-  ORIGINAL_ON_TRANSPARENT: OriginalOnTransparent,
-  WHITE_ON_TRANSPARENT: WhiteOnTransparent,
-  GIFT: gift,
+	LOGO: logo,
+	ORIGINAL_ON_TRANSPARENT: OriginalOnTransparent,
+	WHITE_ON_TRANSPARENT: WhiteOnTransparent,
+	GIFT: gift,
 };
 
 export const COLORS = {
-  PRIMARY: "rgb(14, 186, 151)",
+	PRIMARY: "rgb(14, 186, 151)",
 };
 
 export const FORM_TYPE = {
-  TAX_INVOICE: "Tax Invoice",
-  QUOTE: "Quote",
-  RECEIPT: "Receipt",
-  DELIVERY_NOTE: "Delivery Note",
-  RECEIPT_TAX_INVOICE: "Receipt Tax Invoice",
+	TAX_INVOICE: "Tax Invoice",
+	QUOTE: "Quote",
+	RECEIPT: "Receipt",
+	DELIVERY_NOTE: "Delivery Note",
+	RECEIPT_TAX_INVOICE: "Receipt Tax Invoice",
 };
 export const CURRENCY = {
-  DOLLAR: "$",
-  EURO: "€",
-  NIS: "₪",
+	DOLLAR: "$",
+	EURO: "€",
+	NIS: "₪",
+};
+
+export const PAYMENT_TYPE = {
+	CREDIT_CARD: "Credit Card",
+	CASH: "Cash",
+	BANK_TRANSFER: "Bank Transfer",
 };
 
 export default APP_NAME;

@@ -15,7 +15,6 @@ import AddIcon from "@mui/icons-material/Add";
 import { Alert } from "antd";
 import "../styles/inputFix.css";
 import ButtonPreview from "./ButtonPreview";
-import PDFTaxInvoiceFile from "./PDFTaxInvoiceFile";
 import Radio from "@mui/joy/Radio";
 import * as constants from "../utils/constants";
 import RadioGroup from "@mui/joy/RadioGroup";
@@ -35,8 +34,8 @@ const TaxInvoiceForm = () => {
 		createDate: "",
 		paymentDueDate: "",
 		documentDescription: "",
-		productArray: [],
 		notes: "",
+		productArray: [],
 	});
 
 	const updateFormDetails = (details) => {
@@ -121,8 +120,6 @@ const TaxInvoiceForm = () => {
 							value={newTaxInvoice.createDate} //add
 							onChange={handleChangeTaxDetails} //add
 							className="custom-input"
-							//value={issueDate}
-							//onChange={(newValue) => setIssueDate(newValue)}
 							renderInput={(params) => (
 								<TextField
 									{...params}
@@ -197,6 +194,9 @@ const TaxInvoiceForm = () => {
 							defaultValue={1}
 							fullWidth
 							className="custom-input"
+							name="quantity"
+							value={newProduct.quantity}
+							onChange={handleChangeProductDetails}
 						/>
 					</Grid>
 					<Grid item xs={6} sm={3}>
@@ -207,6 +207,9 @@ const TaxInvoiceForm = () => {
 							defaultValue={0}
 							fullWidth
 							className="custom-input"
+							name="unitPrice"
+							value={newProduct.unitPrice}
+							onChange={handleChangeProductDetails}
 						/>
 					</Grid>
 					<Grid item xs={6} sm={2}>
@@ -350,7 +353,10 @@ const TaxInvoiceForm = () => {
 							multiline
 							rows={4}
 							fullWidth
+							name="notes"
 							className="custom-input"
+							value={newTaxInvoice.notes}
+							onChange={handleChangeTaxDetails}
 						/>
 					</Grid>
 				</Grid>
