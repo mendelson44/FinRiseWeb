@@ -4,7 +4,7 @@ import WhiteOnTransparent from "../assets/WhiteOnTransparent.png";
 import gift from "../assets/gift.png";
 
 const APP_NAME = "FinRise";
-
+export const SUPPER_APP_NAME = "2024b.noa.sharabi";
 export const ROLES = {
   ADMIN: "ADMIN",
   MINI_APP_USER: "MINI_APP_USER",

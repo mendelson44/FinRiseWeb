@@ -7,119 +7,119 @@ import * as objectService from "../services/objectService";
 import * as constants from "../utils/constants";
 
 function SignUp() {
-	const [firstName, setFirstName] = useState("");
-	const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
-	const [newUser, setNewUser] = useState({
-		essentialDetails: {
-			email: "",
-			role: `${constants.MINI_APP_USER}`,
-			userName: `${firstName} ${lastName}`,
-			avatar: "",
-		},
-		extraDetails: {
-			profileImageUrl: "",
-			password: "",
-			firstName: "",
-			lastName: "",
-			businessDetails: {
-				registrationNumber: "",
-				businessId: "",
-				name: "",
-				city: "",
-				address: "",
-				phoneNumber: "",
-			},
-		},
-	});
+  const [newUser, setNewUser] = useState({
+    essentialDetails: {
+      email: "",
+      role: `${constants.MINI_APP_USER}`,
+      userName: `${firstName} ${lastName}`,
+      avatar: "",
+    },
+    extraDetails: {
+      profileImageUrl: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+      businessDetails: {
+        registrationNumber: "",
+        businessId: "",
+        name: "",
+        city: "",
+        address: "",
+        phoneNumber: "",
+      },
+    },
+  });
 
-	useEffect(() => {
-		setNewUser((prevUser) => ({
-			...prevUser,
-			essentialDetails: {
-				...prevUser.essentialDetails,
-				userName: `${firstName} ${lastName}`,
-			},
-			extraDetails: {
-				...prevUser.extraDetails,
-				firstName,
-				lastName,
-			},
-		}));
-	}, [firstName, lastName]);
+  useEffect(() => {
+    setNewUser((prevUser) => ({
+      ...prevUser,
+      essentialDetails: {
+        ...prevUser.essentialDetails,
+        userName: `${firstName} ${lastName}`,
+      },
+      extraDetails: {
+        ...prevUser.extraDetails,
+        firstName,
+        lastName,
+      },
+    }));
+  }, [firstName, lastName]);
 
-	const updateEssentialDetails = (details) => {
-		setNewUser((prevUser) => ({
-			...prevUser,
-			essentialDetails: {
-				...prevUser.essentialDetails,
-				...details,
-			},
-		}));
-	};
+  const updateEssentialDetails = (details) => {
+    setNewUser((prevUser) => ({
+      ...prevUser,
+      essentialDetails: {
+        ...prevUser.essentialDetails,
+        ...details,
+      },
+    }));
+  };
 
-	const updateExtraDetails = (details) => {
-		setNewUser((prevUser) => ({
-			...prevUser,
-			extraDetails: {
-				...prevUser.extraDetails,
-				...details,
-			},
-		}));
-	};
+  const updateExtraDetails = (details) => {
+    setNewUser((prevUser) => ({
+      ...prevUser,
+      extraDetails: {
+        ...prevUser.extraDetails,
+        ...details,
+      },
+    }));
+  };
 
-	const updateBusinessDetails = (businessDetails) => {
-		setNewUser((prevUser) => ({
-			...prevUser,
-			extraDetails: {
-				...prevUser.extraDetails,
-				businessDetails: {
-					...prevUser.extraDetails.businessDetails,
-					...businessDetails,
-				},
-			},
-		}));
-	};
-	const onSignUpAttempt = async () => {
-		console.log(`Attempting SignUp!!!!! \n ${newUser}`);
-		try {
-			const responseDataEssential = await userService.createUser(
-				newUser.essentialDetails
-			);
-			console.log(`Response EssentialDetails: ${responseData}`);
+  const updateBusinessDetails = (businessDetails) => {
+    setNewUser((prevUser) => ({
+      ...prevUser,
+      extraDetails: {
+        ...prevUser.extraDetails,
+        businessDetails: {
+          ...prevUser.extraDetails.businessDetails,
+          ...businessDetails,
+        },
+      },
+    }));
+  };
+  const onSignUpAttempt = async () => {
+    console.log(`Attempting SignUp!!!!! \n ${newUser}`);
+    try {
+      const responseDataEssential = await userService.createUser(
+        newUser.essentialDetails
+      );
+      console.log(`Response EssentialDetails: ${responseData}`);
 
-			const responseDataExtra = await objectService.createObject(
-				newUser.extraDetails
-			);
-			console.log(`Response ExtraDetails: ${responseDataExtra}`);
-		} catch (error) {
-			console.error("Error during sign-up attempt:", error);
-		}
-	};
+      const responseDataExtra = await objectService.createObject(
+        newUser.extraDetails
+      );
+      console.log(`Response ExtraDetails: ${responseDataExtra}`);
+    } catch (error) {
+      console.error("Error during sign-up attempt:", error);
+    }
+  };
 
-	console.log(newUser);
+  console.log(newUser);
 
-	return (
-		<>
-			<BackHeader />
-			<div className="signup-container">
-				<div className="signup-logo">
-					<img src={constants.IMAGES.WHITE_ON_TRANSPARENT} alt="logo FinRise" />
-				</div>
-				<div className="stepper-container">
-					<HorizontalLinearStepper
-						onSignUpAttempt={onSignUpAttempt}
-						newUser={newUser}
-						updateEssentialDetails={updateEssentialDetails}
-						updateExtraDetails={updateExtraDetails}
-						updateBusinessDetails={updateBusinessDetails}
-						setFirstName={setFirstName}
-						setLastName={setLastName}
-					/>
-				</div>
-			</div>
-		</>
-	);
+  return (
+    <>
+      <BackHeader />
+      <div className="signup-container">
+        <div className="signup-logo">
+          <img src={constants.IMAGES.WHITE_ON_TRANSPARENT} alt="logo FinRise" />
+        </div>
+        <div className="stepper-container">
+          <HorizontalLinearStepper
+            onSignUpAttempt={onSignUpAttempt}
+            newUser={newUser}
+            updateEssentialDetails={updateEssentialDetails}
+            updateExtraDetails={updateExtraDetails}
+            updateBusinessDetails={updateBusinessDetails}
+            setFirstName={setFirstName}
+            setLastName={setLastName}
+          />
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default SignUp;

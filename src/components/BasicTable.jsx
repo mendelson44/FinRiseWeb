@@ -45,12 +45,7 @@ export default function BasicTable() {
               <TableCell align="right">{customer.email}</TableCell>
               <TableCell align="right">
                 {console.log("Passing customer:", customer)}
-                <Link
-                  to={{
-                    pathname: "/CustomerPreview",
-                    state: { test: "Hello, World!" },
-                  }}
-                >
+                <Link to={`/CustomerPreview?id=${customer.email}`}>
                   <IconButton
                     color="primary"
                     aria-label="move to customer window"

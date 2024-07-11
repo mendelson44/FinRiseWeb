@@ -4,10 +4,11 @@ import CustomizedTables from "../components/FormTable";
 import { useLocation } from "react-router-dom";
 
 const CustomerPreview = () => {
+  //NEED TO GET CUSTOMER ID FROM BasicTable.jsx
   const location = useLocation();
-  console.log("location: ", location);
-  const { test } = location.state || {}; // Destructure the customer object from state
-  console.log("after location: " + test);
+  const queryParams = new URLSearchParams(location.search);
+  const customerEmail = queryParams.get("id");
+  console.log(customerEmail);
   return (
     <LayoutComponent>
       <div
@@ -35,7 +36,7 @@ const CustomerPreview = () => {
         Forms: <hr />
       </h2>
       <br />
-      <CustomizedTables customer={test} />
+      <CustomizedTables customerEmail={customerEmail} />
     </LayoutComponent>
   );
 };

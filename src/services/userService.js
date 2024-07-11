@@ -1,11 +1,11 @@
 import axios from "axios";
-const SUPPER_APP_NAME = "2024b.noa.sharabi";
+import * as constants from "../utils/constants";
 
 /* GET User By Email */
 export const fetchData = async (currentEmail) => {
   try {
     const response = await axios.get(
-      `http://localhost:8084/superapp/users/login/${SUPPER_APP_NAME}/${currentEmail}`
+      `http://localhost:8084/superapp/users/login/${constants.SUPPER_APP_NAME}/${currentEmail}`
     );
     return response.data;
   } catch (error) {

@@ -8,6 +8,8 @@ import {
   View,
 } from "@react-pdf/renderer";
 import OriginalOnTransparent from "../assets/OriginalOnTransparent.png";
+import Typography from "antd/es/typography/Typography";
+
 const styles = StyleSheet.create({
   body: {
     paddingTop: 35,
@@ -136,6 +138,11 @@ const styles = StyleSheet.create({
     //סגנון עבור שורה זוגית בטבלה
     backgroundColor: "#f2f2f2",
   },
+  secondaryText: {
+    fontSize: 10,
+    color: "gray",
+    marginLeft: 10,
+  },
 });
 const PDFTaxInvoiceFile = (props) => {
   const pageColors = ["#f5f5f5", "#f5f5f5", "#f5f5f5"];
@@ -233,6 +240,13 @@ const PDFTaxInvoiceFile = (props) => {
                     <Text style={styles.tableCellHeader}>
                       {Number(props.taxInvoice.productArray[0].unitPrice) *
                         Number(props.taxInvoice.productArray[0].quantity)}
+                    </Text>
+                    <Text style={styles.secondaryText}>
+                      {`After Vat: ${
+                        Number(props.taxInvoice.productArray[0].unitPrice) *
+                        Number(props.taxInvoice.productArray[0].quantity) *
+                        1.17
+                      }`}
                     </Text>
                   </View>
                 </View>

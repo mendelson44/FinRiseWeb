@@ -398,56 +398,56 @@ export const customers1 = [
     forms: [
       {
         id: "1000",
-        dateCreated: "1.1.22",
+        customerName: "Yosi Ben Shushan",
+        createDate: "26/07/1996",
         type: constants.FORM_TYPE.TAX_INVOICE,
-        formData: {
-          isOpen: false,
-          payDate: `26.7.24`,
-          hasTax: false,
-          productArray: [
-            {
-              name: "Shirt",
-              quantity: "120",
-              unitPrice: "20$",
-              currency: "Dollar",
-              vat: true,
-            },
-            {
-              name: "Pants",
-              quantity: "150",
-              unitPrice: "30$",
-              currency: "Dollar",
-              vat: true,
-            },
-          ],
-        },
+        documentDescription: "This is the document description...",
+        paymentDueDate: "04/04/1996",
+        notes: "This is my notes bla bla bla",
+        isOpen: true,
+        productArray: [
+          {
+            name: "Shirt",
+            quantity: "120",
+            unitPrice: "20",
+            currency: "Dollar",
+            vat: true,
+          },
+          {
+            name: "Pants",
+            quantity: "150",
+            unitPrice: "30",
+            currency: "Dollar",
+            vat: true,
+          },
+        ],
       },
-      {
-        id: "1001",
-        dateCreated: "1.1.22",
-        type: constants.FORM_TYPE.RECEIPT,
-        formData: {
-          isOpen: false,
-          payDate: `26.7.24`,
-          hasTax: false,
-          productArray: [
-            {
-              name: "Ball",
-              quantity: "200",
-              unitPrice: "20$",
-              currency: "Dollar",
-              vat: true,
-            },
-            {
-              name: "Bottle",
-              quantity: "250",
-              unitPrice: "30$",
-              currency: "Dollar",
-              vat: true,
-            },
-          ],
-        },
-      },
+      // {
+      //   id: "1001",
+      //   dateCreated: "1.1.22",
+      //   type: constants.FORM_TYPE.RECEIPT,
+      //   formData: {
+      //     isOpen: false,
+      //     payDate: `26.7.24`,
+      //     hasTax: false,
+      //     productArray: [
+      //       {
+      //         name: "Ball",
+      //         quantity: "200",
+      //         unitPrice: "20$",
+      //         currency: "Dollar",
+      //         vat: true,
+      //       },
+      //       {
+      //         name: "Bottle",
+      //         quantity: "250",
+      //         unitPrice: "30$",
+      //         currency: "Dollar",
+      //         vat: true,
+      //       },
+      //     ],
+      //   },
+      // },
     ],
   },
   {
