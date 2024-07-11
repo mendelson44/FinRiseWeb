@@ -210,7 +210,7 @@ const QuotationForm = () => {
 				}}
 			>
 				<Box sx={{ mr: 2 }}>
-					<Button variant="outlined" color="primary" onClick={handleSubmit}>
+					<Button variant="outlined" color="primary">
 						Preview
 					</Button>
 				</Box>
