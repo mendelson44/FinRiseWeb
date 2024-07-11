@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	TextField,
 	Grid,
@@ -20,22 +20,23 @@ import * as constants from "../utils/constants";
 import RadioGroup from "@mui/joy/RadioGroup";
 import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
-import ListItemButton from "@mui/joy/ListItemButton";
 import Delete from "@mui/icons-material/Delete";
 import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
 
 const TaxInvoiceForm = () => {
 	const [showAlert, setShowAlert] = useState(false);
+	const [errorList, setError1] = useState("");
+	const [errorSubmit, setErrorSubmit] = useState("");
 
 	//------------------------------------------------------------ Tax Details:
 	const [newTaxInvoice, setNewTaxInvoice] = useState({
 		customerName: "",
-		createDate: "",
-		paymentDueDate: "",
+		createDate: null,
+		paymentDueDate: null,
 		documentDescription: "",
-		notes: "",
 		productArray: [],
+		notes: "",
 	});
 
 	const updateFormDetails = (details) => {
@@ -68,22 +69,58 @@ const TaxInvoiceForm = () => {
 		updateProductDetails({ [name]: value });
 	};
 	const onAddProduct = () => {
+		if (!newProduct.name || !newProduct.quantity || !newProduct.unitPrice) {
+			setError1("Please fill out all product fields");
+			return;
+		}
+		setErrorList("");
 		newTaxInvoice.productArray.push(newProduct);
 		console.log(newTaxInvoice.productArray);
 		//reset input box's:
 		setNewProduct({
 			name: "",
-			quantity: "",
-			unitPrice: "",
+			quantity: "0",
+			unitPrice: "0",
 			currency: constants.CURRENCY.DOLLAR,
 			vat: false,
 		});
 	};
+	const onDeleteProduct = (index) => {
+		setNewTaxInvoice((prevState) => ({
+			...prevState,
+			productArray: prevState.productArray.filter((_, i) => i !== index),
+		}));
+	};
+	//--------------------------------------------------------------------
+
+	useEffect(() => {
+		console.log("Product Array:", newTaxInvoice.productArray);
+	}, [newTaxInvoice.productArray]);
 
 	const handleSubmit = () => {
 		//taxInvoiceArray.push(newTaxInvoice);
-		setShowAlert(true); // Show the alert on form submission
+		if (validateForm()) {
+			setShowAlert(true); // Show the alert on form submission
+			setErrorSubmit("");
+		} else {
+			setErrorSubmit("Please fill out all required fields.");
+		}
 	};
+
+	const validateForm = () => {
+		const { customerName, createDate, paymentDueDate, productArray } =
+			newTaxInvoice;
+		if (
+			!customerName ||
+			!createDate ||
+			!paymentDueDate ||
+			productArray.length === 0
+		) {
+			return false;
+		}
+		return true;
+	};
+
 	console.log(newTaxInvoice);
 	console.log(newProduct);
 
@@ -113,7 +150,7 @@ const TaxInvoiceForm = () => {
 							onChange={handleChangeTaxDetails}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={2}>
+					<Grid item xs={10} sm={3}>
 						<DatePicker
 							label="Document Date"
 							name="createDate" //add
@@ -121,29 +158,48 @@ const TaxInvoiceForm = () => {
 							onChange={handleChangeTaxDetails} //add
 							className="custom-input"
 							renderInput={(params) => (
-								<TextField
-									{...params}
-									fullWidth
-									className="custom-input"
-									InputProps={{ endAdornment: <SearchIcon /> }}
-								/>
+								<TextField {...params} fullWidth className="custom-input" />
 							)}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={6}>
+					<Grid item xs={10} sm={3}>
 						<DatePicker
 							label="Payment Due Date"
 							className="custom-input"
 							name="paymentDueDate"
 							value={newTaxInvoice.paymentDueDate}
 							onChange={handleChangeTaxDetails}
-							//value={paymentDate}
-							//onChange={(newValue) => setPaymentDate(newValue)}
 							renderInput={(params) => (
 								<TextField {...params} fullWidth className="custom-input" />
 							)}
 						/>
 					</Grid>
+					{/* <Grid item xs={10} sm={3}>
+            <DatePicker
+              label="Payment Due Date"
+              className="custom-input"
+              name="paymentDueDate"
+              value={newTaxInvoice.paymentDueDate}
+              onChange={handleChangeTaxDetails}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  fullWidth
+                  className="custom-input"
+                  sx={{
+                    "& .MuiInputAdornment-root": {
+                      marginRight: "8px", // Adjust as needed
+                    },
+                    "& .MuiSvgIcon-root": {
+                      width: "1.5em",
+                      height: "1.5em",
+                      fill: "currentColor",
+                    },
+                  }}
+                />
+              )}
+            />
+          </Grid> */}
 					<Grid item xs={12}>
 						<TextField
 							label="Document Description"
@@ -164,6 +220,9 @@ const TaxInvoiceForm = () => {
 					>
 						<Typography variant="h5" gutterBottom marginTop={5}>
 							Add Items:
+							<Typography color="gray" variant="body2">
+								(At Least One)
+							</Typography>
 						</Typography>
 					</Box>
 
@@ -173,17 +232,10 @@ const TaxInvoiceForm = () => {
 							required
 							label="Service or Product Description"
 							name="name"
-							value={newTaxInvoice.name}
+							value={newProduct.name}
 							onChange={handleChangeProductDetails}
 							fullWidth
 							className="custom-input"
-							InputProps={{
-								endAdornment: (
-									<IconButton>
-										<SearchIcon />
-									</IconButton>
-								),
-							}}
 						/>
 					</Grid>
 					<Grid item xs={6} sm={3}>
@@ -286,7 +338,11 @@ const TaxInvoiceForm = () => {
 						</Button>
 					</Grid>
 				</Grid>
-				{/* ==================== Open ==================== */}
+				{errorList && (
+					<Typography color="error" variant="body2">
+						{errorList}
+					</Typography>
+				)}
 				<Box
 					sx={{
 						display: "flex",
@@ -308,29 +364,36 @@ const TaxInvoiceForm = () => {
 						width: "100%", // Ensure the box takes the full width
 					}}
 				>
-					{newTaxInvoice.productArray.map((product) => (
-						<List sx={{ maxWidth: 300 }}>
-							{product.length === 0 ? (
-								"No Products Added"
-							) : (
+					{newTaxInvoice.productArray.length === 0 ? (
+						<Typography variant="body2">No Products Added</Typography>
+					) : (
+						newTaxInvoice.productArray.map((product, index) => (
+							<List key={index}>
 								<ListItem
 									endAction={
-										<IconButton aria-label="Delete" size="sm" color="danger">
+										<IconButton
+											aria-label="Delete"
+											size="sm"
+											color="danger"
+											onClick={() => onDeleteProduct(index)}
+										>
 											<Delete />
 										</IconButton>
 									}
 								>
 									<ListItemDecorator>
+										{" "}
 										<ReceiptLongOutlinedIcon />
-									</ListItemDecorator>{" "}
+										{` ${product.name}: ${Number(
+											product.quantity
+										)} (Quantity), ${Number(product.unitPrice)} (Unit Price) `}
+									</ListItemDecorator>
 								</ListItem>
-							)}
-						</List>
-					))}
+							</List>
+						))
+					)}
 				</Box>
 			</Box>
-
-			{/* ==================== Close ==================== */}
 
 			{/* ==================== Product - End ==================== */}
 
@@ -380,13 +443,20 @@ const TaxInvoiceForm = () => {
 				}}
 			>
 				<Box sx={{ mr: 2 }}>
-					<ButtonPreview details={newTaxInvoice} />
+					<Button variant="outlined" color="primary" onClick={handleSubmit}>
+						Preview
+					</Button>
 				</Box>
 				<Box>
 					<Button variant="contained" color="primary" onClick={handleSubmit}>
 						Submit
 					</Button>
 				</Box>
+				{errorSubmit && (
+					<Typography color="error" variant="body2">
+						{errorSubmit}
+					</Typography>
+				)}
 			</Box>
 		</>
 	);
