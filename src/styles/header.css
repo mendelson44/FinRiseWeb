@@ -4,7 +4,7 @@ nav {
 	background-color: rgb(14, 186, 151); /* Calming green-blue background */
 	display: flex; /* Enables flexbox layout */
 	align-items: center; /* Centers items vertically within the nav */
-	padding: 20px 20px; /* Padding on the top/bottom and left/right */
+	padding: 20px 30px; /* Padding on the top/bottom and left/right */
 	justify-content: space-between;
 	box-shadow: 0 10px 4px -4px rgba(0, 0, 0, 0.2);
 }

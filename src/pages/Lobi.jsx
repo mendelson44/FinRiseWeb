@@ -17,7 +17,7 @@ function Lobi() {
 								fontWeight: "bold",
 							}}
 						>
-							Dashboard
+							OverView
 							<hr />
 						</h1>
 					</div>

@@ -14,6 +14,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import { Alert } from "antd";
 import "../styles/inputFix.css";
+import ButtonPreview from "./ButtonPreview";
+import PDFTaxInvoiceFile from "./PDFTaxInvoiceFile";
 //import taxInvoiceArray from "/data/inbar.js";
 
 const currencies = [
@@ -275,9 +277,7 @@ const TaxInvoiceForm = (props) => {
 				}}
 			>
 				<Box sx={{ mr: 2 }}>
-					<Button variant="outlined" color="primary" onClick={handleSubmit}>
-						Preview
-					</Button>
+					<ButtonPreview details={newTaxInvoice} />
 				</Box>
 				<Box>
 					<Button variant="contained" color="primary" onClick={handleSubmit}>

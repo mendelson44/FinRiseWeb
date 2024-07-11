@@ -81,10 +81,8 @@ function Overview() {
 							width: "30%",
 							display: "flex",
 							flexWrap: "wrap",
-							typography: "body1",
-							"& > :not(style) ~ :not(style)": {
-								ml: 2,
-							},
+							justifyContent: "space-between",
+							//typography: "body1",
 						}}
 						onClick={preventDefault}
 					>

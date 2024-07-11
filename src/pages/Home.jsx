@@ -25,14 +25,12 @@ function Home() {
 				className="logo"
 			/>
 			<div className="custom-text">
-				<Typography variant="body1" gutterBottom>
-					Empowers you to track income and expenses, create invoices and payment
-					orders,
-					<br />
-					manage your cash flow, prepare financial reports, and much more.
-					<br />
-					This easy-to-use and powerful tool puts you in control of your
-					finances and helps you achieve your business goals.
+				<Typography variant="h6" gutterBottom>
+					Take control of tracking income ,generating invoices and payment
+					orders.
+					<br /> FinRize is an easy-to-use tool that helps you manage your
+					finances <br />
+					efficiently and achieve your business goals.
 				</Typography>
 			</div>
 			{/* button for look pdf*/}
@@ -178,11 +176,11 @@ function Home() {
 							variant="h5"
 							sx={{ color: "#0eba97", fontFamily: "Arial", fontWeight: "bold" }}
 						>
-							Track Income and Expenses
+							Track Income
 						</Typography>
 						<Typography variant="body1">
 							Monitor your financial performance with real-time tracking of
-							income and expenses.
+							income.
 						</Typography>
 					</Box>
 					<Box
