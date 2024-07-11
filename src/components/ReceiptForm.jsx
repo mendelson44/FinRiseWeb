@@ -22,11 +22,11 @@ function ReceiptForm() {
 	//------------------------------------------------------------ Receipt Details:
 	const [newReceipt, setNewReceipt] = useState({
 		customerName: "",
-		createDate: "",
+		createDate: null,
 		documentDescription: "",
 		paymentType: constants.PAYMENT_TYPE.CREDIT_CARD,
 		currency: constants.CURRENCY.DOLLAR,
-		date: "",
+		date: null,
 		price: "",
 		notes: "",
 	});

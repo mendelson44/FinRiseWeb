@@ -26,7 +26,7 @@ import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
 
 const TaxInvoiceForm = () => {
 	const [showAlert, setShowAlert] = useState(false);
-	const [errorList, setError1] = useState("");
+	const [errorList, setErrorList] = useState("");
 	const [errorSubmit, setErrorSubmit] = useState("");
 
 	//------------------------------------------------------------ Tax Details:
@@ -70,7 +70,7 @@ const TaxInvoiceForm = () => {
 	};
 	const onAddProduct = () => {
 		if (!newProduct.name || !newProduct.quantity || !newProduct.unitPrice) {
-			setError1("Please fill out all product fields");
+			setErrorList("Please fill out all product fields");
 			return;
 		}
 		setErrorList("");
@@ -174,32 +174,7 @@ const TaxInvoiceForm = () => {
 							)}
 						/>
 					</Grid>
-					{/* <Grid item xs={10} sm={3}>
-            <DatePicker
-              label="Payment Due Date"
-              className="custom-input"
-              name="paymentDueDate"
-              value={newTaxInvoice.paymentDueDate}
-              onChange={handleChangeTaxDetails}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  fullWidth
-                  className="custom-input"
-                  sx={{
-                    "& .MuiInputAdornment-root": {
-                      marginRight: "8px", // Adjust as needed
-                    },
-                    "& .MuiSvgIcon-root": {
-                      width: "1.5em",
-                      height: "1.5em",
-                      fill: "currentColor",
-                    },
-                  }}
-                />
-              )}
-            />
-          </Grid> */}
+
 					<Grid item xs={12}>
 						<TextField
 							label="Document Description"
@@ -443,9 +418,7 @@ const TaxInvoiceForm = () => {
 				}}
 			>
 				<Box sx={{ mr: 2 }}>
-					<Button variant="outlined" color="primary" onClick={handleSubmit}>
-						Preview
-					</Button>
+					<ButtonPreview details={newTaxInvoice} />
 				</Box>
 				<Box>
 					<Button variant="contained" color="primary" onClick={handleSubmit}>
