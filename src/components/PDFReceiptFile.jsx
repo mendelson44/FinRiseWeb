@@ -66,6 +66,11 @@ const styles = StyleSheet.create({
 		marginTop: "100px",
 		textAlign: "right",
 	},
+	textDescription: {
+		textAlign: "center",
+		fontSize: 14,
+		marginTop: "20px",
+	},
 	image: {
 		width: 150, // Adjust width
 		height: 50, // Adjust height
@@ -137,7 +142,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-const PDFReceiptFile = () => {
+const PDFReceiptFile = (props) => {
 	const pageColors = ["#f5f5f5", "#f5f5f5", "#f5f5f5"];
 	const pages = [
 		{
@@ -168,7 +173,9 @@ const PDFReceiptFile = () => {
 									<Text style={styles.text}>Tel-Aviv, Mivtsa kadesh 38 St</Text>
 								</View>
 								<View style={styles.headerRight}>
-									<Text style={styles.text}>To:</Text>
+									<Text style={styles.text}>
+										To: {props.receipt.customerName}
+									</Text>
 									{/* HERE WE NEED TO ENTER THE REAL DETAILS */}
 								</View>
 							</View>
@@ -178,15 +185,18 @@ const PDFReceiptFile = () => {
 									{/* HERE WE NEED TO ENTER THE REAL DETAILS */}
 								</View>
 								<View style={styles.titleDate}>
-									<Text>Production Date: </Text>
+									<Text>Production Date: {props.receipt.createDate}</Text>
 									{/* HERE WE NEED TO ENTER THE REAL DETAILS */}
 								</View>
 							</View>
+							<Text style={styles.textDescription}>
+								Document Description: {props.receipt.documentDescription}
+							</Text>
 
 							<View style={styles.table}>
 								<View style={styles.tableRow}>
 									<View style={styles.tableColHeader}>
-										<Text style={styles.tableCellHeader}>Payment Type </Text>
+										<Text style={styles.tableCellHeader}>Payment Type</Text>
 									</View>
 									<View style={styles.tableColHeader}>
 										<Text style={styles.tableCellHeader}>Date</Text>
@@ -195,12 +205,30 @@ const PDFReceiptFile = () => {
 										<Text style={styles.tableCellHeader}>Price</Text>
 									</View>
 								</View>
+								{/* row for product */}
+								<View style={styles.tableRow}>
+									<View style={styles.tableCol}>
+										<Text style={styles.tableCellHeader}>
+											{props.receipt.PaymentType}
+										</Text>
+									</View>
+									<View style={styles.tableCol}>
+										<Text style={styles.tableCellHeader}>
+											{props.receipt.date}
+										</Text>
+									</View>
+									<View style={styles.tableCol}>
+										<Text style={styles.tableCellHeader}>
+											{props.receipt.price}
+										</Text>
+									</View>
+								</View>
 								{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
 							</View>
 							<View style={styles.title}>
 								<View style={styles.textNotes}>
 									<Text>Notes:</Text>
-									{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
+									<Text> {props.receipt.notes}</Text>
 								</View>
 
 								<View style={styles.textDigitalSignature}>

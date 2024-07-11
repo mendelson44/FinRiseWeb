@@ -65,6 +65,11 @@ const styles = StyleSheet.create({
 		marginTop: "100px",
 		textAlign: "right",
 	},
+	textDescription: {
+		textAlign: "center",
+		fontSize: 14,
+		marginTop: "20px",
+	},
 	image: {
 		width: 150, // Adjust width
 		height: 50, // Adjust height
@@ -136,7 +141,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-const PDFDeliveryNoteFile = () => {
+const PDFDeliveryNoteFile = (props) => {
 	const pageColors = ["#f5f5f5", "#f5f5f5", "#f5f5f5"];
 	const pages = [
 		{
@@ -166,7 +171,9 @@ const PDFDeliveryNoteFile = () => {
 									<Text style={styles.text}>Tel-Aviv, Mivtsa kadesh 38 St</Text>
 								</View>
 								<View style={styles.headerRight}>
-									<Text style={styles.text}>To:</Text>
+									<Text style={styles.text}>
+										To: {props.deliveryNote.customerName}
+									</Text>
 									{/* HERE WE NEED TO ENTER THE REAL DETAILS */}
 								</View>
 							</View>
@@ -176,26 +183,33 @@ const PDFDeliveryNoteFile = () => {
 									{/* HERE WE NEED TO ENTER THE REAL DETAILS */}
 								</View>
 								<View style={styles.titleDate}>
-									<Text>Production Date: </Text>
+									<Text>Production Date: {props.deliveryNote.createDate} </Text>
 									{/* HERE WE NEED TO ENTER THE REAL DETAILS */}
 								</View>
 							</View>
 							<View style={styles.title}>
 								<View style={styles.text}>
-									<Text> Payment Due Date: </Text>
+									<Text>
+										{" "}
+										Payment Due Date: {props.deliveryNote.paymentDueDate}
+									</Text>
 								</View>
 							</View>
+							<Text style={styles.textDescription}>
+								Document Description: {props.deliveryNote.documentDescription}
+							</Text>
 
 							<View style={styles.table}>
 								<View style={styles.tableRow}>
-									<View style={styles.tableColHeader}>
-										<Text style={styles.tableCellHeader}>Quantity </Text>
-									</View>
 									<View style={styles.tableColHeader}>
 										<Text style={styles.tableCellHeader}>
 											Product Description{" "}
 										</Text>
 									</View>
+									<View style={styles.tableColHeader}>
+										<Text style={styles.tableCellHeader}>Quantity </Text>
+									</View>
+
 									<View style={styles.tableColHeader}>
 										<Text style={styles.tableCellHeader}>Price</Text>
 									</View>
@@ -204,12 +218,37 @@ const PDFDeliveryNoteFile = () => {
 									</View>
 								</View>
 								{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
+
+								{/* row for product */}
+								<View style={styles.tableRow}>
+									<View style={styles.tableCol}>
+										<Text style={styles.tableCellHeader}>
+											{props.deliveryNote.productArray[0].name}
+										</Text>
+									</View>
+									<View style={styles.tableCol}>
+										<Text style={styles.tableCellHeader}>
+											{props.deliveryNote.productArray[0].quantity}
+										</Text>
+									</View>
+									<View style={styles.tableCol}>
+										<Text style={styles.tableCellHeader}>
+											{props.deliveryNote.productArray[0].unitPrice}
+										</Text>
+									</View>
+									<View style={styles.tableCol}>
+										<Text style={styles.tableCellHeader}>
+											{Number(props.deliveryNote.productArray[0].unitPrice) *
+												Number(props.deliveryNote.productArray[0].quantity)}
+										</Text>
+									</View>
+								</View>
 							</View>
 
 							<View style={styles.title}>
 								<View style={styles.textNotes}>
 									<Text>Notes:</Text>
-									{/* HERE WE NEED TO ENTER THE REAL ITEMS */}
+									<Text> {props.deliveryNote.notes}</Text>
 								</View>
 
 								<View style={styles.textDigitalSignature}>
