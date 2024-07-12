@@ -15,7 +15,6 @@ import AddIcon from "@mui/icons-material/Add";
 import { Alert } from "antd";
 import "../styles/inputFix.css";
 import ButtonPreview from "./ButtonPreview";
-import PDFTaxInvoiceFile from "./PDFTaxInvoiceFile";
 import Radio from "@mui/joy/Radio";
 import * as constants from "../utils/constants";
 import RadioGroup from "@mui/joy/RadioGroup";
@@ -175,32 +174,7 @@ const TaxInvoiceForm = () => {
               )}
             />
           </Grid>
-          {/* <Grid item xs={10} sm={3}>
-            <DatePicker
-              label="Payment Due Date"
-              className="custom-input"
-              name="paymentDueDate"
-              value={newTaxInvoice.paymentDueDate}
-              onChange={handleChangeTaxDetails}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  fullWidth
-                  className="custom-input"
-                  sx={{
-                    "& .MuiInputAdornment-root": {
-                      marginRight: "8px", // Adjust as needed
-                    },
-                    "& .MuiSvgIcon-root": {
-                      width: "1.5em",
-                      height: "1.5em",
-                      fill: "currentColor",
-                    },
-                  }}
-                />
-              )}
-            />
-          </Grid> */}
+
           <Grid item xs={12}>
             <TextField
               label="Document Description"
@@ -417,7 +391,10 @@ const TaxInvoiceForm = () => {
               multiline
               rows={4}
               fullWidth
+              name="notes"
               className="custom-input"
+              value={newTaxInvoice.notes}
+              onChange={handleChangeTaxDetails}
             />
           </Grid>
         </Grid>
@@ -441,9 +418,7 @@ const TaxInvoiceForm = () => {
         }}
       >
         <Box sx={{ mr: 2 }}>
-          <Button variant="outlined" color="primary" onClick={handleSubmit}>
-            Preview
-          </Button>
+          <ButtonPreview details={newTaxInvoice} />
         </Box>
         <Box>
           <Button variant="contained" color="primary" onClick={handleSubmit}>

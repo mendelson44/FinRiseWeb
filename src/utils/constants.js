@@ -35,4 +35,10 @@ export const CURRENCY = {
   NIS: "₪",
 };
 
+export const PAYMENT_TYPE = {
+  CREDIT_CARD: "Credit Card",
+  CASH: "Cash",
+  BANK_TRANSFER: "Bank Transfer",
+};
+
 export default APP_NAME;

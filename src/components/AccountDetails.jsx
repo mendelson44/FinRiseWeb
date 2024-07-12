@@ -191,7 +191,7 @@ function AccountDetails() {
 				<Box>
 					<Link to="/lobi">
 						<Button variant="contained" color="primary">
-							Back to the Lobi
+							Back to Overview
 						</Button>
 					</Link>
 				</Box>
