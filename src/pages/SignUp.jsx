@@ -87,7 +87,7 @@ function SignUp() {
       const responseDataEssential = await userService.createUser(
         newUser.essentialDetails
       );
-      console.log(`Response EssentialDetails: ${responseData}`);
+      console.log(`Response EssentialDetails: ${responseDataEssential}`);
 
       const responseDataExtra = await objectService.createObject(
         newUser.extraDetails

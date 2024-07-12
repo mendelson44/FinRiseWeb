@@ -9,7 +9,7 @@ import {
   FormControl,
   FormLabel,
 } from "@mui/material";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+//import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import { Alert } from "antd";
@@ -17,23 +17,27 @@ import "../styles/inputFix.css";
 import ButtonPreview from "./ButtonPreview";
 import Radio from "@mui/joy/Radio";
 import * as constants from "../utils/constants";
+import * as userService from "../services/userService";
+import * as objectService from "../services/objectService";
 import RadioGroup from "@mui/joy/RadioGroup";
 import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
 import Delete from "@mui/icons-material/Delete";
 import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
+import Cookies from "js-cookie";
+import { DatePicker } from "rsuite";
 
 const TaxInvoiceForm = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [errorList, setErrorList] = useState("");
   const [errorSubmit, setErrorSubmit] = useState("");
-
+  const currentUser = Cookies.get("currentUser");
   //------------------------------------------------------------ Tax Details:
   const [newTaxInvoice, setNewTaxInvoice] = useState({
     customerName: "",
-    createDate: null,
-    paymentDueDate: null,
+    createDate: "",
+    paymentDueDate: "",
     documentDescription: "",
     productArray: [],
     notes: "",
@@ -102,20 +106,20 @@ const TaxInvoiceForm = () => {
     if (validateForm()) {
       setShowAlert(true); // Show the alert on form submission
       setErrorSubmit("");
+      objectService.storeFormInDataBase(
+        currentUser,
+        constants.FORM_TYPE.TAX_INVOICE,
+        newTaxInvoice
+      );
     } else {
       setErrorSubmit("Please fill out all required fields.");
+      console.log("cannot submit");
     }
   };
 
   const validateForm = () => {
-    const { customerName, createDate, paymentDueDate, productArray } =
-      newTaxInvoice;
-    if (
-      !customerName ||
-      !createDate ||
-      !paymentDueDate ||
-      productArray.length === 0
-    ) {
+    const { customerName, productArray } = newTaxInvoice;
+    if (!customerName || productArray.length === 0) {
       return false;
     }
     return true;
@@ -151,7 +155,7 @@ const TaxInvoiceForm = () => {
             />
           </Grid>
           <Grid item xs={10} sm={3}>
-            <DatePicker
+            {/* <DatePicker
               label="Document Date"
               name="createDate" //add
               value={newTaxInvoice.createDate} //add
@@ -160,10 +164,11 @@ const TaxInvoiceForm = () => {
               renderInput={(params) => (
                 <TextField {...params} fullWidth className="custom-input" />
               )}
-            />
+            /> */}
           </Grid>
           <Grid item xs={10} sm={3}>
-            <DatePicker
+            <DatePicker />
+            {/* <DatePicker
               label="Payment Due Date"
               className="custom-input"
               name="paymentDueDate"
@@ -172,7 +177,7 @@ const TaxInvoiceForm = () => {
               renderInput={(params) => (
                 <TextField {...params} fullWidth className="custom-input" />
               )}
-            />
+            /> */}
           </Grid>
 
           <Grid item xs={12}>

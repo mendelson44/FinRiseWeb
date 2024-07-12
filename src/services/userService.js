@@ -20,11 +20,26 @@ export const createUser = async (data) => {
 export const fetchData = async (currentEmail) => {
   try {
     const response = await axios.get(
-      `https://finrise.azurewebsites.net/superapp/users/login/${constants.SUPPER_APP_NAME}/${currentEmail}`
+      `https://finrise.azurewebsites.net/superapp/users/login/${constants.SUPERAPP_NAME}/${currentEmail}`
     );
     return response;
   } catch (error) {
     console.error("Error making GET request:", error);
+    throw error;
+  }
+};
+
+/* PUT Update User */
+export const putUser = async (currentUser, data) => {
+  try {
+    const response = await axios.put(
+      `https://finrise.azurewebsites.net/superapp/users/${currentUser.userId.superapp}/${currentUser.userId.email}`,
+      data
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error making PUT request:", error);
     throw error;
   }
 };

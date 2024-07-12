@@ -4,7 +4,7 @@ import LoginFinal from "../components/LoginForm";
 import BackHeader from "../components/BackHeader";
 import * as userService from "../services/userService";
 import * as constants from "../utils/constants";
-
+import Cookies from "js-cookie";
 function Login() {
   const [data, setData] = useState(null); // Define state for storing data
 
@@ -21,12 +21,19 @@ function Login() {
       setData(fetchedData.data);
       console.log(`My Data: ${JSON.stringify(fetchedData.data)}`);
 
-      //Cookies.set("user", JSON.stringify(userData), { expires: 1 });
+      // Save the logged-in user in a Cookie
+      Cookies.set("currentUser", JSON.stringify(fetchedData.data), {
+        expires: 7,
+      });
+
+      const currentUser = Cookies.get("currentUser");
+
+      console.log("currentUser after cookie: ", currentUser);
+
       window.location.href = "/Lobi";
     } catch (error) {
       console.error("Error during login attempt:", error);
     }
-    console.log(`@My Data: ${userData}`);
   };
 
   return (
