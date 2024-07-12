@@ -27,7 +27,7 @@ import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
 
 const TaxInvoiceForm = () => {
   const [showAlert, setShowAlert] = useState(false);
-  const [errorList, setError1] = useState("");
+  const [errorList, setErrorList] = useState("");
   const [errorSubmit, setErrorSubmit] = useState("");
 
   //------------------------------------------------------------ Tax Details:
@@ -71,7 +71,7 @@ const TaxInvoiceForm = () => {
   };
   const onAddProduct = () => {
     if (!newProduct.name || !newProduct.quantity || !newProduct.unitPrice) {
-      setError1("Please fill out all product fields");
+      setErrorList("Please fill out all product fields");
       return;
     }
     setErrorList("");

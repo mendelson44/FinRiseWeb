@@ -16,6 +16,7 @@ import ReceiptTaxInvoice from "./pages/ReceiptTaxInvoice";
 import Account from "./pages/Account";
 import CustomerPreview from "./pages/CustomerPreview";
 import DeliveryNote from "./pages/DeliveryNote";
+import Incomes from "./pages/Incomes";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/CustomerPreview" element={<CustomerPreview />} />
         <Route path="/Lobi" element={<Lobi />} />
         <Route path="/customerlist" element={<CustomerList />} />
+        <Route path="/Incomes" element={<Incomes />} />
         <Route path="/taxinvoice" element={<TaxInvoice />} />
         <Route path="/quotation" element={<Quotation />} />
         <Route path="/receipt" element={<Receipt />} />

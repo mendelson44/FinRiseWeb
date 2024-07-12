@@ -7,8 +7,8 @@ const APP_NAME = "FinRise";
 export const SUPPER_APP_NAME = "2024b.noa.sharabi";
 export const ROLES = {
   ADMIN: "ADMIN",
-  MINI_APP_USER: "MINI_APP_USER",
-  SUPER_APP_USER: "SUPER_APP_USER",
+  MINI_APP_USER: "MINIAPP_USER",
+  SUPER_APP_USER: "SUPERAPP_USER",
 };
 
 export const IMAGES = {

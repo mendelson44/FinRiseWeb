@@ -11,12 +11,8 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 /*
-  This component is a Table for the Customer List display
+  This component is a Table for the CUSTOMER LIST display
 */
-
-function moveToCustomer(customer) {
-  console.log(`moveToCustomer Clicked: ${JSON.stringify(customer)}`);
-}
 
 export default function BasicTable() {
   return (
@@ -32,6 +28,7 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
+          {/* change this to the data you get from GET Request: (cus.customers1) */}
           {cus.customers1.map((customer) => (
             <TableRow
               key={customer.email}

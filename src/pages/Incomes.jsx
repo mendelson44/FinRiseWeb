@@ -1,10 +1,7 @@
 import React from "react";
 import LayoutComponent from "../components/LayoutComponent";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
-import AddIcon from "@mui/icons-material/Add";
-import BasicTable from "../components/BasicTable";
-
-const CustomerList = () => {
+import FormTable from "../components/FormTable";
+const Incomes = () => {
   return (
     <LayoutComponent>
       <div
@@ -25,19 +22,12 @@ const CustomerList = () => {
             marginBottom: 0,
           }}
         >
-          Customer list
+          All Forms:
         </h1>
-
-        <Link to="/AddNewCustomer">
-          <AddIcon
-            fontSize="large"
-            style={{ color: "#007bff", cursor: "pointer" }}
-          />
-        </Link>
       </div>
-      <BasicTable />
+      <FormTable emailToSearch={user.essentialDetails.email} />
     </LayoutComponent>
   );
 };
 
-export default CustomerList;
+export default Incomes;

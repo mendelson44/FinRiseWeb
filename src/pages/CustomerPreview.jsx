@@ -36,7 +36,7 @@ const CustomerPreview = () => {
         Forms: <hr />
       </h2>
       <br />
-      <CustomizedTables customerEmail={customerEmail} />
+      <CustomizedTables emailToSearch={customerEmail} />
     </LayoutComponent>
   );
 };

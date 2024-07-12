@@ -62,7 +62,7 @@ const renderFormType = (type) => {
       );
     case constants.FORM_TYPE.QUOTE:
       return (
-        <StyledTableCell align="left">
+        <StyledTableCell align="center">
           <Chip
             icon={<FeedOutlinedIcon />}
             color="primary"
@@ -77,7 +77,7 @@ const renderFormType = (type) => {
       );
     case constants.FORM_TYPE.RECEIPT:
       return (
-        <StyledTableCell align="left">
+        <StyledTableCell align="center">
           <Chip
             color="neutral"
             disabled={false}
@@ -92,7 +92,7 @@ const renderFormType = (type) => {
 
     case constants.FORM_TYPE.DELIVERY_NOTE:
       return (
-        <StyledTableCell align="left">
+        <StyledTableCell align="center">
           <Chip
             color="danger"
             disabled={false}
@@ -106,7 +106,7 @@ const renderFormType = (type) => {
       );
     case constants.FORM_TYPE.RECEIPT_TAX_INVOICE:
       return (
-        <StyledTableCell align="left">
+        <StyledTableCell align="center">
           <Chip
             color="success"
             disabled={false}
@@ -159,7 +159,7 @@ const renderFormAction = (form) => {
       );
     case constants.FORM_TYPE.QUOTE:
       return (
-        <StyledTableCell align="right">
+        <StyledTableCell align="center">
           <PDFDownloadLink
             document={<PDFQuotationFile quotation={form} />}
             fileName={`Quotation - ${form.dateCreated}`}
@@ -189,7 +189,7 @@ const renderFormAction = (form) => {
       );
     case constants.FORM_TYPE.RECEIPT:
       return (
-        <StyledTableCell align="right">
+        <StyledTableCell align="center">
           <PDFDownloadLink
             document={<PDFReceiptFile receipt={form} />}
             fileName={`Receipt - ${form.dateCreated}`}
@@ -220,7 +220,7 @@ const renderFormAction = (form) => {
 
     case constants.FORM_TYPE.DELIVERY_NOTE:
       return (
-        <StyledTableCell align="right">
+        <StyledTableCell align="center">
           <PDFDownloadLink
             document={<PDFDeliveryNoteFile deliveryNote={form} />}
             fileName={`Delivery Note - ${form.dateCreated}`}
@@ -250,13 +250,13 @@ const renderFormAction = (form) => {
       );
     default:
       return (
-        <StyledTableCell align="right">No action available</StyledTableCell>
+        <StyledTableCell align="center">No action available</StyledTableCell>
       );
   }
 };
 
 export default function CustomizedTables(props) {
-  console.log("@@ " + props.customerEmail);
+  console.log("@@ " + props.emailToSearch);
 
   /*
     make a get request for customer (Get Customer-Object By Email)
@@ -278,6 +278,7 @@ export default function CustomizedTables(props) {
           </TableRow>
         </TableHead>
         <TableBody>
+          {/* Reaplace cus.customers1[0] To Data.forms */}
           {cus.customers1[0].forms.map((form) => (
             <StyledTableRow key={form.id}>
               {renderFormType(form.type)}

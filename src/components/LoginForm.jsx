@@ -25,6 +25,8 @@ export default function LoginFinal(props) {
   };
 
   const handleLogin = () => {
+    console.log("loginData:");
+    console.log(loginData);
     props.onLoginAttempt(loginData);
   };
 

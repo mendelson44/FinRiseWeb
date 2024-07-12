@@ -13,8 +13,8 @@ function SignUp() {
   const [newUser, setNewUser] = useState({
     essentialDetails: {
       email: "",
-      role: `${constants.MINI_APP_USER}`,
-      userName: `${firstName} ${lastName}`,
+      role: `${constants.ROLES.MINI_APP_USER}`,
+      username: `${firstName} ${lastName}`,
       avatar: "",
     },
     extraDetails: {
@@ -38,7 +38,7 @@ function SignUp() {
       ...prevUser,
       essentialDetails: {
         ...prevUser.essentialDetails,
-        userName: `${firstName} ${lastName}`,
+        username: `${firstName} ${lastName}`,
       },
       extraDetails: {
         ...prevUser.extraDetails,
@@ -81,7 +81,8 @@ function SignUp() {
     }));
   };
   const onSignUpAttempt = async () => {
-    console.log(`Attempting SignUp!!!!! \n ${newUser}`);
+    console.log(`Attempting SignUp!!!!!`);
+    console.log(newUser);
     try {
       const responseDataEssential = await userService.createUser(
         newUser.essentialDetails
