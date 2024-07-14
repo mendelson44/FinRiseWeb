@@ -1,8 +1,11 @@
 import React from "react";
 import LayoutComponent from "../components/LayoutComponent";
 import TaxInvoiceForm from "../components/TaxInvoiceForm";
-
+import { useLocation } from "react-router-dom";
 function TaxInvoice() {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const userEmail = queryParams.get("email");
   return (
     <>
       <LayoutComponent>
@@ -22,7 +25,7 @@ function TaxInvoice() {
             </h1>
           </div>
         </div>
-        <TaxInvoiceForm />
+        <TaxInvoiceForm userEmail={userEmail} />
       </LayoutComponent>
     </>
   );

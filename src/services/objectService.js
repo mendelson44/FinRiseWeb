@@ -1,15 +1,60 @@
+import axios from "axios";
 import * as userService from "./userService";
+import * as objectService from "./objectService";
 import * as constants from "../utils/constants";
+import { json } from "react-router-dom";
+import Cookies from "js-cookie";
 /*POST New Object (You must be a SUPERAPP_USER to POST an Object)*/
 export const postObject = async (objectBoundary) => {
   try {
     const response = await axios.post(
-      "https://finrise.azurewebsites.net/superapp/objects",
+      `${constants.BASE_URL}/superapp/objects`,
       objectBoundary
     );
-    return response;
+    console.log("postObject response: ");
+    console.log(response);
+    return response.data;
   } catch (error) {
     console.error("Error making POST request:", error);
+    throw error;
+  }
+};
+/* GET Objects By Alias [Array]*/
+export const getObjectByAlias = async (user) => {
+  try {
+    const response = await axios.get(
+      `${constants.BASE_URL}/superapp/objects/search/byAlias/${user.userId.email}?userSuperapp=${user.userId.superapp}&userEmail=${user.userId.email}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error making GET request:", error);
+    throw error;
+  }
+};
+/* PUT Update User */
+export const putObject = async (object) => {
+  try {
+    const response = await axios.put(
+      `${constants.BASE_URL}/superapp/objects/${object.objectId.superapp}/${object.objectId.id}`,
+      object
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Error making PUT request:", error);
+    throw error;
+  }
+};
+
+/* GET Objects By Type [Array]*/
+export const getObjectByType = async (user) => {
+  try {
+    const response = await axios.get(
+      `${constants.BASE_URL}/superapp/objects/search/byType/${constants.CLASS_TYPE.CUSTOMER}?userSuperapp=${user.userId.superapp}&userEmail=${user.userId.email}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error making GET request:", error);
     throw error;
   }
 };
@@ -30,8 +75,8 @@ const createNewObjectBoundary = (currentUser, type, alias, objectDetails) => {
     creationTimestamp: null,
     createdBy: {
       userId: {
-        superapp: currentUser.essentialDetails.userId.superapp,
-        email: currentUser.essentialDetails.userId.email,
+        superapp: currentUser.userId.superapp,
+        email: currentUser.userId.email,
       },
     },
     objectDetails: objectDetails,
@@ -45,26 +90,40 @@ const createNewObjectBoundary = (currentUser, type, alias, objectDetails) => {
 3. PUT - change role back
 
 */
-export const storeFormInDataBase = (currentUser, formType, formObject) => {
+export const storeObjectInDataBase = async (
+  currentUser,
+  type,
+  alias,
+  ObjectDetails
+) => {
   // 1. PUT - change role
-  const data1 = {
-    role: constants.ROLES.SUPERAPP_USER,
-  };
-  userService.putUser(currentUser, data1);
+  currentUser.role = constants.ROLES.SUPERAPP_USER;
+  await userService.putUser(currentUser);
+  console.log("after PUT: ");
+  console.log(currentUser);
   // 2. Create Object Boundary
-  const newObjectBoundary = objectService.createNewObjectBoundary(
+  const newObjectBoundary = createNewObjectBoundary(
     currentUser,
-    "form",
-    formType,
-    formObject
+    type,
+    alias,
+    ObjectDetails
   );
-  // post object
-  const answer = postObject(newObjectBoundary);
-  console.log("answer: ", answer.data);
+  console.log("newObjectBoundary: ");
+  console.log(newObjectBoundary);
+  console.log("newObjectBoundary (stringify): ");
+  console.log(JSON.stringify(newObjectBoundary));
 
-  const data2 = {
-    role: constants.ROLES.MINIAPP_USER,
-  };
-  userService.putUser(currentUser, data2);
+  //3. Post object
+  const response = await postObject(newObjectBoundary);
+  console.log("Object response: ");
+  console.log(response);
+
+  // 4. PUT - change role
+  currentUser.role = constants.ROLES.MINIAPP_USER;
+  await userService.putUser(currentUser);
+  console.log("after PUT2: ");
+  console.log(currentUser);
+  console.log("@@ FINISH");
+  return response;
 };
 export default createNewObjectBoundary;

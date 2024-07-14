@@ -11,7 +11,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DateCalendar from "./DateCalendar";
 import { Link } from "react-router-dom";
 import {
@@ -22,11 +22,18 @@ import {
   MonetizationOnSharp,
 } from "@mui/icons-material";
 import Cookies from "js-cookie";
-
+import * as objectService from "../services/objectService";
+import * as constants from "../utils/constants";
 const preventDefault = (event) => event.preventDefault();
 
-function Overview() {
+function Overview(props) {
+  const currentUser = JSON.parse(Cookies.get(`${props.userEmail}`));
+
+  console.log("currentUser after cookie: ");
+  console.log(currentUser);
+
   const [openTable, setOpenTable] = useState(null);
+  const [img, setImg] = useState(null);
   const [buttonColor, setButtonColor] = useState({
     upcomingDebts: "primary",
     openReceivables: "primary",
@@ -40,10 +47,22 @@ function Overview() {
       openReceivables: table == "openReceivables" ? "secondary" : "primary",
     }));
   };
-
-  const currentUser = Cookies.get("currentUser");
-
-  console.log("currentUser after cookie: ", currentUser);
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const userObject = await objectService.getObjectByAlias(currentUser);
+        console.log("userObject:");
+        console.log(userObject);
+        return userObject;
+      } catch (error) {
+        console.error("Error fetching customers:", error);
+      }
+    };
+    const userExtraDetails = fetchCurrentUser();
+    console.log("userExtraDetails:");
+    console.log(userExtraDetails);
+    setImg(userExtraDetails[0].objectDetails.profileImageUrl);
+  }, [img]);
 
   return (
     <>
@@ -55,13 +74,13 @@ function Overview() {
         }}
       >
         <Avatar
-          src="/path/to/avatar.jpg"
+          src={img}
           alt="Avatar"
           sx={{ width: 100, height: 100, marginRight: "10px" }}
         />
         <Box sx={{ width: "80%", maxWidth: 600 }}>
           <Typography variant="h5" marginTop={2} marginLeft={2}>
-            Hello Inbar,
+            {`Hello ${currentUser.username}`}
           </Typography>
           <Typography variant="h6" marginTop={2} marginLeft={2}>
             We are always here for you, wishing calmer days soon.

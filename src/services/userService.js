@@ -5,9 +5,10 @@ import * as constants from "../utils/constants";
 export const createUser = async (data) => {
   try {
     const response = await axios.post(
-      "https://finrise.azurewebsites.net/superapp/users",
+      `${constants.BASE_URL}/superapp/users`,
       data
     );
+    console.log("postUser response: ");
     console.log(response.data);
     return response.data;
   } catch (error) {
@@ -20,7 +21,7 @@ export const createUser = async (data) => {
 export const fetchData = async (currentEmail) => {
   try {
     const response = await axios.get(
-      `https://finrise.azurewebsites.net/superapp/users/login/${constants.SUPERAPP_NAME}/${currentEmail}`
+      `${constants.BASE_URL}/superapp/users/login/${constants.SUPERAPP_NAME}/${currentEmail}`
     );
     return response;
   } catch (error) {
@@ -30,13 +31,13 @@ export const fetchData = async (currentEmail) => {
 };
 
 /* PUT Update User */
-export const putUser = async (currentUser, data) => {
+export const putUser = async (currentUser) => {
   try {
     const response = await axios.put(
-      `https://finrise.azurewebsites.net/superapp/users/${currentUser.userId.superapp}/${currentUser.userId.email}`,
-      data
+      `${constants.BASE_URL}/superapp/users/${currentUser.userId.superapp}/${currentUser.userId.email}`,
+      currentUser
     );
-    console.log(response.data);
+
     return response.data;
   } catch (error) {
     console.error("Error making PUT request:", error);

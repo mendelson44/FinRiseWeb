@@ -120,7 +120,7 @@ function SignUpForm(props) {
               />
             </FormControl>
 
-            <FormControl>
+            {/* <FormControl>
               <FormLabel style={{ fontWeight: "bold" }}>Password</FormLabel>
               <Input
                 name="password"
@@ -129,7 +129,7 @@ function SignUpForm(props) {
                 value={props.dataExtra.password}
                 onChange={handleChangeExtra}
               />
-            </FormControl>
+            </FormControl> */}
 
             <Typography
               endDecorator={<Link href="/login">Log in</Link>}

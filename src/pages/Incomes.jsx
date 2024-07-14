@@ -1,7 +1,11 @@
 import React from "react";
 import LayoutComponent from "../components/LayoutComponent";
 import FormTable from "../components/FormTable";
+import { useLocation } from "react-router-dom";
 const Incomes = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const userEmail = queryParams.get("email");
   return (
     <LayoutComponent>
       <div
@@ -25,7 +29,7 @@ const Incomes = () => {
           All Forms:
         </h1>
       </div>
-      <FormTable emailToSearch={user.essentialDetails.email} />
+      <FormTable userEmail={userEmail} />
     </LayoutComponent>
   );
 };

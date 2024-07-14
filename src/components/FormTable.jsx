@@ -20,6 +20,8 @@ import * as cus from "../../data/customers";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
+import Cookies from "js-cookie";
+
 /*
   This component is a Table for the Form List display
 */
@@ -126,13 +128,13 @@ const renderFormType = (type) => {
 };
 
 const renderFormAction = (form) => {
-  switch (form.type) {
+  switch (form.alias) {
     case constants.FORM_TYPE.TAX_INVOICE:
       return (
         <StyledTableCell align="center">
           <PDFDownloadLink
-            document={<PDFTaxInvoiceFile taxInvoice={form} />}
-            fileName={`Tax Invoice - ${form.dateCreated}`}
+            document={<PDFTaxInvoiceFile formObject={form} />}
+            fileName={`Tax Invoice - `}
           >
             {({ loading }) =>
               loading ? (
@@ -161,8 +163,8 @@ const renderFormAction = (form) => {
       return (
         <StyledTableCell align="center">
           <PDFDownloadLink
-            document={<PDFQuotationFile quotation={form} />}
-            fileName={`Quotation - ${form.dateCreated}`}
+            document={<PDFQuotationFile quotation={form.objectDetails} />}
+            fileName={`Quotation - ${form.creationTimestamp}`}
           >
             {({ loading }) =>
               loading ? (
@@ -191,8 +193,8 @@ const renderFormAction = (form) => {
       return (
         <StyledTableCell align="center">
           <PDFDownloadLink
-            document={<PDFReceiptFile receipt={form} />}
-            fileName={`Receipt - ${form.dateCreated}`}
+            document={<PDFReceiptFile receipt={form.objectDetails} />}
+            fileName={`Receipt - ${form.creationTimestamp}`}
           >
             {({ loading }) =>
               loading ? (
@@ -222,8 +224,8 @@ const renderFormAction = (form) => {
       return (
         <StyledTableCell align="center">
           <PDFDownloadLink
-            document={<PDFDeliveryNoteFile deliveryNote={form} />}
-            fileName={`Delivery Note - ${form.dateCreated}`}
+            document={<PDFDeliveryNoteFile deliveryNote={form.objectDetails} />}
+            fileName={`Delivery Note - ${form.creationTimestamp}`}
           >
             {({ loading }) =>
               loading ? (
@@ -256,8 +258,6 @@ const renderFormAction = (form) => {
 };
 
 export default function CustomizedTables(props) {
-  console.log("@@ " + props.emailToSearch);
-
   /*
     make a get request for customer (Get Customer-Object By Email)
   */
@@ -279,17 +279,21 @@ export default function CustomizedTables(props) {
         </TableHead>
         <TableBody>
           {/* Reaplace cus.customers1[0] To Data.forms */}
-          {cus.customers1[0].forms.map((form) => (
-            <StyledTableRow key={form.id}>
-              {renderFormType(form.type)}
+          {props.formArray.map((form) => (
+            <StyledTableRow key={form.objectId.id}>
+              {renderFormType(form.alias)}
               <StyledTableCell align="center">
-                {form.createDate}
+                {form.creationTimestamp}
               </StyledTableCell>
               <StyledTableCell align="center">
-                {`${cus.customers1[0].firstName} ${cus.customers1[0].lastName}`}
+                {form.objectDetails.customer}
               </StyledTableCell>
               <StyledTableCell align="center">
-                {form.isOpen ? <LockOpenOutlinedIcon /> : <LockOutlinedIcon />}
+                {form.objectDetails.isOpen ? (
+                  <LockOpenOutlinedIcon />
+                ) : (
+                  <LockOutlinedIcon />
+                )}
               </StyledTableCell>
               {renderFormAction(form)}
             </StyledTableRow>

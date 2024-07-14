@@ -16,9 +16,6 @@ import { Alert } from "antd";
 import "../styles/inputFix.css";
 import ButtonPreview from "./ButtonPreview";
 import Radio from "@mui/joy/Radio";
-import * as constants from "../utils/constants";
-import * as userService from "../services/userService";
-import * as objectService from "../services/objectService";
 import RadioGroup from "@mui/joy/RadioGroup";
 import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
@@ -27,15 +24,24 @@ import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
 import Cookies from "js-cookie";
 import { DatePicker } from "rsuite";
+import Autocomplete from "@mui/material/Autocomplete";
+import * as objectService from "../services/objectService";
+import * as commandService from "../services/commandService";
+import * as constants from "../utils/constants";
 
-const TaxInvoiceForm = () => {
+const TaxInvoiceForm = (props) => {
+  const currentUser = JSON.parse(Cookies.get(props.userEmail));
+
+  console.log("currentUser after cookie: ");
+  console.log(currentUser);
   const [showAlert, setShowAlert] = useState(false);
   const [errorList, setErrorList] = useState("");
   const [errorSubmit, setErrorSubmit] = useState("");
-  const currentUser = Cookies.get("currentUser");
+  const [inputCustomer, setInputCustomer] = useState("");
   //------------------------------------------------------------ Tax Details:
   const [newTaxInvoice, setNewTaxInvoice] = useState({
-    customerName: "",
+    customer: "",
+    isOpen: false,
     createDate: "",
     paymentDueDate: "",
     documentDescription: "",
@@ -52,6 +58,9 @@ const TaxInvoiceForm = () => {
   const handleChangeTaxDetails = (event) => {
     const { name, value } = event.target;
     updateFormDetails({ [name]: value });
+  };
+  const handleCustomerChange = (event, newValue) => {
+    updateFormDetails({ customer: newValue.label });
   };
   //------------------------------------------------------------ Product Details:
   const [newProduct, setNewProduct] = useState({
@@ -101,13 +110,14 @@ const TaxInvoiceForm = () => {
     console.log("Product Array:", newTaxInvoice.productArray);
   }, [newTaxInvoice.productArray]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     //taxInvoiceArray.push(newTaxInvoice);
     if (validateForm()) {
       setShowAlert(true); // Show the alert on form submission
       setErrorSubmit("");
-      objectService.storeFormInDataBase(
+      await objectService.storeObjectInDataBase(
         currentUser,
+        constants.CLASS_TYPE.FORM,
         constants.FORM_TYPE.TAX_INVOICE,
         newTaxInvoice
       );
@@ -117,16 +127,65 @@ const TaxInvoiceForm = () => {
     }
   };
 
+  const [customerObjectArray, setCustomerObjectArray] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCustomers = async () => {
+      try {
+        const userObject = await objectService.getObjectByAlias(currentUser);
+        console.log("userObject:");
+        console.log(userObject);
+
+        const commandDetails = {
+          type: constants.CLASS_TYPE.CUSTOMER,
+          userId: `${currentUser.userId.superapp}#${currentUser.userId.email}`,
+          page: 0,
+          size: 200,
+        };
+        const customers = await commandService.invokeCommand(
+          constants.APP_NAME,
+          constants.COMMAND_NAME.ALL_OBJECTS_BY_TYPE_AND_CREATED_BY,
+          currentUser,
+          userObject[0].objectId.id,
+          commandDetails
+        );
+
+        console.log("customerObjectArray:");
+        console.log(customers);
+        setCustomerObjectArray(customers);
+      } catch (error) {
+        console.error("Error fetching customers:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCustomers();
+  }, []);
+
+  const getCustomerNames = () => {
+    const customerNames = [];
+    customerObjectArray.map((customerObject) =>
+      customerNames.push({
+        label: customerObject.alias,
+      })
+    );
+    return customerNames;
+  };
+
   const validateForm = () => {
-    const { customerName, productArray } = newTaxInvoice;
-    if (!customerName || productArray.length === 0) {
+    const { customer, productArray } = newTaxInvoice;
+    if (!customer || productArray.length === 0) {
       return false;
     }
     return true;
   };
 
+  console.log("newTaxInvoice");
   console.log(newTaxInvoice);
-  console.log(newProduct);
+
+  const customerNames = getCustomerNames();
 
   return (
     <>
@@ -144,15 +203,34 @@ const TaxInvoiceForm = () => {
         </Typography>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <TextField
+            <Autocomplete
+              required
+              name="customer"
+              value={newTaxInvoice.customer}
+              inputValue={inputCustomer}
+              onInputChange={(event, newInputValue) =>
+                setInputCustomer(newInputValue)
+              }
+              onChange={handleCustomerChange}
+              disablePortal
+              id="combo-box-demo"
+              options={customerNames}
+              isOptionEqualToValue={(option, value) =>
+                option.label === value?.label
+              }
+              renderInput={(params) => (
+                <TextField {...params} label="Customer" />
+              )}
+            />
+            {/* <TextField
               required
               label="Customer Name"
               fullWidth
               className="custom-input"
-              name="customerName"
-              value={newTaxInvoice.customerName}
+              name="customer"
+              value={newTaxInvoice.customer}
               onChange={handleChangeTaxDetails}
-            />
+            /> */}
           </Grid>
           <Grid item xs={10} sm={3}>
             {/* <DatePicker

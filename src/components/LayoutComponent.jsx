@@ -7,22 +7,32 @@ import {
   FileOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
-import Cookies from "js-cookie";
-
+import { useLocation } from "react-router-dom";
 import SyncAltIcon from "@mui/icons-material/SyncAlt";
 
 const { Header, Content, Sider } = Layout;
 
 const LayoutComponent = ({ children }) => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const userEmail = queryParams.get("email");
   const siderMenuItems = [
     {
       key: "sub1",
       icon: <DesktopOutlined />,
       label: "Dashboard",
       children: [
-        { key: "1", label: "Overview", linkTo: "/lobi" }, // Add linkTo for Overview
-        { key: "3", label: "Incomes", linkTo: "/Incomes" },
-        { key: "4", label: "My Customers", linkTo: "/customerlist" }, // Add linkTo for Customers
+        {
+          key: "1",
+          label: "Overview",
+          linkTo: `/lobi?email=${userEmail}`,
+        }, // Add linkTo for Overview
+        { key: "3", label: "Incomes", linkTo: `/Incomes?email=${userEmail}` },
+        {
+          key: "4",
+          label: "My Customers",
+          linkTo: `/customerlist?email=${userEmail}`,
+        }, // Add linkTo for Customers
       ],
     },
     {
@@ -30,13 +40,21 @@ const LayoutComponent = ({ children }) => {
       icon: <FileOutlined />,
       label: "Documents",
       children: [
-        { key: "5", label: "Tax Invoice", linkTo: "/taxinvoice" },
-        { key: "6", label: "Quotation", linkTo: "/quotation" },
-        { key: "7", label: "Receipt", linkTo: "/receipt" },
+        {
+          key: "5",
+          label: "Tax Invoice",
+          linkTo: `/taxinvoice?email=${userEmail}`,
+        },
+        {
+          key: "6",
+          label: "Quotation",
+          linkTo: `/quotation?email=${userEmail}`,
+        },
+        { key: "7", label: "Receipt", linkTo: `/receipt?email=${userEmail}` },
         {
           key: "8",
           label: "Receipt Tax Invoice",
-          linkTo: "/receiptTaxInvoice",
+          linkTo: `/receiptTaxInvoice?email=${userEmail}`,
         },
       ],
     },
@@ -44,24 +62,23 @@ const LayoutComponent = ({ children }) => {
       key: "sub3",
       icon: <SyncAltIcon />,
       label: "Ongoing Management",
-      children: [{ key: "9", label: "Delivery Note", linkTo: "/deliveryNote" }],
+      children: [
+        {
+          key: "9",
+          label: "Delivery Note",
+          linkTo: `/deliveryNote?email=${userEmail}`,
+        },
+      ],
     },
     {
       key: "sub4",
       icon: <UserOutlined />,
       label: "Profile",
-      children: [{ key: "12", label: "Account", linkTo: "/account" }],
+      children: [
+        { key: "12", label: "Account", linkTo: `/account?email=${userEmail}` },
+      ],
     },
   ];
-
-  const userCookie = Cookies.get("user");
-  const user = userCookie ? JSON.parse(userCookie) : null;
-  console.log("After -get Cookies: " + user);
-  if (!user) {
-    // Redirect to login if user not found
-    // window.location.href = "/login";
-    //return null;
-  }
 
   return (
     <Layout style={{ minHeight: "100vh" }}>

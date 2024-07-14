@@ -5,7 +5,7 @@ import HorizontalLinearStepper from "../components/HorizontalLinearStepper";
 import * as userService from "../services/userService";
 import * as objectService from "../services/objectService";
 import * as constants from "../utils/constants";
-
+import Cookies from "js-cookie";
 function SignUp() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -13,7 +13,7 @@ function SignUp() {
   const [newUser, setNewUser] = useState({
     essentialDetails: {
       email: "",
-      role: `${constants.ROLES.MINI_APP_USER}`,
+      role: constants.ROLES.MINIAPP_USER,
       username: `${firstName} ${lastName}`,
       avatar: "",
     },
@@ -22,6 +22,7 @@ function SignUp() {
       password: "",
       firstName: "",
       lastName: "",
+
       businessDetails: {
         registrationNumber: "",
         businessId: "",
@@ -84,15 +85,21 @@ function SignUp() {
     console.log(`Attempting SignUp!!!!!`);
     console.log(newUser);
     try {
+      // Post User
       const responseDataEssential = await userService.createUser(
         newUser.essentialDetails
       );
-      console.log(`Response EssentialDetails: ${responseDataEssential}`);
-
-      const responseDataExtra = await objectService.createObject(
+      console.log(`Response EssentialDetails: `);
+      console.log(responseDataEssential);
+      // Post Object
+      const responseDataExtra = await objectService.storeObjectInDataBase(
+        responseDataEssential,
+        constants.CLASS_TYPE.USER_DATA,
+        responseDataEssential.userId.email,
         newUser.extraDetails
       );
-      console.log(`Response ExtraDetails: ${responseDataExtra}`);
+      console.log("Response ExtraDetails:");
+      console.log(responseDataExtra);
     } catch (error) {
       console.error("Error during sign-up attempt:", error);
     }
